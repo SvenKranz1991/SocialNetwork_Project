@@ -10,44 +10,11 @@ import axios from "axios";
 export default class App extends React.Component {
     constructor() {
         super();
-        this.state = {
-            name: "",
-            cutenessScore: null
-        };
-        this.handleChange = this.handleChange.bind(this); // have to bind event to object
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {};
     }
     // componentDidMount is the React version of "mounted"
     componentDidMount() {
-        axios.get("/get-animal").then(resp => {
-            console.log("resp: ", resp);
-            this.setState({
-                name: resp.data.name,
-                cutenessScore: resp.data.cutenessScore
-            });
-        });
         console.log("this.state: ", this.state);
-        console.log("Maaaaaaaaaaan");
-    }
-    // e get access to handle object
-    handleChange(e) {
-        console.log("handleChange running!");
-        console.log("e.target.name: ", e.target.name);
-        console.log("e.target.value: ", e.target.value);
-
-        this.setState({
-            [e.target.name]: e.target.value // everything inside brackets should be understood as variable name
-        });
-    }
-    handleSubmit(e) {
-        console.log("handleSubmit click running!");
-        console.log("this.state: ", this.state);
-        console.log("e: ", e);
-        e.preventDefault();
-
-        // from here you could make a POST request with axios... just like we did with Vue!
-
-        // this.setState({});
     }
     render() {
         return (

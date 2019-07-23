@@ -3,7 +3,7 @@ const app = express();
 const compression = require("compression");
 
 app.use(compression());
-// should be used always
+// should be used always - shorten res/req time
 
 app.use(express.static("./public"));
 const db = require("./utils/db");
@@ -82,11 +82,11 @@ if (process.env.NODE_ENV != "production") {
 }
 
 app.get("*", function(req, res) {
-    // if (!req.session.userId) {
-    //     res.redirect("/welcome");
-    // } else {
-    res.sendFile(__dirname + "/index.html");
-    // }
+    if (!req.session.userId) {
+        res.redirect("/welcome");
+    } else {
+        res.sendFile(__dirname + "/index.html");
+    }
 });
 
 app.post("/registration", function(req, res) {
