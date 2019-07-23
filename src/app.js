@@ -63,3 +63,11 @@ export default class App extends React.Component {
 // check index.js for getting response
 
 // logging e is just null
+
+// log location.pathname just to check
+
+// if (location.pathname == "/welcome") {
+//     // they are logged out
+// } else {
+//     // they are logged in
+// }

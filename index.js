@@ -11,19 +11,64 @@ const bc = require("./utils/bc");
 app.use(require("body-parser").json());
 
 // app.use(
-//     require("cookie-session")({
-//         secret: process.env.SESSION_SECRET,
-//         maxAge: 1000 * 60 * 60 * 24 * 14
-//     })
-// );
-
-// can switch out
-
-// app.use(
 //     require("body-parser").urlencoded({
 //         extended: false
 //     })
 // );
+
+// Stuff-Setup from petition
+
+const cookieParser = require("cookie-parser");
+// const csurf = require("csurf");
+
+// var cookieSession = require("cookie-session");
+// app.use(
+//     cookieSession({
+//         secret: `I cook rice.`,
+//         maxAge: 1000 * 60 * 60 * 24 * 14
+//     })
+// );
+
+// What is this?? process.env.SESSION_SECRET
+
+app.use(
+    require("cookie-session")({
+        secret: "process.env.SESSION_SECRET",
+        maxAge: 1000 * 60 * 60 * 24 * 14
+    })
+);
+
+app.use("/favicon.ico", (req, res) => res.sendStatus(404));
+app.use(cookieParser());
+// app.use(csurf());
+
+var multer = require("multer");
+var uidSafe = require("uid-safe");
+var path = require("path");
+const s3 = require("./s3");
+const config = require("./config");
+
+// Disk Storage
+
+var diskStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function(req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
+});
+
+// Uploader
+
+var uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152
+    }
+});
 
 if (process.env.NODE_ENV != "production") {
     app.use(
@@ -35,14 +80,6 @@ if (process.env.NODE_ENV != "production") {
 } else {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
-
-// log location.pathname just to check
-
-// if (location.pathname == "/welcome") {
-//     // they are logged out
-// } else {
-//     // they are logged in
-// }
 
 app.get("*", function(req, res) {
     // if (!req.session.userId) {
@@ -63,8 +100,9 @@ app.post("/registration", function(req, res) {
         )
             .then(resp => {
                 console.log("Added in Database: ", resp);
+                req.session.userId = resp.rows[0].id;
                 res.json({
-                    process: "success"
+                    success: true
                 });
             })
             .catch(err => {
@@ -89,26 +127,19 @@ app.post("/login", (req, res) => {
                 // console.log("Account Found: ", account.rows[0]);
                 bc.checkPassword(req.body.password, account.rows[0].password)
                     .then(match => {
-                        // console.log("Password: ", match);
                         // req.session.userId = userId;
-                        // req.session.signId = signId;
-                        // req.session.nameId = nameId;
+
                         // console.log(
                         //     "Its fine: ",
-                        //     req.session.userId,
-                        //     req.session.signId,
-                        //     req.session.nameId
+                        //     req.session.userId
                         // );
-                        // if (req.session.userId && req.session.signId) {
-                        //     res.redirect("petition/signed");
-                        // } else if (!req.session.signId) {
-                        //     res.redirect("petition");
+                        // if (req.session.userId) {
+                        //     res.redirect("/");
                         // } else {
-                        //     res.render("login", {
-                        //         warning: true
+                        //     res.json({
+                        //         error: true
                         //     });
                         // }
-
                         console.log("Just log match: ", match);
                     })
                     .catch(err => {
@@ -120,6 +151,46 @@ app.post("/login", (req, res) => {
             console.log("Error in getUser: ", err);
         });
 });
+
+// Upload Route
+
+// app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+//     console.log("My Request in Index: ", req);
+//
+//     let username = req.body.username;
+//     let title = req.body.title;
+//     let description = req.body.description;
+//     let url = config.s3Url + req.file.filename;
+//
+//     db.insertPicture(url, username, title, description)
+//         .then(id => {
+//             console.log("My New ID in Database: ", id);
+//             db.getRecentPictures()
+//                 .then(results => {
+//                     console.log(results.rows);
+//                     console.log("My new Results from querry: ", results);
+//                     res.json(results);
+//                 })
+//                 .catch(err => {
+//                     console.log("Error in getRecentPictures: ", err);
+//                 });
+//         })
+//         .catch(err => {
+//             console.log("InsertPicture: ", err);
+//         });
+//
+//     // if (req.file) {
+//     //     res.json({
+//     //         file: req.file.filename
+//     //     });
+//     // res.json({ success: true });
+//     // } else {
+//     //     res.json({ success: false });
+//     // }
+// });
+
+////////////////////////
+///////////////
 
 // maybe better here
 // app.get('/welcome', function(req, res) {

@@ -1,6 +1,6 @@
 * {
     text-align: center;
-    background-color: teal;
+    background-color: tomato;
     color: white;
     font-family: Helvetica;
 }
@@ -13,10 +13,20 @@
 input {
     background-color: white;
     color: black;
+    width: 200px;
+    height: 20px;
+    border: 1px solid #cccccc;
+    font-size: 15px;
+    font-family: Helvetica;
+}
+
+.TitleWelcome {
+    padding-bottom: 30px;
 }
 
 .Registration {
-    margin: 100px;
+    margin: 30px;
+    border: 1px dotted #cccccc;
 }
 
 .submitButton {
@@ -24,4 +34,9 @@ input {
     border-radius: 5px;
     background-color: white;
     color: black;
+    margin-bottom: 20px;
+}
+
+.error {
+    color: red;
 }
