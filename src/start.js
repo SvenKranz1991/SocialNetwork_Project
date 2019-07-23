@@ -1,13 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./app";
 
-ReactDOM.render(
-    <HelloWorld />,
-    document.querySelector('main')
-);
+// let elem;
+//
+// if (location.pathname == "/welcome") {
+//     // they are logged out
+//     elem = <Welcome />;
+// } else {
+//     // they are logged in
+//     elem = <img src="/logo.png" />;
+// }
 
-function HelloWorld() {
-    return (
-        <div>Hello, World!</div>
-    );
-}
+// after registration reload the page - redirect
+// ReactDOM.render can only render one
+
+ReactDOM.render(<App />, document.querySelector("main"));
