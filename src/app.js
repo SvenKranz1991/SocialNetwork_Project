@@ -5,7 +5,7 @@ import React from "react";
 
 // in order to use axios we need to import
 import Welcome from "./welcome";
-import axios from "axios";
+import axios from "./axios";
 
 export default class App extends React.Component {
     constructor() {

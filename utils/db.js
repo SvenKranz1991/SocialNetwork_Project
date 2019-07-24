@@ -24,7 +24,7 @@ exports.getUser = function getUser(email) {
     return dbUrl.query(
         `SELECT users.id AS userid, users.password, users.first_name || ' ' || users.last_name AS fullname, signatures.id AS "signId"
         FROM users
-        LEFT JOIN signatures ON users.id = signatures.userid
+        LEFT JOIN signatures ON users.id = socialnetwork.userid
         WHERE users.email = $1`,
         [email]
     );

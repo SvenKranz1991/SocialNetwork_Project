@@ -19,7 +19,7 @@ app.use(require("body-parser").json());
 // Stuff-Setup from petition
 
 const cookieParser = require("cookie-parser");
-// const csurf = require("csurf");
+const csurf = require("csurf");
 
 // var cookieSession = require("cookie-session");
 // app.use(
@@ -47,6 +47,15 @@ var uidSafe = require("uid-safe");
 var path = require("path");
 const s3 = require("./s3");
 const config = require("./config");
+
+// Csurf Token
+
+app.use(csurf());
+
+app.use(function(req, res, next) {
+    res.cookie("mytoken", req.csrfToken());
+    next();
+});
 
 // Disk Storage
 
@@ -82,8 +91,18 @@ if (process.env.NODE_ENV != "production") {
 }
 
 app.get("*", function(req, res) {
-    if (!req.session.userId) {
+    if (!req.session.userId && req.url != "/welcome") {
         res.redirect("/welcome");
+    } else {
+        res.sendFile(__dirname + "/index.html");
+    }
+});
+
+// somehow I need this for location
+
+app.get("/welcome", function(req, res) {
+    if (req.session.userId) {
+        res.redirect("/");
     } else {
         res.sendFile(__dirname + "/index.html");
     }
@@ -121,14 +140,16 @@ app.post("/login", (req, res) => {
                     warning: true
                 });
             } else {
-                // let userId = account.rows[0].userid;
+                let userId = account.rows[0].userid;
                 // let signId = account.rows[0].signId;
                 // let nameId = account.rows[0].fullname;
                 // console.log("Account Found: ", account.rows[0]);
                 bc.checkPassword(req.body.password, account.rows[0].password)
                     .then(match => {
-                        // req.session.userId = userId;
-
+                        req.session.userId = userId;
+                        res.json({
+                            success: true
+                        });
                         // console.log(
                         //     "Its fine: ",
                         //     req.session.userId

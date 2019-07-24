@@ -2,7 +2,8 @@
 // if something goes wrong it needs to show an error message, which will be done with state
 
 import React from "react";
-import axios from "axios";
+import axios from "./axios";
+import { Link } from "react-router-dom";
 
 export default class Registration extends React.Component {
     constructor(props) {
@@ -58,10 +59,12 @@ export default class Registration extends React.Component {
                     name="password"
                     onChange={this.handleChange}
                 />
-                <br />
                 <button onClick={this.handleSubmit} className="submitButton">
                     Register
                 </button>
+                <h5>
+                    Already a member? <Link to="/login">Login!</Link>
+                </h5>
             </div>
         );
     }
