@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "./axios";
-import { Link } from "react-router-dom";
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -10,28 +9,25 @@ export default class Login extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
     handleSubmit(e) {
-        // this.setState({
-        //     whatever: "something"
-        // });
-        // console.log("Check: ", this.state.whatever);
         console.log("e: ", e);
-
         axios
             .post("/login", {
                 email: this.state.email,
                 password: this.state.password // was "" before
             })
             .then(({ data }) => {
+                console.log("myData: ", { data });
                 if (data.success) {
                     console.log("Success - redirect");
                     location.replace("/");
                 } else {
+                    console.log("Not correct response!");
                     this.setState({ error: true });
                 }
             });
     }
     handleChange(e) {
-        this[e.target.name] = e.target.value; // davids method
+        // this[e.target.name] = e.target.value; // davids method
         this.setState({
             [e.target.name]: e.target.value
         }); // ivanas
@@ -45,7 +41,7 @@ export default class Login extends React.Component {
                 <input type="text" name="email" onChange={this.handleChange} />
                 <h4>Password</h4>
                 <input
-                    type="text"
+                    type="password"
                     name="password"
                     onChange={this.handleChange}
                 />

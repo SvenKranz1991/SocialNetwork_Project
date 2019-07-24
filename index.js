@@ -108,26 +108,62 @@ app.get("/welcome", function(req, res) {
     }
 });
 
-app.post("/registration", function(req, res) {
-    console.log("Request for registration: ", req);
-    bc.hashPassword(req.body.password).then(decrypt => {
-        db.addRegistration(
-            req.body.first_name,
-            req.body.last_name,
-            req.body.email,
-            decrypt
-        )
-            .then(resp => {
-                console.log("Added in Database: ", resp);
-                req.session.userId = resp.rows[0].id;
-                res.json({
-                    success: true
-                });
-            })
-            .catch(err => {
-                console.log("Error in addRegistration: ", err);
-            });
-    });
+// app.post("/registration", function(req, res) {
+//     console.log("Request for registration: ", req);
+//     bc.hashPassword(req.body.password).then(decrypt => {
+//         db.addRegistration(
+//             req.body.first_name,
+//             req.body.last_name,
+//             req.body.email,
+//             decrypt
+//         )
+//             .then(resp => {
+//                 console.log("Added in Database: ", resp);
+//                 req.session.userId = resp.rows[0].id;
+//                 res.json({
+//                     success: true
+//                 });
+//             })
+//             .catch(err => {
+//                 console.log("Error in addRegistration: ", err);
+//             });
+//     });
+// });
+
+// have to rewrite to make await async usable
+app.post("/registration", async (req, res) => {
+    const { first_name, last_name, email, password } = req.body; //  Destructuring
+    // you can change name with colon, like "password:newname"
+
+    try {
+        let hash = await bc.hashPassword(password);
+        let id = await db.addRegistration(first_name, last_name, email, hash);
+        req.session.userId = id.rows[0].id;
+        res.json({ success: true });
+    } catch (err) {
+        console.log("error in add Registration: ", err);
+        res.json({ success: false });
+    }
+
+    // console.log("Request for registration: ", req);
+    // bc.hashPassword(req.body.password).then(decrypt => {
+    //     db.addRegistration(
+    //         req.body.first_name,
+    //         req.body.last_name,
+    //         req.body.email,
+    //         decrypt
+    //     )
+    //         .then(resp => {
+    //             console.log("Added in Database: ", resp);
+    //             req.session.userId = resp.rows[0].id;
+    //             res.json({
+    //                 success: true
+    //             });
+    //         })
+    //         .catch(err => {
+    //             console.log("Error in addRegistration: ", err);
+    //         });
+    // });
 });
 
 app.post("/login", (req, res) => {
@@ -136,20 +172,21 @@ app.post("/login", (req, res) => {
         .then(account => {
             if (!account.rows[0]) {
                 console.log("nothing Found");
-                res.render("login", {
-                    warning: true
+                res.json({
+                    success: false
                 });
             } else {
-                let userId = account.rows[0].userid;
-                // let signId = account.rows[0].signId;
-                // let nameId = account.rows[0].fullname;
-                // console.log("Account Found: ", account.rows[0]);
+                let userId = account.rows[0].id;
+                console.log("Account Found: ", account.rows[0].id);
                 bc.checkPassword(req.body.password, account.rows[0].password)
                     .then(match => {
+                        console.log("Just log match: ", match);
+                        console.log("My user Id", userId);
                         req.session.userId = userId;
                         res.json({
                             success: true
                         });
+
                         // console.log(
                         //     "Its fine: ",
                         //     req.session.userId
@@ -161,7 +198,6 @@ app.post("/login", (req, res) => {
                         //         error: true
                         //     });
                         // }
-                        console.log("Just log match: ", match);
                     })
                     .catch(err => {
                         console.log("Error in assigning Cookie: ", err);
