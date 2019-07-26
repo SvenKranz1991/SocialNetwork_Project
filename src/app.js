@@ -8,6 +8,7 @@ import Logonav from "./logonav";
 // things I need to add
 import Profile from "./profilepic";
 import Uploader from "./uploader";
+import ProfileCard from "./profileCard";
 
 console.log("axios", axios);
 
@@ -41,6 +42,15 @@ export default class App extends React.Component {
                         }
                     />
                 </header>
+
+                <ProfileCard
+                    bio={this.state.bio}
+                    changeBio={bio => {}}
+                    url={this.state.picurl}
+                    firstname={this.state.firstname}
+                    lastname={this.state.lastname}
+                    onClick={() => this.setState({ uploaderIsVisible: true })}
+                />
 
                 {this.state.uploaderIsVisible && (
                     <Uploader
@@ -107,3 +117,17 @@ export default class App extends React.Component {
 //     console.log("My Data in user Request: ", data);
 //     this.setState({ data });
 // }
+
+// exports.updateBio = ({bio}) => {
+//     db.update()
+// }
+//
+// db.updateBio(req.body)
+
+// const profilePic = (
+//     <ProfilePic
+//         image={this.state.image}
+//         first={this.state.first}
+//         last={this.state.last}
+//
+// )

@@ -246,7 +246,7 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     if (req.file) {
         db.updateUserImage(url, id)
             .then(updatePicture => {
-                console.log("My New ID in Database: ", id);
+                console.log("Updated Picture of User: ", id);
                 res.json({
                     data: updatePicture.rows[0].picurl,
                     success: true
@@ -260,6 +260,34 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             success: false
         });
     }
+});
+
+app.post("/user/bioEditor", (req, res) => {
+    let id = req.session.userId;
+    let text = req.body.bio;
+    console.log("My Request in editing the Bio: ", req.body);
+    console.log("Text: ", text);
+
+    if (text) {
+        db.updateUserBio(text, id)
+            .then(updateBio => {
+                console.log("Updated Bio of User: ", id);
+                console.log("Log: ", updateBio.rows[0].bio);
+
+                res.json({
+                    success: true,
+                    draftBio: updateBio.rows[0].bio
+                });
+            })
+            .catch(err => {
+                console.log("Error in Edit Bio: ", err);
+            });
+    } else {
+        res.json({
+            success: false
+        });
+    }
+    // declaring Variable for the Value in Text
 });
 
 ////////////////////////
