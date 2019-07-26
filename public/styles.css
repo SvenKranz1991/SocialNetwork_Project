@@ -3,11 +3,41 @@
     background-color: tomato;
     color: white;
     font-family: Helvetica;
+    box-sizing: border-box;
 }
 
 .logo {
     height: 250px;
     width: 250px;
+}
+
+.logoinnav {
+    height: 50px;
+    width: 50px;
+    float: left;
+}
+
+.navigation {
+    height: 60px;
+    width: 100%;
+    background-color: tomato;
+    border-bottom: 1px solid #cccccc;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Profilepic {
+    width: 50px;
+    height: 50px;
+    float: right;
+}
+
+.wrapperForProfilepic {
+    display: inline-flex;
+}
+
+.wrapperForProfilepic p {
+    margin-right: 10px;
 }
 
 input {
@@ -39,4 +69,40 @@ input {
 
 .error {
     color: red;
+}
+
+.modal input {
+    visibility: hidden;
+}
+
+.modal {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: tomato;
+    border: 1px solid #cccccc;
+    border-radius: 15px;
+    height: 300px;
+    width: 500px;
+}
+
+.modal label {
+    margin-bottom: 30px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    padding: 10px;
+}
+
+.close-btn {
+    margin-top: 30px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
 }

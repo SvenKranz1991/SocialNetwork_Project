@@ -2,24 +2,59 @@
 // will be used to render all Components, link them and send to start.js
 
 import React from "react";
-
-// in order to use axios we need to import
-import Welcome from "./welcome";
 import axios from "./axios";
+// in order to use axios we need to import
+import Logonav from "./logonav";
+// things I need to add
+import Profile from "./profilepic";
+import Uploader from "./uploader";
+
+console.log("axios", axios);
 
 export default class App extends React.Component {
-    constructor() {
-        super();
-        this.state = {};
+    constructor(props) {
+        super(props);
+        this.state = {
+            uploaderIsVisible: false
+        };
     }
-    // componentDidMount is the React version of "mounted"
-    componentDidMount() {
-        console.log("this.state: ", this.state);
+    async componentDidMount() {
+        const { data } = await axios.get("/user");
+        console.log("Data: ", { data });
+
+        console.log("data.user", data.user);
+
+        this.setState(data.user);
     }
     render() {
         return (
             <div>
-                <Welcome />
+                <header className="navigation">
+                    <Logonav />
+                    <h3>something something</h3>
+                    <Profile
+                        url={this.state.picurl}
+                        firstname={this.state.firstname}
+                        lastname={this.state.lastname}
+                        onClick={() =>
+                            this.setState({ uploaderIsVisible: true })
+                        }
+                    />
+                </header>
+
+                {this.state.uploaderIsVisible && (
+                    <Uploader
+                        url={this.state.url}
+                        firstname={this.state.firstname}
+                        onClick
+                        done={url =>
+                            this.setState({ url, uploaderIsVisible: false })
+                        }
+                        close={() =>
+                            this.setState({ uploaderIsVisible: false })
+                        }
+                    />
+                )}
             </div>
         );
     }
@@ -31,10 +66,44 @@ export default class App extends React.Component {
 
 // logging e is just null
 
-// log location.pathname just to check
+// {myArray.length && <Something />}      --> example Something you can add
 
-// if (location.pathname == "/welcome") {
-//     // they are logged out
-// } else {
-//     // they are logged in
+// maybe add dedicated <Profilepic />
+
+// Information we need to get
+// id
+// firstname
+// lastname
+// email // except
+// password // except
+// profilepicurl
+// bio
+
+// go find a default user image - done
+
+// update users row for profile picture
+
+// My Get Request
+
+//  {image => this.setState({image})}
+
+// if no picture -- placeholder image
+//  or <p>Loading...</p>
+
+// Option two
+
+// For placing a placeholder img
+
+// if (!this.state.id) {
+// return <img src="placeholder.img" alt="Wait">
+// }
+
+// componentDidMount is the React version of "mounted"
+
+// async componentDidMount() {
+//     console.log("this.state: ", this.state);
+//
+//     const { data } = await axios.get("/user");
+//     console.log("My Data in user Request: ", data);
+//     this.setState({ data });
 // }

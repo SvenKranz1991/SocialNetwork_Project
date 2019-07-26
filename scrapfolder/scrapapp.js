@@ -68,3 +68,35 @@ export default class App extends React.Component {
 // } else {
 //     // they are logged in
 // }
+
+
+// scrap for componentDidMount
+
+this.state object in constructor
+
+// id: "",
+// firstname: "",
+// lastname: "",
+// email: "",
+// picurl: "/images/smallimage.jpg",
+// bio: ""
+
+axios.getUser
+
+// const {
+//     id,
+//     firstname,
+//     lastname,
+//     email,
+//     picurl,
+//     bio
+// } = userprofile.data.data;
+
+// this.setState({
+//     id: id,
+//     firstname: firstname,
+//     lastname: lastname,
+//     email: email,
+//     picurl: picurl,
+//     bio: bio
+// });

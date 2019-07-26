@@ -7,7 +7,7 @@ export default class Logonav extends React.Component {
 
     render() {
         return (
-            <div className="navigation">
+            <div>
                 <img
                     className="logoinnav"
                     src="/images/Social_Network_Ello_Logo.svg.png"

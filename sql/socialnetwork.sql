@@ -5,7 +5,9 @@ CREATE TABLE users(
     firstname VARCHAR(255) NOT NULL,
     lastname VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE,
-    password VARCHAR(255) NOT NULL,
+    password text NOT NULL,
+    picurl VARCHAR(255),
+    bio VARCHAR(700),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

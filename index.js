@@ -90,14 +90,6 @@ if (process.env.NODE_ENV != "production") {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
-app.get("*", function(req, res) {
-    if (!req.session.userId && req.url != "/welcome") {
-        res.redirect("/welcome");
-    } else {
-        res.sendFile(__dirname + "/index.html");
-    }
-});
-
 // somehow I need this for location
 
 app.get("/welcome", function(req, res) {
@@ -107,6 +99,37 @@ app.get("/welcome", function(req, res) {
         res.sendFile(__dirname + "/index.html");
     }
 });
+
+// app.get("/user", function(req, res) {
+//     console.log("My Req to user: ", req);
+//     db.getUserProfile(req.session.userId)
+//         .then(account => {
+//             console.log("Req.session.userId: ", req.session.userId);
+//             console.log("The Account: ", account);
+//             res.json({
+//                 account
+//             });
+//         })
+//         .catch(err => {
+//             console.log("Error in get UserData for App.js: ", err);
+//         });
+// });
+
+app.get("/user", async (req, res) => {
+    console.log("req", req);
+    let user = await db.getUserById(req.session.userId);
+    user = user.rows[0];
+    if (user.url == null) {
+        user.url = "/images/smallimage.jpg";
+    }
+    console.log("user", user);
+
+    res.json({ user });
+});
+
+// or in profilepicurl
+// image = image || 'defaultpicture.jpg';
+// return ( <img src={image} alt="blabla" />)
 
 // app.post("/registration", function(req, res) {
 //     console.log("Request for registration: ", req);
@@ -167,25 +190,29 @@ app.post("/registration", async (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    console.log("Request for Login: ", req);
+    // console.log("Request for Login: ", req);
     db.getUser(req.body.email)
         .then(account => {
             if (!account.rows[0]) {
-                console.log("nothing Found");
+                // console.log("nothing Found");
                 res.json({
                     success: false
                 });
             } else {
                 let userId = account.rows[0].id;
-                console.log("Account Found: ", account.rows[0].id);
+                // console.log("Account Found: ", account.rows[0].id);
                 bc.checkPassword(req.body.password, account.rows[0].password)
                     .then(match => {
-                        console.log("Just log match: ", match);
-                        console.log("My user Id", userId);
-                        req.session.userId = userId;
-                        res.json({
-                            success: true
-                        });
+                        if (match) {
+                            // console.log("Just log match: ", match);
+                            // console.log("My user Id", userId);
+                            req.session.userId = userId;
+                            res.json({
+                                success: true
+                            });
+                        } else {
+                            res.json({ success: false });
+                        }
 
                         // console.log(
                         //     "Its fine: ",
@@ -211,40 +238,29 @@ app.post("/login", (req, res) => {
 
 // Upload Route
 
-// app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-//     console.log("My Request in Index: ", req);
-//
-//     let username = req.body.username;
-//     let title = req.body.title;
-//     let description = req.body.description;
-//     let url = config.s3Url + req.file.filename;
-//
-//     db.insertPicture(url, username, title, description)
-//         .then(id => {
-//             console.log("My New ID in Database: ", id);
-//             db.getRecentPictures()
-//                 .then(results => {
-//                     console.log(results.rows);
-//                     console.log("My new Results from querry: ", results);
-//                     res.json(results);
-//                 })
-//                 .catch(err => {
-//                     console.log("Error in getRecentPictures: ", err);
-//                 });
-//         })
-//         .catch(err => {
-//             console.log("InsertPicture: ", err);
-//         });
-//
-//     // if (req.file) {
-//     //     res.json({
-//     //         file: req.file.filename
-//     //     });
-//     // res.json({ success: true });
-//     // } else {
-//     //     res.json({ success: false });
-//     // }
-// });
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("My Request in Index: ", req);
+
+    let id = req.session.userId;
+    let url = config.s3Url + req.file.filename;
+    if (req.file) {
+        db.updateUserImage(url, id)
+            .then(updatePicture => {
+                console.log("My New ID in Database: ", id);
+                res.json({
+                    data: updatePicture.rows[0].picurl,
+                    success: true
+                });
+            })
+            .catch(err => {
+                console.log("Error in updateUserImage: ", err);
+            });
+    } else {
+        res.json({
+            success: false
+        });
+    }
+});
 
 ////////////////////////
 ///////////////
@@ -268,6 +284,14 @@ app.post("/login", (req, res) => {
 // but it isn't a regular cookie, you need to b65? it
 // --> log document.cookie btoa
 // other option axios request -- takes longer
+
+app.get("*", function(req, res) {
+    if (!req.session.userId && req.url != "/welcome") {
+        res.redirect("/welcome");
+    } else {
+        res.sendFile(__dirname + "/index.html");
+    }
+});
 
 app.listen(8080, function() {
     console.log("I'm listening.");

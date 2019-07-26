@@ -11,7 +11,7 @@ if (location.pathname == "/welcome") {
     elem = <Welcome />;
 } else {
     // they are logged in
-    elem = <Logo />;
+    elem = <App />;
 }
 
 // after registration reload the page - redirect

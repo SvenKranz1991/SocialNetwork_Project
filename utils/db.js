@@ -23,3 +23,17 @@ exports.addRegistration = function addRegistration(
 exports.getUser = function getUser(email) {
     return dbUrl.query(`SELECT * FROM users WHERE email=$1`, [email]);
 };
+
+exports.getUserById = function getUserById(id) {
+    return dbUrl.query(
+        `SELECT id, firstname, lastname, picurl, bio FROM users WHERE id=$1`,
+        [id]
+    );
+};
+
+exports.updateUserImage = function updateUserImage(url, id) {
+    return dbUrl.query(
+        `UPDATE users SET picurl = $1 WHERE id = $2 RETURNING picurl`,
+        [url, id]
+    );
+};
