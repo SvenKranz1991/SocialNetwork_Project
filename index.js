@@ -116,15 +116,20 @@ app.get("/welcome", function(req, res) {
 // });
 
 app.get("/user", async (req, res) => {
-    console.log("req", req);
-    let user = await db.getUserById(req.session.userId);
-    user = user.rows[0];
-    if (user.url == null) {
-        user.url = "/images/smallimage.jpg";
-    }
-    console.log("user", user);
+    // console.log("req", req);
+    try {
+        let user = await db.getUserById(req.session.userId);
+        user = user.rows[0];
+        console.log("user data: ", user);
+        if (user.picurl == null) {
+            user.picurl = "/images/smallimage.jpg";
+        }
+        console.log("user", user);
 
-    res.json({ user });
+        res.json({ user });
+    } catch (err) {
+        console.log("My Error in get User: ", err);
+    }
 });
 
 // or in profilepicurl

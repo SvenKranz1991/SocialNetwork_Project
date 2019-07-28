@@ -24,8 +24,9 @@ export default class BioEditor extends React.Component {
                 this.setState({
                     addstatus: true,
                     editing: false,
-                    draftBio: data.draftBio
+                    bio: data.draftBio
                 });
+                console.log("My Data.DraftBio: ", data.draftBio);
                 this.props.done(data.draftBio);
             })
             .catch(err => {
@@ -44,22 +45,38 @@ export default class BioEditor extends React.Component {
     render() {
         return (
             <div>
+                {!this.props.bio && (
+                    <div>
+                        <p
+                            onClick={() =>
+                                this.setState({
+                                    editing: true,
+                                    addstatus: false
+                                })
+                            }
+                            className="bioPlaceholder"
+                        >
+                            Add Your Bio
+                        </p>
+                    </div>
+                )}
+
                 {this.state.editing && (
                     <div>
                         <textarea
                             name="draftBio"
-                            defaultValue="blabla"
+                            defaultValue={this.props.bio}
                             onChange={this.handleChangeBio}
                         />
                         <br />
                         <button onClick={this.handleSubmitBio}>Save</button>
                     </div>
                 )}
-
-                {this.props.bio}
-
-                {this.state.addstatus && (
+                {this.props.bio && this.state.addstatus && (
                     <div>
+                        <br />
+                        <p>{this.props.bio}</p>
+                        <br />
                         <button
                             onClick={() =>
                                 this.setState({
@@ -76,8 +93,3 @@ export default class BioEditor extends React.Component {
         );
     }
 }
-
-// make Save Button eventHandler emit submit(e)
-// and send Info to DraftBio
-
-// bio: this.state.bio

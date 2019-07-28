@@ -26,7 +26,9 @@ export default class App extends React.Component {
         console.log("data.user", data.user);
 
         this.setState(data.user);
+        console.log("This.state.bio", this.state.bio);
     }
+
     render() {
         return (
             <div>
@@ -42,23 +44,25 @@ export default class App extends React.Component {
                         }
                     />
                 </header>
-
-                <ProfileCard
-                    bio={this.state.bio}
-                    changeBio={bio => {}}
-                    url={this.state.picurl}
-                    firstname={this.state.firstname}
-                    lastname={this.state.lastname}
-                    onClick={() => this.setState({ uploaderIsVisible: true })}
-                />
+                <div className="mainbody">
+                    <ProfileCard
+                        bio={this.state.bio}
+                        doneBio={bio => {
+                            this.setState({ bio: bio });
+                        }}
+                        url={this.state.picurl}
+                        firstname={this.state.firstname}
+                        lastname={this.state.lastname}
+                    />
+                </div>
 
                 {this.state.uploaderIsVisible && (
                     <Uploader
-                        url={this.state.url}
+                        url={this.state.picurl}
                         firstname={this.state.firstname}
                         onClick
-                        done={url =>
-                            this.setState({ url, uploaderIsVisible: false })
+                        done={picurl =>
+                            this.setState({ picurl, uploaderIsVisible: false })
                         }
                         close={() =>
                             this.setState({ uploaderIsVisible: false })
@@ -70,15 +74,7 @@ export default class App extends React.Component {
     }
 }
 
-// other event onClick
-
-// check index.js for getting response
-
-// logging e is just null
-
 // {myArray.length && <Something />}      --> example Something you can add
-
-// maybe add dedicated <Profilepic />
 
 // Information we need to get
 // id
@@ -89,45 +85,7 @@ export default class App extends React.Component {
 // profilepicurl
 // bio
 
-// go find a default user image - done
-
-// update users row for profile picture
-
-// My Get Request
-
-//  {image => this.setState({image})}
-
 // if no picture -- placeholder image
 //  or <p>Loading...</p>
 
-// Option two
-
-// For placing a placeholder img
-
-// if (!this.state.id) {
-// return <img src="placeholder.img" alt="Wait">
-// }
-
 // componentDidMount is the React version of "mounted"
-
-// async componentDidMount() {
-//     console.log("this.state: ", this.state);
-//
-//     const { data } = await axios.get("/user");
-//     console.log("My Data in user Request: ", data);
-//     this.setState({ data });
-// }
-
-// exports.updateBio = ({bio}) => {
-//     db.update()
-// }
-//
-// db.updateBio(req.body)
-
-// const profilePic = (
-//     <ProfilePic
-//         image={this.state.image}
-//         first={this.state.first}
-//         last={this.state.last}
-//
-// )
