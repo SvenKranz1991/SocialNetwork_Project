@@ -34,49 +34,53 @@ export default class App extends React.Component {
     logout() {
         axios.post("/logout").then(() => {
             console.log("LoggedOut");
-            history.pushState({}, "", "/welcome");
+            this.props.history.push("/welcome#/");
         });
     }
 
     render() {
         return (
             <div>
-                <header className="navigation">
-                    <Logonav />
-                    <h3>something something</h3>
-                    <Logout logout={() => this.logout()} />
-                    <Profile
-                        url={this.state.picurl}
-                        firstname={this.state.firstname}
-                        lastname={this.state.lastname}
-                        onClick={() =>
-                            this.setState({ uploaderIsVisible: true })
-                        }
-                    />
-                </header>
                 <BrowserRouter>
-                    <div className="mainbody">
-                        <Route
-                            exact
-                            path="/"
-                            render={() => {
-                                return (
-                                    <ProfileCard
-                                        bio={this.state.bio}
-                                        doneBio={bio => {
-                                            this.setState({ bio: bio });
-                                        }}
-                                        url={this.state.picurl}
-                                        firstname={this.state.firstname}
-                                        lastname={this.state.lastname}
-                                    />
-                                );
-                            }}
-                        />
+                    <div>
+                        <header className="navigation">
+                            <Logonav />
+                            <h3>something something</h3>
 
-                        <Route path="/user/:id" component={OtherProfile} />
-                        <Route path="/logout" component={Logout} />
-                        <Link to="/">Home</Link>
+                            <Logout logout={() => this.logout()} />
+                            <Link to="/">Home</Link>
+                            <Profile
+                                url={this.state.picurl}
+                                firstname={this.state.firstname}
+                                lastname={this.state.lastname}
+                                onClick={() =>
+                                    this.setState({ uploaderIsVisible: true })
+                                }
+                            />
+                        </header>
+
+                        <div className="mainbody">
+                            <Route
+                                exact
+                                path="/"
+                                render={() => {
+                                    return (
+                                        <ProfileCard
+                                            bio={this.state.bio}
+                                            doneBio={bio => {
+                                                this.setState({ bio: bio });
+                                            }}
+                                            url={this.state.picurl}
+                                            firstname={this.state.firstname}
+                                            lastname={this.state.lastname}
+                                        />
+                                    );
+                                }}
+                            />
+
+                            <Route path="/user/:id" component={OtherProfile} />
+                            <Route path="/logout" component={Logout} />
+                        </div>
                     </div>
                 </BrowserRouter>
 
