@@ -241,6 +241,37 @@ app.post("/login", (req, res) => {
         });
 });
 
+// Other Users
+// all paths should be unique
+// could use :id.json
+
+app.get("/user/:id.json", async (req, res) => {
+    console.log("Req.params.id: ", req.params.id);
+    let id = req.params.id;
+    console.log("Just id: ", id);
+
+    if (req.session.userId == req.params.id) {
+        console.log("LoggedInUser");
+        res.json({
+            LoggedInUser: true
+        });
+    } else {
+        try {
+            let user = await db.getUserById(id);
+            user = user.rows[0];
+            console.log("otherUser data: ", user);
+            if (user.picurl == null) {
+                user.picurl = "/images/smallimage.jpg";
+            }
+            console.log("otherUser different Picture", user);
+
+            res.json({ user });
+        } catch (err) {
+            console.log("Error in getting UserData: ", err);
+        }
+    }
+});
+
 // Upload Route
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
@@ -317,6 +348,13 @@ app.post("/user/bioEditor", (req, res) => {
 // but it isn't a regular cookie, you need to b65? it
 // --> log document.cookie btoa
 // other option axios request -- takes longer
+
+// needToTryAfterGettingBrowserRouter
+
+app.post("/logout", function(req, res) {
+    req.session.userId = null;
+    res.redirect("/");
+});
 
 app.get("*", function(req, res) {
     if (!req.session.userId && req.url != "/welcome") {

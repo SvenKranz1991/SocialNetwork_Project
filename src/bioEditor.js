@@ -75,9 +75,10 @@ export default class BioEditor extends React.Component {
                 {this.props.bio && this.state.addstatus && (
                     <div>
                         <br />
-                        <p>{this.props.bio}</p>
-                        <br />
-                        <button
+                        <p>
+                            <strong>Bio:</strong> {this.props.bio}
+                        </p>
+                        <p
                             onClick={() =>
                                 this.setState({
                                     editing: true,
@@ -86,10 +87,40 @@ export default class BioEditor extends React.Component {
                             }
                         >
                             Edit
-                        </button>
+                        </p>
+                        <br />
                     </div>
                 )}
             </div>
         );
     }
 }
+
+// put in OtherProfile
+// async componentDidMount() {
+// const id = this.props.match.params.id;
+// if(id == loggedInUserId)  --- could do this in server and serve home
+// const {data} = await axios.get(`/user/${id}.json`)
+//     this.setState({})
+// }
+
+//
+// in server
+//
+// const {id} = req.params;
+//
+// if(id == req.session.userId) {
+//     res.json({
+//         error: true,
+//         sameUser: true
+//     })
+// and redirect to slash
+// could user location.replace('/')
+// OOOOOOR
+// in app.js
+// if (data.sameUser) {
+// this.props.history.push('/')
+// }
+// }
+
+// look at "key"-value  -- ties component to url - if it not matches, it will change the component

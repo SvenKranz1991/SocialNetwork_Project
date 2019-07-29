@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./app";
 import Logo from "./logo";
 import Welcome from "./welcome";
+import axios from "./axios";
 
 let elem;
 

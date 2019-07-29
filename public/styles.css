@@ -107,6 +107,12 @@ input {
     color: black;
 }
 
+button {
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+
 .mainbody {
     height: 100%;
     width: 100%;
@@ -127,7 +133,8 @@ input {
 }
 
 .ProfileCard {
-    border: 1px dotted black;
+    /* border: 1px dotted black; */
+    border-radius: 10px;
     margin-right: 40px;
     margin-top: 20px;
     width: 50vh;
@@ -141,6 +148,7 @@ input {
     width: 80px;
     height: 80px;
     margin-left: 20px;
+    border: 1px solid black;
 }
 
 .ProfileCard p {
@@ -149,4 +157,20 @@ input {
 
 .ProfileCard textarea {
     margin-left: 30px;
+}
+
+.ProfileCard {
+    white-space: nowrap;
+}
+
+.underline {
+    font-size: 12px;
+    text-decoration-style: dotted;
+    pointer: cursor;
+}
+
+.logout p {
+    font-size: 16px;
+    text-decoration-style: dotted;
+    pointer: cursor;
 }
