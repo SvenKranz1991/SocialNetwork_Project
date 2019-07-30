@@ -10,6 +10,7 @@ import Profile from "./profilepic";
 import Uploader from "./uploader";
 import ProfileCard from "./profileCard";
 import Logout from "./logout";
+import FindPeople from "./findPeople";
 import OtherProfile from "./otherProfile";
 import { Route, BrowserRouter, Link } from "react-router-dom";
 
@@ -48,6 +49,7 @@ export default class App extends React.Component {
                             <h3>something something</h3>
 
                             <Logout logout={() => this.logout()} />
+                            <Link to="/users">Find Users</Link>
                             <Link to="/">Home</Link>
                             <Profile
                                 url={this.state.picurl}
@@ -78,6 +80,7 @@ export default class App extends React.Component {
                                 }}
                             />
 
+                            <Route exact path="/users" component={FindPeople} />
                             <Route path="/user/:id" component={OtherProfile} />
                             <Route path="/logout" component={Logout} />
                         </div>

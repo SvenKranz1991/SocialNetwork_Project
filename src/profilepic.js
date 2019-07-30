@@ -24,6 +24,7 @@ export default function({ url, firstname, lastname, onClick }) {
             <p>
                 {firstname} {lastname}
             </p>
+
             <img
                 className="Profilepic"
                 src={url}

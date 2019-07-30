@@ -33,18 +33,22 @@ export default class OtherProfile extends React.Component {
     }
     render() {
         return (
-            <div className="ProfileCard">
-                <Profilepic
-                    url={this.state.picurl}
-                    first={this.state.firstname}
-                    last={this.state.lastname}
-                />
-                <p className="NoWrap">{`${this.state.firstname} ${
-                    this.state.lastname
-                }`}</p>
-                <p>
-                    <strong>Bio:</strong> {this.state.bio}
-                </p>
+            <div>
+                <h3>Other Profile</h3>
+                <br />
+                <div className="ProfileCard">
+                    <Profilepic
+                        url={this.state.picurl}
+                        first={this.state.firstname}
+                        last={this.state.lastname}
+                    />
+                    <p className="NoWrap">{`${this.state.firstname} ${
+                        this.state.lastname
+                    }`}</p>
+                    <p>
+                        <strong>Bio:</strong> {this.state.bio}
+                    </p>
+                </div>
             </div>
         );
     }

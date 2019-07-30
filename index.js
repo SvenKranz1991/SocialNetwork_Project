@@ -326,6 +326,38 @@ app.post("/user/bioEditor", (req, res) => {
     // declaring Variable for the Value in Text
 });
 
+app.get("/users.json", (req, res) => {
+    console.log("My Request in recent Users: ", req.body);
+    // console.log("I get something from find People");
+
+    db.getRecentRegistrations()
+        .then(users => {
+            console.log("Data for recent Users: ", users);
+            res.json(users.rows);
+        })
+        .catch(err => {
+            console.log("Error in get RecentRegistraion/Users: ", err);
+        });
+});
+
+app.get("/search-user/:search.json", (req, res) => {
+    // console.log("Responds!");
+    // console.log("My Request in User: ", req.body);
+    console.log("Req.params.search: ", req.params.search);
+    let val = req.params.search;
+    db.findUsers(val)
+        .then(users => {
+            console.log("Data for findUsers: ", users);
+
+            // if theres data render
+            res.json(users.rows);
+            // if there is not --> empty - render something else
+        })
+        .catch(err => {
+            console.log("Error in result for Finding Users:", err);
+        });
+});
+
 ////////////////////////
 ///////////////
 

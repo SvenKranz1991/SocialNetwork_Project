@@ -44,3 +44,18 @@ exports.updateUserBio = function updateUserBio(bio, id) {
         [bio, id]
     );
 };
+
+exports.getRecentRegistrations = function getRecentRegistrations() {
+    return dbUrl.query(
+        `SELECT id, firstname, lastname, picurl, bio FROM users ORDER BY created_at DESC LIMIT 3`
+    );
+};
+
+// works
+
+exports.findUsers = function findUsers(val) {
+    return dbUrl.query(
+        `SELECT id, firstname, lastname, picurl FROM users WHERE firstname ILIKE $1 OR lastname ILIKE $1`,
+        [val + "%"]
+    );
+};
