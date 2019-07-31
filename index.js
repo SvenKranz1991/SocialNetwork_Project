@@ -456,13 +456,19 @@ app.post("/user/acceptFriendRequest/:id.json", async (req, res) => {
 });
 
 app.post("/user/withdrawFriendRequest/:id.json", async (req, res) => {
-    // just needs id
-    console.log("Id of Row for Withdraw Delete: ", req.params.id);
+    // just needs id - wrong guess
+    // console.log("Id of Row for Withdraw Delete: ", req.params.id);
+    //
+    // let id = req.params.id;
 
-    let id = req.params.id;
+    let sender_id = req.session.userId;
+    let receiver_id = req.params.id;
 
     try {
-        const newFriendstatus = await db.withdrawFriendRequest(id);
+        const newFriendstatus = await db.withdrawFriendRequest(
+            sender_id,
+            receiver_id
+        );
         console.log("Added to db!", newFriendstatus);
         res.json({
             newFriendstatus,
@@ -476,12 +482,18 @@ app.post("/user/withdrawFriendRequest/:id.json", async (req, res) => {
 });
 
 app.post("/user/declineFriendRequest/:id.json", async (req, res) => {
-    // just needs id
+    // just needs id -- wrong guess
 
-    let id = req.params.id;
+    // let id = req.params.id;
+
+    let sender_id = req.session.userId;
+    let receiver_id = req.params.id;
 
     try {
-        const newFriendstatus = await db.declineFriendship(id);
+        const newFriendstatus = await db.declineFriendship(
+            sender_id,
+            receiver_id
+        );
         console.log("Added to db!", newFriendstatus);
         res.json({
             newFriendstatus,

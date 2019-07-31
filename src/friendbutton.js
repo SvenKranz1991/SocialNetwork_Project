@@ -66,7 +66,7 @@ export default class Friendbutton extends React.Component {
     withdrawFriendRequest(e) {
         // JustNeedsId of RowTable
         // console.log("Withdraw Friend Request!", e);
-        const id = this.state.friendstatus.rows[0].id;
+        const id = this.props.otherProfileId;
         console.log("Friendstatus.id: ", this.state.friendstatus.rows[0].id);
 
         axios.post(`/user/withdrawFriendRequest/${id}.json`).then(result => {
@@ -77,7 +77,7 @@ export default class Friendbutton extends React.Component {
     declineFriendRequest(e) {
         // JustNeedsId of RowTable
         // console.log("Decline Friend Request!", e);
-        const id = this.state.friendstatus.rows[0].id;
+        const id = this.props.otherProfileId;
         axios.post(`/user/declineFriendRequest/${id}.json`).then(result => {
             console.log("Results from sendFriendData at Front", result);
             this.setState(result.data);
@@ -97,14 +97,14 @@ export default class Friendbutton extends React.Component {
                 {this.state.accepted && (
                     <div>
                         <button onClick={e => this.withdrawFriendRequest(e)}>
-                            Already Friends -- Terminate?
+                            Already Friends - Terminate?
                         </button>
                     </div>
                 )}
                 {this.state.pending && (
                     <div>
                         <button onClick={e => this.withdrawFriendRequest(e)}>
-                            Status Pending
+                            Status Pending - Cancel?
                         </button>
                     </div>
                 )}

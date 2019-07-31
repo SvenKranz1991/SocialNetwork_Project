@@ -103,18 +103,21 @@ exports.acceptFriendship = function acceptFriendship(id) {
 
 // But i just want to delete the Friend Request
 
-exports.declineFriendship = function declineFriendship(id) {
+exports.declineFriendship = function declineFriendship(sender_id, receiver_id) {
     return dbUrl.query(
         `DELETE FROM friendstatus
-            WHERE id = $1`,
-        [id]
+            WHERE sender_id = $1 AND receiver_id = $2 OR sender_id = $2 AND receiver_id = $1`,
+        [sender_id, receiver_id]
     );
 };
 
-exports.withdrawFriendRequest = function withdrawFriendRequest(id) {
+exports.withdrawFriendRequest = function withdrawFriendRequest(
+    sender_id,
+    receiver_id
+) {
     return dbUrl.query(
         `DELETE FROM friendstatus
-            WHERE id = $1`,
-        [id]
+            WHERE sender_id = $1 AND receiver_id = $2 OR sender_id = $2 AND receiver_id = $1`,
+        [sender_id, receiver_id]
     );
 };
