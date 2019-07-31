@@ -408,8 +408,6 @@ app.get("/friendstatus/:user.json", async (req, res) => {
 });
 
 // sending FriendData
-// getting the ID of the Row both users sit in and depending on state sort post into if else statements that represent that state
-// Work in Progress - next Step
 
 app.post("/user/sendFriendRequest/:id.json", async (req, res) => {
     console.log("Id of Object of Caring: ", req.params.id);
@@ -479,8 +477,6 @@ app.post("/user/withdrawFriendRequest/:id.json", async (req, res) => {
 
 app.post("/user/declineFriendRequest/:id.json", async (req, res) => {
     // just needs id
-    console.log("Id of Object of Caring: ", req.params.id);
-    console.log("Id of Logged In User: ", req.session.userId);
 
     let id = req.params.id;
 
