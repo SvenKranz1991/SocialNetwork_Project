@@ -358,6 +358,57 @@ app.get("/search-user/:search.json", (req, res) => {
         });
 });
 
+//////////////////////// Friend Request Section
+
+// getting Friendshipstatus
+
+app.get("/friendstatus/:user.json", async (req, res) => {
+    console.log(
+        "Logged User Id: ",
+        req.session.userId,
+        "...Foreign User Id: ",
+        req.params.user
+    );
+    let sender_id = req.session.userId;
+    let receiver_id = req.params.user;
+
+    try {
+        const friendstatus = await db.getFriendstatus(sender_id, receiver_id);
+        console.log("The friendStatus from Query: ", friendstatus);
+        res.json(friendstatus);
+    } catch (err) {
+        console.log("Error in getting Friendshipstatus: ", err);
+        res.json({
+            Friends: false
+        });
+    }
+});
+
+// sending FriendData
+// getting the ID of the Row both users sit in and depending on state sort post into if else statements that represent that state
+// Work in Progress - next Step
+
+app.post("/user/sendFriendData/:id.json", async (req, res) => {
+    console.log("Id of Object of Caring: ", req.params.id);
+    console.log("Id of Logged In User: ", req.session.userId);
+
+    let sender_id = req.session.userId;
+    let receiver_id = req.params.id;
+
+    try {
+        const newFriendstatus = await db.sendFriendshipOffer(
+            sender_id,
+            receiver_id
+        );
+        console.log("Added to db!", newFriendstatus);
+        res.json({
+            newFriendstatus
+        });
+    } catch (err) {
+        console.log("Error in sending FriendData: ", err);
+    }
+});
+
 ////////////////////////
 ///////////////
 

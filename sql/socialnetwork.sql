@@ -11,12 +11,22 @@ CREATE TABLE users(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE IF EXISTS user_profiles;
+DROP TABLE IF EXISTS friendstatus;
 
-CREATE TABLE user_profiles (
+
+CREATE TABLE friendstatus(
     id SERIAL PRIMARY KEY,
-    age Integer,
-    city VARCHAR(255),
-    homepage VARCHAR(255),
-    userid INT NOT NULL UNIQUE
+    sender_id INT REFERENCES users(id),
+    receiver_id INT REFERENCES users(id),
+    accepted BOOLEAN DEFAULT false
 );
+
+-- DROP TABLE IF EXISTS user_profiles;
+--
+-- CREATE TABLE user_profiles (
+--     id SERIAL PRIMARY KEY,
+--     age Integer,
+--     city VARCHAR(255),
+--     homepage VARCHAR(255),
+--     userid INT NOT NULL UNIQUE
+-- );

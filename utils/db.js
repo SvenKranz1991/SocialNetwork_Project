@@ -59,3 +59,43 @@ exports.findUsers = function findUsers(val) {
         [val + "%"]
     );
 };
+
+// getFriendstatus for check
+
+exports.getFriendstatus = function getFriendstatus(sender_id, receiver_id) {
+    return dbUrl.query(
+        `SELECT * FROM friendstatus WHERE sender_id = $1 AND receiver_id = $2 OR sender_id = $2 AND receiver_id = $1`,
+        [sender_id, receiver_id]
+    );
+};
+
+// Insert Table Row for friendshipoffer
+
+exports.sendFriendshipOffer = function sendFriendshipOffer(
+    sender_id,
+    receiver_id
+) {
+    return dbUrl.query(
+        `INSERT INTO friendstatus (sender_id, receiver_id) VALUES ($1, $2) RETURNING *`,
+        [sender_id, receiver_id]
+    );
+};
+
+// accept and decline and updating boolean of accepted
+// could be either only ID or both sender_id, receiver_id
+
+exports.acceptFriendship = function acceptFriendship(id) {
+    return dbUrl.query(
+        `UPDATE friendstatus SET accepted = 'true' WHERE id = $1 RETURNING *`,
+        [id]
+    );
+};
+
+// could be either only ID or both sender_id, receiver_id
+
+exports.declineFriendship = function declineFriendship(id) {
+    return dbUrl.query(
+        `UPDATE friendstatus SET accepted = 'false' WHERE id = $1 RETURNING *`,
+        [id]
+    );
+};
