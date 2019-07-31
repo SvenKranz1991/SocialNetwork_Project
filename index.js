@@ -375,12 +375,35 @@ app.get("/friendstatus/:user.json", async (req, res) => {
     try {
         const friendstatus = await db.getFriendstatus(sender_id, receiver_id);
         console.log("The friendStatus from Query: ", friendstatus);
-        res.json(friendstatus);
+
+        // If Else Statement for friendshipstatus
+        if (friendstatus.rowCount == 0) {
+            res.json({
+                friendstatus,
+                noRowsOrNoRequest: true
+            });
+        } else if (friendstatus.rows[0].accepted == true) {
+            res.json({
+                friendstatus,
+                accepted: true
+            });
+        } else if (friendstatus.rows[0].sender_id == req.session.userId) {
+            console.log("SenderId == UserId");
+            res.json({
+                friendstatus,
+                pending: true
+            });
+        } else if (friendstatus.rows[0].receiver_id == req.session.userId) {
+            console.log("ReceiverId == UserId");
+            res.json({
+                friendstatus,
+                mightAccept: true
+            });
+        } else {
+            console.log("Maybe there is something wrong.");
+        }
     } catch (err) {
         console.log("Error in getting Friendshipstatus: ", err);
-        res.json({
-            Friends: false
-        });
     }
 });
 
@@ -388,7 +411,7 @@ app.get("/friendstatus/:user.json", async (req, res) => {
 // getting the ID of the Row both users sit in and depending on state sort post into if else statements that represent that state
 // Work in Progress - next Step
 
-app.post("/user/sendFriendData/:id.json", async (req, res) => {
+app.post("/user/sendFriendRequest/:id.json", async (req, res) => {
     console.log("Id of Object of Caring: ", req.params.id);
     console.log("Id of Logged In User: ", req.session.userId);
 
@@ -401,8 +424,75 @@ app.post("/user/sendFriendData/:id.json", async (req, res) => {
             receiver_id
         );
         console.log("Added to db!", newFriendstatus);
+
         res.json({
-            newFriendstatus
+            newFriendstatus,
+            noRowsOrNoRequest: false,
+            pending: true
+        });
+    } catch (err) {
+        console.log("Error in sending FriendData: ", err);
+    }
+});
+
+app.post("/user/acceptFriendRequest/:id.json", async (req, res) => {
+    // just needs id
+
+    console.log("Id Row for Accepting Friend: ", req.params.id);
+    let id = req.params.id;
+    // console.log("Id of Logged In User: ", req.session.userId);
+
+    try {
+        const newFriendstatus = await db.acceptFriendship(id);
+        console.log("Added to db!", newFriendstatus);
+        res.json({
+            newFriendstatus,
+            accepted: true,
+            pending: false,
+            mightAccept: false,
+            noRowsOrNoRequest: false
+        });
+    } catch (err) {
+        console.log("Error in sending FriendData: ", err);
+    }
+});
+
+app.post("/user/withdrawFriendRequest/:id.json", async (req, res) => {
+    // just needs id
+    console.log("Id of Row for Withdraw Delete: ", req.params.id);
+
+    let id = req.params.id;
+
+    try {
+        const newFriendstatus = await db.withdrawFriendRequest(id);
+        console.log("Added to db!", newFriendstatus);
+        res.json({
+            newFriendstatus,
+            noRowsOrNoRequest: true,
+            pending: false,
+            accepted: false
+        });
+    } catch (err) {
+        console.log("Error in sending FriendData: ", err);
+    }
+});
+
+app.post("/user/declineFriendRequest/:id.json", async (req, res) => {
+    // just needs id
+    console.log("Id of Object of Caring: ", req.params.id);
+    console.log("Id of Logged In User: ", req.session.userId);
+
+    let id = req.params.id;
+
+    try {
+        const newFriendstatus = await db.declineFriendship(id);
+        console.log("Added to db!", newFriendstatus);
+        res.json({
+            newFriendstatus,
+            noRowsOrNoRequest: true,
+            pending: false,
+            accepted: false,
+            mightAccept: false
         });
     } catch (err) {
         console.log("Error in sending FriendData: ", err);

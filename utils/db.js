@@ -93,9 +93,28 @@ exports.acceptFriendship = function acceptFriendship(id) {
 
 // could be either only ID or both sender_id, receiver_id
 
+// Option 1 for declining - updating the database
+// exports.declineFriendship = function declineFriendship(id) {
+//     return dbUrl.query(
+//         `UPDATE friendstatus SET accepted = 'false' WHERE id = $1 RETURNING *`,
+//         [id]
+//     );
+// };
+
+// But i just want to delete the Friend Request
+
 exports.declineFriendship = function declineFriendship(id) {
     return dbUrl.query(
-        `UPDATE friendstatus SET accepted = 'false' WHERE id = $1 RETURNING *`,
+        `DELETE FROM friendstatus
+            WHERE id = $1`,
+        [id]
+    );
+};
+
+exports.withdrawFriendRequest = function withdrawFriendRequest(id) {
+    return dbUrl.query(
+        `DELETE FROM friendstatus
+            WHERE id = $1`,
         [id]
     );
 };
