@@ -13,7 +13,7 @@ export default class Friendbutton extends React.Component {
     }
     async componentDidMount() {
         // console.log("This props: ", this.props);
-        // console.log("This otherProfileId: ", this.props.otherProfileId);
+        console.log("This otherProfileId: ", this.props.otherProfileId);
         const userId = this.props.otherProfileId;
         // console.log("Reassuring this.props.otherProfileId", userId);
         const friendstatus = await axios.get(`/friendstatus/${userId}.json`);
@@ -67,7 +67,7 @@ export default class Friendbutton extends React.Component {
         // JustNeedsId of RowTable
         // console.log("Withdraw Friend Request!", e);
         const id = this.props.otherProfileId;
-        console.log("Friendstatus.id: ", this.state.friendstatus.rows[0].id);
+        // console.log("Friendstatus.id: ", this.state.friendstatus.rows[0].id);
 
         axios.post(`/user/withdrawFriendRequest/${id}.json`).then(result => {
             console.log("Results from sendFriendData at Front", result);
@@ -96,14 +96,26 @@ export default class Friendbutton extends React.Component {
                 )}
                 {this.state.accepted && (
                     <div>
-                        <button onClick={e => this.withdrawFriendRequest(e)}>
+                        <button
+                            onClick={e =>
+                                this.withdrawFriendRequest(
+                                    this.props.otherProfileId
+                                )
+                            }
+                        >
                             Already Friends - Terminate?
                         </button>
                     </div>
                 )}
                 {this.state.pending && (
                     <div>
-                        <button onClick={e => this.withdrawFriendRequest(e)}>
+                        <button
+                            onClick={e =>
+                                this.withdrawFriendRequest(
+                                    this.props.otherProfileId
+                                )
+                            }
+                        >
                             Status Pending - Cancel?
                         </button>
                     </div>
@@ -113,7 +125,13 @@ export default class Friendbutton extends React.Component {
                         <button onClick={e => this.acceptFriendRequest(e)}>
                             Accept Friend Request
                         </button>
-                        <button onClick={e => this.declineFriendRequest(e)}>
+                        <button
+                            onClick={e =>
+                                this.declineFriendRequest(
+                                    this.props.otherProfileId
+                                )
+                            }
+                        >
                             Decline Friend Request
                         </button>
                     </div>
