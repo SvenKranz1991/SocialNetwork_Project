@@ -121,3 +121,17 @@ exports.withdrawFriendRequest = function withdrawFriendRequest(
         [sender_id, receiver_id]
     );
 };
+
+// For Friends.js
+
+exports.getDataForFriends = function getDataForFriends(id) {
+    return dbUrl.query(
+        `SELECT users.id, firstname, lastname, picurl, accepted
+        FROM friendstatus
+        JOIN users
+        ON (accepted = false AND receiver_id = 201 AND sender_id = users.id)
+        OR (accepted = true AND receiver_id = 201 AND sender_id = users.id)
+        OR (accepted = true AND sender_id = 201 AND receiver_id = users.id)`,
+        [id]
+    );
+};

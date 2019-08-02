@@ -13,6 +13,7 @@ import Logout from "./logout";
 import FindPeople from "./findPeople";
 import OtherProfile from "./otherProfile";
 import { Route, BrowserRouter, Link } from "react-router-dom";
+import Friends from "./friends";
 
 console.log("axios", axios);
 
@@ -50,6 +51,7 @@ export default class App extends React.Component {
 
                             <Logout logout={() => this.logout()} />
                             <Link to="/users">Find Users</Link>
+                            <Link to="/friends">Friends</Link>
                             <Link to="/">Home</Link>
                             <Profile
                                 url={this.state.picurl}
@@ -79,7 +81,7 @@ export default class App extends React.Component {
                                     );
                                 }}
                             />
-
+                            <Route exact path="/friends" component={Friends} />
                             <Route exact path="/users" component={FindPeople} />
                             <Route path="/user/:id" component={OtherProfile} />
                             <Route path="/logout" component={Logout} />
