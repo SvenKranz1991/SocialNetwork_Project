@@ -437,11 +437,17 @@ app.post("/user/acceptFriendRequest/:id.json", async (req, res) => {
     // just needs id
 
     console.log("Id Row for Accepting Friend: ", req.params.id);
-    let id = req.params.id;
+    // let id = req.params.id;
     // console.log("Id of Logged In User: ", req.session.userId);
 
+    let sender_id = req.session.userId;
+    let receiver_id = req.params.id;
+
     try {
-        const newFriendstatus = await db.acceptFriendship(id);
+        const newFriendstatus = await db.acceptFriendship(
+            sender_id,
+            receiver_id
+        );
         console.log("Added to db!", newFriendstatus);
         res.json({
             newFriendstatus,
@@ -504,6 +510,24 @@ app.post("/user/declineFriendRequest/:id.json", async (req, res) => {
         });
     } catch (err) {
         console.log("Error in sending FriendData: ", err);
+    }
+});
+
+//////////////////////
+/////// Friends Page
+
+app.get("/friends/getDataForFriends", async (req, res) => {
+    let id = req.session.userId;
+    console.log("Req.session.userId: ", req.session.userId);
+
+    try {
+        const friendsdata = await db.getDataForFriends(id);
+        console.log("My FriendsData: ", friendsdata);
+        res.json({
+            friendsdata
+        });
+    } catch (err) {
+        console.log("Error in Back/getDataForFriends: ", err);
     }
 });
 

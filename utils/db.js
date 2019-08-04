@@ -83,11 +83,12 @@ exports.sendFriendshipOffer = function sendFriendshipOffer(
 
 // accept and decline and updating boolean of accepted
 // could be either only ID or both sender_id, receiver_id
+// UPDATE : needed to change query for friends Page
 
-exports.acceptFriendship = function acceptFriendship(id) {
+exports.acceptFriendship = function acceptFriendship(sender_id, receiver_id) {
     return dbUrl.query(
-        `UPDATE friendstatus SET accepted = 'true' WHERE id = $1 RETURNING *`,
-        [id]
+        `UPDATE friendstatus SET accepted = 'true' WHERE sender_id = $1 AND receiver_id = $2 OR sender_id = $2 AND receiver_id = $1 RETURNING *`,
+        [sender_id, receiver_id]
     );
 };
 
@@ -129,9 +130,9 @@ exports.getDataForFriends = function getDataForFriends(id) {
         `SELECT users.id, firstname, lastname, picurl, accepted
         FROM friendstatus
         JOIN users
-        ON (accepted = false AND receiver_id = 201 AND sender_id = users.id)
-        OR (accepted = true AND receiver_id = 201 AND sender_id = users.id)
-        OR (accepted = true AND sender_id = 201 AND receiver_id = users.id)`,
+        ON (accepted = false AND receiver_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND sender_id = $1 AND receiver_id = users.id)`,
         [id]
     );
 };

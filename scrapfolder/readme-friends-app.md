@@ -14,6 +14,12 @@
 
             -- reuse the stuff you have
 
+
+            done
+
+
+            _______________
+
 2. Client
 
     - start.js
@@ -23,10 +29,10 @@
       _ "Provider" (react-redux) - copy paste from docs -- Provider
       _ `composeWithDevTools`(redux-devtools-extension) - d
       _ your reducer (./reducers.js)
-        - create the store with the redux promise middleware applied and redux devtools enabled
-        - wrap your `<App />` in `<Provider>` and pass that to `ReactDOM.render`. Oh yeah, remember to pass the store you created as a prop to `Provider`
+        - create the store with the redux promise middleware applied and redux devtools enabled -d
+        - wrap your `<App />` in `<Provider>` and pass that to `ReactDOM.render`. Oh yeah, remember to pass the store you created as a prop to `Provider` -d
     - app.js
-      -- dont need props -server knows id
+      -- dont need props -server knows id -- done
     - friends.js
         -   - export a function component
         -   - get a dispatch function by calling the `useDispatch` Hook (exported by react-redux)
