@@ -33,12 +33,7 @@ export default class App extends React.Component {
         this.setState(data.user);
         console.log("This.state.bio", this.state.bio);
     }
-    logout() {
-        axios.post("/logout").then(() => {
-            console.log("LoggedOut");
-            this.props.history.push("/welcome#/");
-        });
-    }
+    logout() {}
 
     render() {
         return (
@@ -48,8 +43,7 @@ export default class App extends React.Component {
                         <header className="navigation">
                             <Logonav />
                             <h3>something something</h3>
-
-                            <Logout logout={() => this.logout()} />
+                            <Link to="/logout">Logout</Link>
                             <Link to="/users">Find Users</Link>
                             <Link to="/friends">Friends</Link>
                             <Link to="/">Home</Link>

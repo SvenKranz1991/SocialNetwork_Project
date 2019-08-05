@@ -1,22 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "./axios";
 
-export default class Logout extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-    clickLogout(e) {
-        console.log("clicked", e);
-        this.props.logout();
-    }
-    render() {
-        return (
-            <div>
-                <p className="logout" onClick={e => this.clickLogout(e)}>
-                    Logout
-                </p>
-            </div>
-        );
-    }
+export default function Logout() {
+    useEffect(() => {
+        axios.post("/logout").then(() => {
+            console.log("LoggedOut");
+            location.replace("/welcome");
+        });
+    }, []);
+    return (
+        <div>
+            <h1>Logging out!</h1>
+        </div>
+    );
 }
