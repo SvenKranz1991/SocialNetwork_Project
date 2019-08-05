@@ -536,6 +536,27 @@ app.get("/friends/getDataForFriends", async (req, res) => {
 });
 
 ////////////////////////
+/////////// Delete account
+
+app.post("/user/deleteAccount", async (req, res) => {
+    let id = req.session.userId;
+    console.log("ID for Delete User: ", id);
+    try {
+        const userDelete = await db.deleteUser(id);
+        const friendstatusDelete = await db.deleteAllFriendstatus(id);
+        console.log("User deleted: ", userDelete);
+        console.log("Friendstatus deleted: ", friendstatusDelete);
+        req.session.userId = null;
+        // res.redirect("/");
+        res.json({
+            userDelete
+        });
+    } catch (err) {
+        console.log("Error in deleting Account: ", err);
+    }
+});
+
+////////////////////////
 ///////////////
 
 // maybe better here

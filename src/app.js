@@ -14,6 +14,7 @@ import FindPeople from "./findPeople";
 import OtherProfile from "./otherProfile";
 import { Route, BrowserRouter, Link } from "react-router-dom";
 import Friends from "./friends";
+import DeleteAccount from "./deleteAccount";
 
 console.log("axios", axios);
 
@@ -48,6 +49,7 @@ export default class App extends React.Component {
                                 <Link to="/users">Find Users</Link>
                                 <Link to="/">Home</Link>
                                 <Link to="/logout">Logout</Link>
+                                <Link to="/deleteAccount">Delete Account</Link>
                             </div>
                             <Profile
                                 url={this.state.picurl}
@@ -83,6 +85,10 @@ export default class App extends React.Component {
                             <Route exact path="/users" component={FindPeople} />
                             <Route path="/user/:id" component={OtherProfile} />
                             <Route path="/logout" component={Logout} />
+                            <Route
+                                path="/deleteAccount"
+                                component={DeleteAccount}
+                            />
                         </div>
                     </div>
                 </BrowserRouter>

@@ -136,3 +136,17 @@ exports.getDataForFriends = function getDataForFriends(id) {
         [id]
     );
 };
+
+// delete DeleteAccount
+
+exports.deleteUser = function deleteUser(id) {
+    return dbUrl.query(`DELETE FROM users WHERE id = $1`, [id]);
+};
+
+exports.deleteAllFriendstatus = function deleteAllFriendstatus(id) {
+    return dbUrl.query(
+        `DELETE FROM friendstatus
+        WHERE sender_id = $1 OR receiver_id = $1`,
+        [id]
+    );
+};
