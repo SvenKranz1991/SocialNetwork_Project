@@ -50,16 +50,24 @@ export default function FindPeople() {
     );
 
     return (
-        <div>
+        <div className="findFriendsDiv">
             <h1>Find People</h1>
-            <input onChange={e => setSearch(e.target.value)} />
+            <input
+                onChange={e => setSearch(e.target.value)}
+                className="centerInput"
+            />
+            <br />
             {!search && <h3>And see who just joined!</h3>}
 
             {users &&
                 users.map(user => (
                     <div key={user.id}>
                         <Link to={`/user/${user.id}`}>
-                            <img src={user.picurl} height="250" width="250" />
+                            <img
+                                src={user.picurl}
+                                height="100px"
+                                width="100px"
+                            />
                         </Link>
                         <p>
                             {user.firstname} {user.lastname}

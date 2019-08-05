@@ -85,6 +85,7 @@ export default class BioEditor extends React.Component {
                                     addstatus: false
                                 })
                             }
+                            className="editButton"
                         >
                             Edit
                         </p>

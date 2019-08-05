@@ -150,3 +150,12 @@ exports.deleteAllFriendstatus = function deleteAllFriendstatus(id) {
         [id]
     );
 };
+
+// for chatmessages
+
+exports.deleteAllChatMessagesOfUser = function deleteAllChatMessagesOfUser(id) {
+    return dbUrl.query(
+        `DELETE FROM chatmessages WHERE sender_id = $1 OR receiver_id = $1`,
+        [id]
+    );
+};

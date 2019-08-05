@@ -4,7 +4,7 @@ import Profilepic from "./profilepic";
 
 export default function ProfileCard(props) {
     return (
-        <div>
+        <div className="ForProfileSlashRoute">
             <h3>My Profile</h3>
             <div className="ProfileCard">
                 <Profilepic

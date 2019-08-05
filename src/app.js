@@ -15,6 +15,7 @@ import OtherProfile from "./otherProfile";
 import { Route, BrowserRouter, Link } from "react-router-dom";
 import Friends from "./friends";
 import DeleteAccount from "./deleteAccount";
+import Chat from "./chat";
 
 console.log("axios", axios);
 
@@ -47,6 +48,7 @@ export default class App extends React.Component {
                             <div className="navigation-links">
                                 <Link to="/friends">Friends</Link>
                                 <Link to="/users">Find Users</Link>
+                                <Link to="/chat">Chat</Link>
                                 <Link to="/">Home</Link>
                                 <Link to="/logout">Logout</Link>
                                 <Link to="/deleteAccount">Delete Account</Link>
@@ -64,23 +66,25 @@ export default class App extends React.Component {
                         </header>
 
                         <div className="mainbody">
-                            <Route
-                                exact
-                                path="/"
-                                render={() => {
-                                    return (
-                                        <ProfileCard
-                                            bio={this.state.bio}
-                                            doneBio={bio => {
-                                                this.setState({ bio: bio });
-                                            }}
-                                            url={this.state.picurl}
-                                            firstname={this.state.firstname}
-                                            lastname={this.state.lastname}
-                                        />
-                                    );
-                                }}
-                            />
+                            <div>
+                                <Route
+                                    exact
+                                    path="/"
+                                    render={() => {
+                                        return (
+                                            <ProfileCard
+                                                bio={this.state.bio}
+                                                doneBio={bio => {
+                                                    this.setState({ bio: bio });
+                                                }}
+                                                url={this.state.picurl}
+                                                firstname={this.state.firstname}
+                                                lastname={this.state.lastname}
+                                            />
+                                        );
+                                    }}
+                                />
+                            </div>
                             <Route exact path="/friends" component={Friends} />
                             <Route exact path="/users" component={FindPeople} />
                             <Route path="/user/:id" component={OtherProfile} />
@@ -89,6 +93,7 @@ export default class App extends React.Component {
                                 path="/deleteAccount"
                                 component={DeleteAccount}
                             />
+                            <Route path="/chat" component={Chat} />
                         </div>
                     </div>
                 </BrowserRouter>

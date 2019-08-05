@@ -33,7 +33,7 @@ export default function Friends() {
     console.log("WannabeFriends: ", wannabeFriends);
 
     return (
-        <div className="FriendsDiv">
+        <div className="findFriendsDiv">
             {wannabeFriends && (
                 <div>
                     <h3>These Guys and Girls want to be your Friend!</h3>
@@ -47,11 +47,10 @@ export default function Friends() {
                             <Link to={`/user/${user.id}`}>
                                 <img
                                     src={user.picurl}
-                                    height="250"
-                                    width="250"
+                                    height="100px"
+                                    width="100px"
                                 />
                             </Link>
-                            <br />
                             <p>
                                 {user.firstname} {user.lastname}
                             </p>
@@ -92,7 +91,11 @@ export default function Friends() {
                 friends.map(user => (
                     <div className="friendsList" key={user.id}>
                         <Link to={`/user/${user.id}`}>
-                            <img src={user.picurl} height="250" width="250" />
+                            <img
+                                src={user.picurl}
+                                height="100px"
+                                width="100px"
+                            />
                         </Link>
                         <p>
                             {user.firstname} {user.lastname}

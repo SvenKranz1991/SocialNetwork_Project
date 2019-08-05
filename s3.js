@@ -13,6 +13,31 @@ const s3 = new aws.S3({
     secretAccessKey: secrets.AWS_SECRET
 });
 
+// Unfinished - uncomplete and will only delete single File
+
+exports.delete = (req, res, next) => {
+    const { file } = req;
+    if (!file) {
+        console.log("Multer failed");
+        return res.sendStatus(500);
+    }
+
+    const { filename } = req.file;
+
+    s3.deleteObject({
+        Bucket: "spicedling",
+        Key: filename
+    })
+        .promise()
+        .then(data => {
+            console.log("Image deleted: ", data);
+            next();
+        })
+        .catch(err => {
+            console.log("Error in deleting Picture", err);
+        });
+};
+
 exports.upload = (req, res, next) => {
     // console.log("Got Request S3: have File");
     const { file } = req;

@@ -18,7 +18,7 @@
 }
 
 .navigation {
-    height: 60px;
+    height: 80px;
     width: 100%;
     background-color: tomato;
     border-bottom: 1px solid #cccccc;
@@ -29,9 +29,9 @@
 
 .navigation-links {
     width: 500px;
-    margin-left: 100px;
     display: flex;
     justify-content: space-between;
+    margin-left: 50px;
 }
 
 .Profilepic {
@@ -115,17 +115,27 @@ input {
     color: black;
 }
 
-button {
+/* button {
     background-color: white;
     color: black;
     border-radius: 5px;
+} */
+
+/* Button Option 2 */
+
+button {
+    margin-top: 30px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
 }
 
 .mainbody {
     height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     padding-top: 20px;
 }
@@ -142,13 +152,13 @@ button {
 
 .ProfileCard {
     /* border: 1px dotted black; */
+    display: flex;
+    align-items: center;
     border-radius: 10px;
     margin-right: 40px;
     margin-top: 20px;
     width: 50vh;
     height: 15vh;
-    display: flex;
-    align-items: center;
 }
 
 .ProfileCard img {
@@ -181,4 +191,27 @@ button {
     font-size: 16px;
     text-decoration-style: dotted;
     pointer: cursor;
+}
+
+.findFriendsDiv {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.centerInput {
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.ForProfileSlashRoute {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.editButton {
+    cursor: pointer;
 }

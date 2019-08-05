@@ -38,6 +38,7 @@ export default class Uploader extends React.Component {
                     Close
                 </button>
                 <h1>Want to change your profile image?</h1>
+
                 <input
                     onChange={e => this.upload(e)}
                     name="file"
@@ -52,3 +53,5 @@ export default class Uploader extends React.Component {
         );
     }
 }
+
+// for showing image in uploader -->                 <img src={this.props.url} height="100px" width="100px" />

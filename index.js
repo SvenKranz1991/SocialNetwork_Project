@@ -5,6 +5,8 @@ const compression = require("compression");
 app.use(compression());
 // should be used always - shorten res/req time
 
+const server = require("http").Server(app);
+
 app.use(express.static("./public"));
 const db = require("./utils/db");
 const bc = require("./utils/bc");
@@ -20,6 +22,10 @@ app.use(require("body-parser").json());
 
 const cookieParser = require("cookie-parser");
 const csurf = require("csurf");
+
+// Socket IO Server Setup
+
+const io = require("socket.io")(server, { origins: "localhost:8080" });
 
 // var cookieSession = require("cookie-session");
 // app.use(
@@ -596,4 +602,31 @@ app.get("*", function(req, res) {
 
 app.listen(8080, function() {
     console.log("I'm listening.");
+});
+
+// SOCKET fun!!
+
+let mySocketId;
+io.on("connection", socket => {
+    console.log(`A socket with the id ${socket.id} just connected.`);
+
+    console.log(socket.request.headers);
+
+    socket.emit("greeting", {
+        message: "hey there, good looking"
+    });
+
+    io.sockets.emit("newPlayer", {});
+
+    if (mySocketId) {
+        io.sockets.sockets[mySocketId].emit("targetedMessage");
+    }
+
+    mySocketId = socket.id;
+
+    socket.on("niceToBeHere", payload => console.log(payload));
+
+    socket.on("disconnect", () => {
+        console.log(`A socket with the id ${socket.id} just disconnected.`);
+    });
 });
