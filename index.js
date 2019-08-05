@@ -333,6 +333,10 @@ app.get("/users.json", (req, res) => {
     db.getRecentRegistrations()
         .then(users => {
             console.log("Data for recent Users: ", users);
+            if (users.rows[0].picurl == null) {
+                users.picurl = "/images/smallimage.jpg";
+                console.log("New picture added in get RecentUsers!");
+            }
             res.json(users.rows);
         })
         .catch(err => {

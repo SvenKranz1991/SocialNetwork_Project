@@ -24,6 +24,14 @@
     border-bottom: 1px solid #cccccc;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.navigation-links {
+    width: 500px;
+    margin-left: 100px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .Profilepic {

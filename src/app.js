@@ -43,16 +43,20 @@ export default class App extends React.Component {
                         <header className="navigation">
                             <Logonav />
                             <h3>something something</h3>
-                            <Link to="/logout">Logout</Link>
-                            <Link to="/users">Find Users</Link>
-                            <Link to="/friends">Friends</Link>
-                            <Link to="/">Home</Link>
+                            <div className="navigation-links">
+                                <Link to="/friends">Friends</Link>
+                                <Link to="/users">Find Users</Link>
+                                <Link to="/">Home</Link>
+                                <Link to="/logout">Logout</Link>
+                            </div>
                             <Profile
                                 url={this.state.picurl}
                                 firstname={this.state.firstname}
                                 lastname={this.state.lastname}
                                 onClick={() =>
-                                    this.setState({ uploaderIsVisible: true })
+                                    this.setState({
+                                        uploaderIsVisible: true
+                                    })
                                 }
                             />
                         </header>
