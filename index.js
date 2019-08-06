@@ -6,6 +6,9 @@ app.use(compression());
 // should be used always - shorten res/req time
 
 const server = require("http").Server(app);
+// Socket IO Server Setup
+
+const io = require("socket.io")(server, { origins: "localhost:8080" });
 
 app.use(express.static("./public"));
 const db = require("./utils/db");
@@ -23,10 +26,6 @@ app.use(require("body-parser").json());
 const cookieParser = require("cookie-parser");
 const csurf = require("csurf");
 
-// Socket IO Server Setup
-
-const io = require("socket.io")(server, { origins: "localhost:8080" });
-
 // var cookieSession = require("cookie-session");
 // app.use(
 //     cookieSession({
@@ -37,12 +36,26 @@ const io = require("socket.io")(server, { origins: "localhost:8080" });
 
 // What is this?? process.env.SESSION_SECRET
 
-app.use(
-    require("cookie-session")({
-        secret: "process.env.SESSION_SECRET",
-        maxAge: 1000 * 60 * 60 * 24 * 14
-    })
-);
+// app.use(
+//     require("cookie-session")({
+//         secret: "process.env.SESSION_SECRET",
+//         maxAge: 1000 * 60 * 60 * 24 * 14
+//     })
+// );
+
+// Socket CookieSession
+
+const cookieSession = require("cookie-session");
+const cookieSessionMiddleware = cookieSession({
+    secret: `I'm always angry.`,
+    maxAge: 1000 * 60 * 60 * 24 * 90
+});
+
+app.use(cookieSessionMiddleware);
+
+io.use(function(socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 app.use("/favicon.ico", (req, res) => res.sendStatus(404));
 app.use(cookieParser());
@@ -600,33 +613,90 @@ app.get("*", function(req, res) {
     }
 });
 
-app.listen(8080, function() {
-    console.log("I'm listening.");
+server.listen(8080, function() {
+    console.log("I'm listening. Server, not app.");
 });
 
 // SOCKET fun!!
 
-let mySocketId;
-io.on("connection", socket => {
+// From David
+
+// let mySocketId;
+// io.on("connection", socket => {
+//     console.log(`A socket with the id ${socket.id} just connected.`);
+//
+//     console.log(socket.request.headers);
+//
+//     socket.emit("greeting", {
+//         message: "hey there, good looking"
+//     });
+//
+//     io.sockets.emit("newPlayer", {});
+//
+//     if (mySocketId) {
+//         io.sockets.sockets[mySocketId].emit("targetedMessage");
+//     }
+//
+//     mySocketId = socket.id;
+//
+//     socket.on("niceToBeHere", payload => console.log(payload));
+//
+//     socket.on("disconnect", () => {
+//         console.log(`A socket with the id ${socket.id} just disconnected.`);
+//     });
+// });
+
+// For showing Online Users - bonus
+const onlineUsers = {};
+
+io.on("connection", function(socket) {
     console.log(`A socket with the id ${socket.id} just connected.`);
-
-    console.log(socket.request.headers);
-
-    socket.emit("greeting", {
-        message: "hey there, good looking"
-    });
-
-    io.sockets.emit("newPlayer", {});
-
-    if (mySocketId) {
-        io.sockets.sockets[mySocketId].emit("targetedMessage");
+    if (!socket.request.session.userId) {
+        return socket.disconnect(true);
     }
 
-    mySocketId = socket.id;
+    // Keeping Track of Current Users
 
-    socket.on("niceToBeHere", payload => console.log(payload));
+    const userId = socket.request.session.userId;
+    onlineUsers[socket.id] = userId;
 
+    const onlineUserIds = Object.values(onlineUsers);
+    console.log("Log my users: ", onlineUserIds);
+
+    // For Disconnect Online Users - bonus
     socket.on("disconnect", () => {
-        console.log(`A socket with the id ${socket.id} just disconnected.`);
+        delete onlineUsers[socket.id];
+        console.log(`A socket with the id ${socket.id} has disconnected.`);
+        console.log("Log my users after disconnect: ", onlineUserIds);
+    });
+
+    socket.on("MyNewChatMessage", msg => {
+        console.log("New Message in index: ", msg);
+        // Do Redux
+    });
+
+    // part 1 js getting the last 10 chatMessages
+    db.getLastTenMessages()
+        .then(data => {
+            // now we have the last 10 chats.
+            console.log("Data for my Chat: ", data.rows);
+            // socket.emit("chatMessages", msgs => data.rows);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+    // part 2 is dealing with a new chat message.
+    socket.on("newMessage", function(newMessage) {
+        console.log("TheNewMessage: ", newMessage);
+        // figure out who sent message
+        // then make a DB query to get info about that user.
+        // THEN -> create a new Message Object that matches the objects in
+        // the last 10 chat messages.
+
+        // emit that there is a new chat and pass the object.
+        // add this chat message to our Database.
     });
 });
+
+// where do I need to add --> <script src="/socket.io/socket.io.js"></script>???

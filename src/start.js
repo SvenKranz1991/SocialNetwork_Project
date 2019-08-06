@@ -7,10 +7,9 @@ import reduxPromise from "redux-promise";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux"; // make a file?
 import reducer from "./reducers";
-import axios from "./axios";
-
+// import axios from "./axios";
 // for Socket
-import * as socket from "./socket";
+import { init } from "./socket";
 
 const store = createStore(
     reducer,
@@ -23,6 +22,7 @@ if (location.pathname == "/welcome") {
     // they are logged out
     elem = <Welcome />;
 } else {
+    init(store);
     // they are logged in
     elem = (
         <Provider store={store}>

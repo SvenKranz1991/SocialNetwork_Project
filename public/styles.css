@@ -215,3 +215,11 @@ button {
 .editButton {
     cursor: pointer;
 }
+
+/* FOR CHAT */
+
+.chat-container {
+    height: 300px;
+    width: 500px;
+    overflow-y: scroll;
+}

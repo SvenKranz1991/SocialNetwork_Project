@@ -151,11 +151,47 @@ exports.deleteAllFriendstatus = function deleteAllFriendstatus(id) {
     );
 };
 
-// for chatmessages
+// for chatmessages delete
 
 exports.deleteAllChatMessagesOfUser = function deleteAllChatMessagesOfUser(id) {
     return dbUrl.query(
         `DELETE FROM chatmessages WHERE sender_id = $1 OR receiver_id = $1`,
+        [id]
+    );
+};
+
+// For chat
+// latest 10 messanges
+
+exports.getLastTenMessages = function getLastTenMessages() {
+    return dbUrl.query(
+        `SELECT users.id, firstname, lastname, picurl, chats.id, chats.sender_id, chats.message, chats.created_at FROM users
+        JOIN chats
+        ON users.id = sender_id
+        ORDER BY created_at DESC LIMIT 10`
+    );
+};
+
+// insert Message
+
+exports.insertMessageIntoTable = function insertMessageIntoTable(
+    sender_id,
+    message
+) {
+    return dbUrl.query(
+        `INSERT INTO chats(sender_id, message) VALUES ($1, $2) RETURNING *`,
+        [sender_id, message]
+    );
+};
+
+//
+
+//////////////////////////
+//////// For Current Users online
+
+module.exports.getNewOnlineUser = function getNewOnlineUser(id) {
+    return dbUrl.query(
+        `SELECT id, firstname, lastname, picurl FROM users WHERE id = $1`,
         [id]
     );
 };
