@@ -691,7 +691,7 @@ io.on("connection", function(socket) {
     //         });
     // });
 
-    // For Disconnect Online Users - bonus
+    // For Disconnect Online Users - bonus Online Users
     socket.on("disconnect", () => {
         delete onlineUsers[socket.id];
         console.log(`A socket with the id ${socket.id} has disconnected.`);
