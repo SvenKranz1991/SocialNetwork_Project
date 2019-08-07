@@ -53,8 +53,33 @@ export function chatMessage(msg) {
 
 export function showUsers(usersId) {
     console.log("My Online users: ", usersId);
+    let arr = [];
+    arr.push(usersId);
+    console.log("MyNewArr", arr);
     return {
         type: "USERS_ONLINE",
-        usersOnline: usersId
+        usersOnline: arr[0]
+    };
+}
+
+// Get Friends of Friends
+
+export async function getFriendsOfFriendsList(user) {
+    const { data } = await axios.get(`/friendstatus/${user}.json`);
+    console.log("Log My Friends Data", data.friendstatus.rows);
+
+    return {
+        type: "FRIENDS_OF_FRIENDS_LIST",
+        friendsList: data.friendstatus.rows
+    };
+}
+
+export async function getFriendstatus(user) {
+    const { data } = await axios.get(`/friendstatus/${user}.json`);
+    console.log("Log My Friends Data", data.friendstatus.rows);
+
+    return {
+        type: "FRIENDSTATUS",
+        friendStatus: data.friendstatus.rows
     };
 }

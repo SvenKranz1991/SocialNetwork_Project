@@ -9,7 +9,7 @@ export default function Logout() {
         });
     }, []);
     return (
-        <div>
+        <div className="Loggout">
             <h1>Logging out!</h1>
         </div>
     );

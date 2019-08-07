@@ -680,16 +680,18 @@ io.on("connection", function(socket) {
     const onlineUserIds = Object.values(onlineUsers);
     console.log("Log my users: ", onlineUserIds);
 
-    // onlineUserIds.forEach(usersOnline => {
-    //     db.getNewOnlineUser(usersOnline)
-    //         .then(usersOnline => {
-    //             console.log("My New User Ids: ", usersOnline.rows[0]);
-    //             io.sockets.emit("NewUser", usersOnline.rows[0]);
-    //         })
-    //         .catch(err => {
-    //             console.log("Error in tracking new Users: ", err);
-    //         });
-    // });
+    socket.on("getCurrentUsers", () => {
+        onlineUserIds.forEach(usersOnline => {
+            db.getNewOnlineUser(usersOnline)
+                .then(usersOnline => {
+                    console.log("My New User Ids: ", usersOnline.rows[0]);
+                    socket.emit("NewUser", usersOnline.rows[0]);
+                })
+                .catch(err => {
+                    console.log("Error in tracking new Users: ", err);
+                });
+        });
+    });
 
     // For Disconnect Online Users - bonus Online Users
     socket.on("disconnect", () => {

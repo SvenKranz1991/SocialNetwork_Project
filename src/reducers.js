@@ -52,7 +52,21 @@ export default function(state = {}, action) {
     if (action.type == "USERS_ONLINE") {
         return {
             ...state,
-            usersOnline: [...state.usersOnline, action.usersOnline]
+            usersOnline: [action.usersOnline]
+        };
+    }
+
+    if (action.type == "FRIENDSTATUS") {
+        state = {
+            ...state,
+            friendStatus: action.friendStatus
+        };
+    }
+
+    if (action.type == "FRIENDS_OF_FRIENDS_LIST") {
+        state = {
+            ...state,
+            friendsList: action.friendsList
         };
     }
 
