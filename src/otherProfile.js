@@ -3,6 +3,7 @@ import axios from "./axios";
 import Profilepic from "./profilepic";
 import Friendbutton from "./friendbutton";
 import FriendsOfFriends from "./friendsOfFriends";
+import { useDispatch, useSelector } from "react-redux";
 
 // export default function OtherProfile(props) {
 //     return (
@@ -20,25 +21,39 @@ import FriendsOfFriends from "./friendsOfFriends";
 export default class OtherProfile extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            showFriends: false
+        };
     }
     async componentDidMount() {
         const id = this.props.match.params.id;
-        // const userId = this.props.match.params.id;
+        const userId = this.props.match.params.id;
         const { data } = await axios.get(`/user/${id}.json`);
-        // const friendstatus = await axios.get(`/friendstatus/${userId}.json`);
-        // console.log(
-        //     "Log My FriendstatusDataforFun: ",
-        //     friendstatus.data.friendstatus.rows[0].accepted
-        // );
-        // console.log("Data in other Profile as Object: ", data.user);
+
         if (data.LoggedInUser) {
             this.props.history.push("/");
         } else {
             this.setState(data.user);
         }
-        console.log("This.state.bio", this.state.bio);
-        console.log("this.state: ", this.state);
+        const friendstatus = await axios.get(`/friendstatus/${userId}.json`);
+
+        // console.log(
+        //     "Log My FriendstatusDataforFun: ",
+        //     friendstatus.data.friendstatus.rows[0].accepted
+        // );
+        // console.log("Data in other Profile as Object: ", data.user);
+        if (friendstatus.data.friendstatus.rows[0].accepted == true) {
+            this.setState({ showFriends: true });
+        } else {
+            this.setState({ showFriends: false });
+        }
+
+        // this.setState({
+        //     friends: friendstatus.data.friendstatus.rows[0].accepted
+        // });
+
+        // console.log("This.state.bio", this.state.bio);
+        // console.log("this.state: ", this.state);
     }
     render() {
         return (
@@ -56,13 +71,28 @@ export default class OtherProfile extends React.Component {
                     }`}</p>
                     <p>
                         <strong>Bio:</strong> {this.state.bio}
+                        {!this.state.bio && (
+                            <div>
+                                <p>no Info</p>
+                            </div>
+                        )}
                     </p>
                 </div>
                 <Friendbutton otherProfileId={this.props.match.params.id} />
-                <FriendsOfFriends
-                    otherProfileId={this.props.match.params.id}
-                    isAccepted={this.state.accepted}
-                />
+                {this.state.showFriends && (
+                    <div>
+                        <FriendsOfFriends
+                            otherProfileId={this.props.match.params.id}
+                            isAccepted={this.state.accepted}
+                            selfId={this.props.id}
+                        />
+                    </div>
+                )}
+                {!this.state.showFriends && (
+                    <div>
+                        <p>You would never guess who he is friends with!</p>
+                    </div>
+                )}
             </div>
         );
     }

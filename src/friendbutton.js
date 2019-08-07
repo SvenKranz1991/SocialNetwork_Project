@@ -12,7 +12,8 @@ export default class Friendbutton extends React.Component {
         };
     }
     async componentDidMount() {
-        // console.log("This props: ", this.props);
+        console.log("This props for FOF: ", this.props);
+        console.log("This state for FOF: ", this.state);
         console.log("This otherProfileId: ", this.props.otherProfileId);
         const userId = this.props.otherProfileId;
         // console.log("Reassuring this.props.otherProfileId", userId);

@@ -34,6 +34,7 @@ export default class App extends React.Component {
 
         this.setState(data.user);
         console.log("This.state.bio", this.state.bio);
+        console.log("This.state in Home: ", this.state.id);
     }
     logout() {}
 
