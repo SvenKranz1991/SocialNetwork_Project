@@ -65,12 +65,12 @@ export function showUsers(usersId) {
 // Get Friends of Friends
 
 export async function getFriendsOfFriendsList(user) {
-    const { data } = await axios.get(`/friendstatus/${user}.json`);
-    console.log("Log My Friends Data", data.friendstatus.rows);
+    const { data } = await axios.get(`/friendsOfFriends/${user}.json`);
+    console.log("Log My Friends Data", data.friendsList.rows);
 
     return {
         type: "FRIENDS_OF_FRIENDS_LIST",
-        friendsList: data.friendstatus.rows
+        friendsList: data.friendsList.rows
     };
 }
 

@@ -24,14 +24,21 @@ export default class OtherProfile extends React.Component {
     }
     async componentDidMount() {
         const id = this.props.match.params.id;
+        // const userId = this.props.match.params.id;
         const { data } = await axios.get(`/user/${id}.json`);
-        console.log("Data in other Profile as Object: ", data.user);
+        // const friendstatus = await axios.get(`/friendstatus/${userId}.json`);
+        // console.log(
+        //     "Log My FriendstatusDataforFun: ",
+        //     friendstatus.data.friendstatus.rows[0].accepted
+        // );
+        // console.log("Data in other Profile as Object: ", data.user);
         if (data.LoggedInUser) {
             this.props.history.push("/");
         } else {
             this.setState(data.user);
         }
         console.log("This.state.bio", this.state.bio);
+        console.log("this.state: ", this.state);
     }
     render() {
         return (
@@ -52,7 +59,10 @@ export default class OtherProfile extends React.Component {
                     </p>
                 </div>
                 <Friendbutton otherProfileId={this.props.match.params.id} />
-                <FriendsOfFriends otherProfileId={this.props.match.params.id} />
+                <FriendsOfFriends
+                    otherProfileId={this.props.match.params.id}
+                    isAccepted={this.state.accepted}
+                />
             </div>
         );
     }
