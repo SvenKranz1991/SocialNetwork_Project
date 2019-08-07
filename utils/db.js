@@ -154,10 +154,7 @@ exports.deleteAllFriendstatus = function deleteAllFriendstatus(id) {
 // for chatmessages delete
 
 exports.deleteAllChatMessagesOfUser = function deleteAllChatMessagesOfUser(id) {
-    return dbUrl.query(
-        `DELETE FROM chatmessages WHERE sender_id = $1 OR receiver_id = $1`,
-        [id]
-    );
+    return dbUrl.query(`DELETE FROM chats WHERE sender_id = $1`, [id]);
 };
 
 // For chat
@@ -165,10 +162,10 @@ exports.deleteAllChatMessagesOfUser = function deleteAllChatMessagesOfUser(id) {
 
 exports.getLastTenMessages = function getLastTenMessages() {
     return dbUrl.query(
-        `SELECT users.id, firstname, lastname, picurl, chats.id, chats.sender_id, chats.message, chats.created_at FROM users
+        `SELECT users.id, firstname, lastname, picurl, chats.id, chats.sender_id, chats.message, to_char(chats.created_at, 'Day DD-MM-YY - HH12:MI:SS') as date FROM users
         JOIN chats
         ON users.id = sender_id
-        ORDER BY created_at DESC LIMIT 10`
+        ORDER BY chats.created_at ASC LIMIT 10`
     );
 };
 
@@ -187,11 +184,25 @@ exports.insertMessageIntoTable = function insertMessageIntoTable(
 //
 
 //////////////////////////
-//////// For Current Users online
+//////// For Current Users online bonus
 
 module.exports.getNewOnlineUser = function getNewOnlineUser(id) {
     return dbUrl.query(
         `SELECT id, firstname, lastname, picurl FROM users WHERE id = $1`,
         [id]
+    );
+};
+
+/////////////////////////////
+//////////// For Friends of Friends bonus
+
+module.exports.getFriendsOfFriends = function getFriendsOfFriends(request_ID) {
+    return dbUrl.query(
+        `SELECT users.id, firstname, lastname, picurl, accepted
+        FROM friendstatus
+        JOIN users
+        ON (accepted = true AND receiver_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND sender_id = $1 AND receiver_id = users.id)`,
+        [request_ID]
     );
 };

@@ -35,5 +35,26 @@ export default function(state = {}, action) {
         };
     }
 
+    if (action.type == "GET_CHAT_MESSAGES") {
+        return {
+            ...state,
+            chatMessages: action.chatMessages
+        };
+    }
+
+    if (action.type == "GET_NEW_MESSAGE") {
+        return {
+            ...state,
+            chatMessages: [...state.chatMessages, action.chatMessage]
+        };
+    }
+
+    if (action.type == "USERS_ONLINE") {
+        return {
+            ...state,
+            usersOnline: [...state.usersOnline, action.usersOnline]
+        };
+    }
+
     return state;
 }

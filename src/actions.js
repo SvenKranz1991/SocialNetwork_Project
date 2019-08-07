@@ -32,3 +32,29 @@ export async function declineFriendship(id) {
         id
     };
 }
+
+export function chatMessages(msgs) {
+    console.log("My msgs from actions: ", msgs);
+    return {
+        type: "GET_CHAT_MESSAGES",
+        chatMessages: msgs
+    };
+}
+
+export function chatMessage(msg) {
+    console.log("My msg from actions: ", msg);
+    return {
+        type: "GET_NEW_MESSAGE",
+        chatMessage: msg
+    };
+}
+
+// show Users online
+
+export function showUsers(usersId) {
+    console.log("My Online users: ", usersId);
+    return {
+        type: "USERS_ONLINE",
+        usersOnline: usersId
+    };
+}

@@ -2,6 +2,7 @@ import React from "react";
 import axios from "./axios";
 import Profilepic from "./profilepic";
 import Friendbutton from "./friendbutton";
+import FriendsOfFriends from "./friendsOfFriends";
 
 // export default function OtherProfile(props) {
 //     return (
@@ -51,6 +52,7 @@ export default class OtherProfile extends React.Component {
                     </p>
                 </div>
                 <Friendbutton otherProfileId={this.props.match.params.id} />
+                <FriendsOfFriends otherProfileId={this.props.match.params.id} />
             </div>
         );
     }

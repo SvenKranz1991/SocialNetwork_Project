@@ -563,8 +563,10 @@ app.post("/user/deleteAccount", async (req, res) => {
     try {
         const userDelete = await db.deleteUser(id);
         const friendstatusDelete = await db.deleteAllFriendstatus(id);
+        const deleteChatOfUser = await db.deleteAllChatMessagesOfUser(id);
         console.log("User deleted: ", userDelete);
         console.log("Friendstatus deleted: ", friendstatusDelete);
+        console.log("Chat of User deleted: ", deleteChatOfUser);
         req.session.userId = null;
         // res.redirect("/");
         res.json({
@@ -572,6 +574,21 @@ app.post("/user/deleteAccount", async (req, res) => {
         });
     } catch (err) {
         console.log("Error in deleting Account: ", err);
+    }
+});
+
+app.get("/friendsOfFriends/:user.json", async (req, res) => {
+    let request_Id = req.params.user;
+    console.log("Log my Request Id for friendslist: ", request_Id);
+
+    try {
+        const friendsList = await db.getFriendsOfFriends(request_Id);
+        console.log("The FriendsOfFriendsList: ", friendsList);
+        res.json({
+            friendsList
+        });
+    } catch (err) {
+        console.log("Error in getting FriendsOfFriendsList: ", err);
     }
 });
 
@@ -663,6 +680,17 @@ io.on("connection", function(socket) {
     const onlineUserIds = Object.values(onlineUsers);
     console.log("Log my users: ", onlineUserIds);
 
+    // onlineUserIds.forEach(usersOnline => {
+    //     db.getNewOnlineUser(usersOnline)
+    //         .then(usersOnline => {
+    //             console.log("My New User Ids: ", usersOnline.rows[0]);
+    //             io.sockets.emit("NewUser", usersOnline.rows[0]);
+    //         })
+    //         .catch(err => {
+    //             console.log("Error in tracking new Users: ", err);
+    //         });
+    // });
+
     // For Disconnect Online Users - bonus
     socket.on("disconnect", () => {
         delete onlineUsers[socket.id];
@@ -670,25 +698,21 @@ io.on("connection", function(socket) {
         console.log("Log my users after disconnect: ", onlineUserIds);
     });
 
-    socket.on("MyNewChatMessage", msg => {
-        console.log("New Message in index: ", msg);
-        // Do Redux
+    // part 1 js getting the last 10 chatMessages
+    socket.on("getLatestChat", () => {
+        db.getLastTenMessages()
+            .then(data => {
+                // now we have the last 10 chats.
+                console.log("Data for my Chat: ", data.rows);
+                socket.emit("chatMessages", data.rows);
+            })
+            .catch(err => {
+                console.log("Error in getting Latest Messages: ", err);
+            });
     });
 
-    // part 1 js getting the last 10 chatMessages
-    db.getLastTenMessages()
-        .then(data => {
-            // now we have the last 10 chats.
-            console.log("Data for my Chat: ", data.rows);
-            // socket.emit("chatMessages", msgs => data.rows);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-
     // part 2 is dealing with a new chat message.
-    socket.on("newMessage", function(newMessage) {
-        console.log("TheNewMessage: ", newMessage);
+    socket.on("MyNewChatMessage", msg => {
         // figure out who sent message
         // then make a DB query to get info about that user.
         // THEN -> create a new Message Object that matches the objects in
@@ -696,7 +720,19 @@ io.on("connection", function(socket) {
 
         // emit that there is a new chat and pass the object.
         // add this chat message to our Database.
+        // Do Redux
+        console.log("New Message in index: ", userId, msg);
+        db.insertMessageIntoTable(userId, msg)
+            .then(result => {
+                console.log("My Result for inserting in chat table: ", result);
+                io.sockets.emit("chatMessage", result.rows[0]);
+            })
+            .catch(err => {
+                console.log("err in MyNewChatMessage: ", err);
+            });
     });
 });
 
 // where do I need to add --> <script src="/socket.io/socket.io.js"></script>???
+
+// socket.emit("chatMessage", result.rows[0]);

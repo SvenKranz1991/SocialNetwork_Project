@@ -67,6 +67,7 @@ export default class BioEditor extends React.Component {
                             name="draftBio"
                             defaultValue={this.props.bio}
                             onChange={this.handleChangeBio}
+                            className="draftBio"
                         />
                         <br />
                         <button onClick={this.handleSubmitBio}>Save</button>

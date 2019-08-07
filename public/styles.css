@@ -216,10 +216,59 @@ button {
     cursor: pointer;
 }
 
+.draftBio {
+    background-color: white;
+    color: black;
+    height: 70px;
+    width: 200px;
+}
+
 /* FOR CHAT */
+
+.chatbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .chat-container {
     height: 300px;
     width: 500px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     overflow-y: scroll;
+    background-color: tomato;
+    color: black;
+    border: 1px solid #cccccc;
 }
+
+.ChatTextarea {
+    background-color: white;
+    color: black;
+    height: 50px;
+    width: 500px;
+    margin-top: 0px;
+}
+
+.dateformatinchat {
+    font-size: 10px;
+}
+
+/* .ImageandnameInChat {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.MessageAndDateInChat {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */

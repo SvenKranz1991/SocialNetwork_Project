@@ -46,10 +46,10 @@ export default class App extends React.Component {
                             <Logonav />
                             <h3>something something</h3>
                             <div className="navigation-links">
+                                <Link to="/">Home</Link>
                                 <Link to="/friends">Friends</Link>
                                 <Link to="/users">Find Users</Link>
                                 <Link to="/chat">Chat</Link>
-                                <Link to="/">Home</Link>
                                 <Link to="/logout">Logout</Link>
                                 <Link to="/deleteAccount">Delete Account</Link>
                             </div>
