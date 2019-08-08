@@ -46,6 +46,7 @@ export default class OtherProfile extends React.Component {
     render() {
         return (
             <div>
+                <br />
                 <h3>
                     Profile of {this.state.firstname} {this.state.lastname}
                 </h3>

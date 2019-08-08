@@ -162,7 +162,7 @@ exports.deleteAllChatMessagesOfUser = function deleteAllChatMessagesOfUser(id) {
 
 exports.getLastTenMessages = function getLastTenMessages() {
     return dbUrl.query(
-        `SELECT users.id, firstname, lastname, picurl, chats.id, chats.sender_id, chats.message, to_char(chats.created_at, 'Day DD-MM-YY - HH:MI:SS') as date, to_char((now() - chats.created_at), 'DD, HH:MI:SS') as timeElapsed FROM users
+        `SELECT users.id, firstname, lastname, picurl, chats.id, chats.sender_id, chats.message, to_char(chats.created_at, 'Day DD-MM-YY - HH24:MI:SS') as date, to_char((now() - chats.created_at), 'HH24:MI:SS') as timeElapsed FROM users
         JOIN chats
         ON users.id = sender_id
         ORDER BY chats.created_at DESC LIMIT 10`

@@ -43,7 +43,7 @@ export default function Chat() {
     };
     return (
         <div className="chatbox">
-            <h1> HUGE Chatroom </h1>
+            <h1> Chatroom </h1>
             <br />
             <div className="chat-container" ref={elemRef}>
                 {chatMessages &&
@@ -73,7 +73,8 @@ export default function Chat() {
                                 <div className="MessageAndDateInChat">
                                     <div className="dateformatinchat">
                                         <p className="chatwrappercolor">
-                                            Time since: {msg.timeelapsed}
+                                            Message send {msg.timeelapsed}{" "}
+                                            seconds ago
                                         </p>
                                         <p className="chatwrappercolor">
                                             Date: {msg.date}{" "}

@@ -36,7 +36,7 @@ export default function Friends() {
         <div className="findFriendsDiv">
             {wannabeFriends && (
                 <div>
-                    <h3>Your Friendrequests!</h3>
+                    <h3>Your Friend Requests</h3>
                     <br />
                 </div>
             )}
@@ -56,7 +56,7 @@ export default function Friends() {
                                 {user.firstname} {user.lastname}
                             </p>
                             <button
-                                className="friends-button"
+                                className="Button AcceptFriend"
                                 onClick={() =>
                                     dispatch(acceptFriendship(user.id))
                                 }
@@ -64,7 +64,7 @@ export default function Friends() {
                                 Add Friend
                             </button>
                             <button
-                                className="friends-button"
+                                className="Button DeclineFriend"
                                 onClick={() =>
                                     dispatch(declineFriendship(user.id))
                                 }
@@ -81,7 +81,7 @@ export default function Friends() {
 
             {friends && (
                 <div>
-                    <h3>Your Friends!</h3>
+                    <h3>Your Friends</h3>
                     <br />
                 </div>
             )}
@@ -101,12 +101,12 @@ export default function Friends() {
                         </p>
                         <div>
                             <button
-                                className="friends-button"
+                                className="Button AlreadyFriends"
                                 onClick={() =>
                                     dispatch(declineFriendship(user.id))
                                 }
                             >
-                                Terminate Friend
+                                Friends - Terminate?
                             </button>
                         </div>
                         <br />

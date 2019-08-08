@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "./axios";
 
-export default class Friendbutton extends React.Component {
+export default class Friendp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -90,51 +90,60 @@ export default class Friendbutton extends React.Component {
             <div>
                 {this.state.noRowsOrNoRequest && (
                     <div>
-                        <button onClick={e => this.submitFriendRequest(e)}>
+                        <p
+                            onClick={e => this.submitFriendRequest(e)}
+                            className="Button sendFriendRequest"
+                        >
                             Send Friend Request
-                        </button>
+                        </p>
                     </div>
                 )}
                 {this.state.accepted && (
                     <div>
-                        <button
+                        <p
                             onClick={e =>
                                 this.withdrawFriendRequest(
                                     this.props.otherProfileId
                                 )
                             }
+                            className="Button AlreadyFriends"
                         >
                             Already Friends - Terminate?
-                        </button>
+                        </p>
                     </div>
                 )}
                 {this.state.pending && (
                     <div>
-                        <button
+                        <p
                             onClick={e =>
                                 this.withdrawFriendRequest(
                                     this.props.otherProfileId
                                 )
                             }
+                            className="Button PendingFriends"
                         >
                             Status Pending - Cancel?
-                        </button>
+                        </p>
                     </div>
                 )}
                 {this.state.mightAccept && (
                     <div>
-                        <button onClick={e => this.acceptFriendRequest(e)}>
+                        <p
+                            onClick={e => this.acceptFriendRequest(e)}
+                            className="Button AcceptFriend"
+                        >
                             Accept Friend Request
-                        </button>
-                        <button
+                        </p>
+                        <p
                             onClick={e =>
                                 this.declineFriendRequest(
                                     this.props.otherProfileId
                                 )
                             }
+                            className="Button DeclineFriend"
                         >
                             Decline Friend Request
-                        </button>
+                        </p>
                     </div>
                 )}
             </div>

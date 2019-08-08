@@ -7,6 +7,11 @@
     margin: auto;
 }
 
+footer {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
 .Welcome {
 }
 
@@ -267,7 +272,7 @@ button {
 }
 
 .chat-container {
-    height: 300px;
+    height: 550px;
     width: 500px;
     padding-top: 20px;
     padding-left: 20px;
@@ -342,4 +347,42 @@ button {
 
 .horiLine {
     width: 50vh;
+}
+
+/* STYLING FRIEND BUTTONS */
+
+.Button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 30px;
+    font-size: 10px;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+    border: 1px solid #cccccc;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.AlreadyFriends {
+    background-color: green;
+}
+
+.sendFriendRequest {
+    background-color: orange;
+}
+
+.PendingFriends {
+    background-color: violet;
+}
+
+.DeclineFriend {
+    background-color: red;
+}
+
+.AcceptFriend {
+    background-color: pink;
 }
