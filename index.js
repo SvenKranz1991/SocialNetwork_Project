@@ -711,7 +711,7 @@ io.on("connection", function(socket) {
             .then(data => {
                 // now we have the last 10 chats.
                 console.log("Data for my Chat: ", data.rows);
-                socket.emit("chatMessages", data.rows);
+                socket.emit("chatMessages", data.rows.reverse());
             })
             .catch(err => {
                 console.log("Error in getting Latest Messages: ", err);

@@ -36,7 +36,8 @@ export default function Friends() {
         <div className="findFriendsDiv">
             {wannabeFriends && (
                 <div>
-                    <h3>These Guys and Girls want to be your Friend!</h3>
+                    <h3>Your Friendrequests!</h3>
+                    <br />
                 </div>
             )}
 
@@ -62,7 +63,6 @@ export default function Friends() {
                             >
                                 Add Friend
                             </button>
-                            <br />
                             <button
                                 className="friends-button"
                                 onClick={() =>
@@ -76,14 +76,13 @@ export default function Friends() {
                     </div>
                 ))}
 
-            <hr />
+            <hr className="horiLine" />
+            <br />
 
             {friends && (
                 <div>
-                    <h3>
-                        These Guys and Girls are by this moment declared your
-                        Friends!
-                    </h3>
+                    <h3>Your Friends!</h3>
+                    <br />
                 </div>
             )}
 

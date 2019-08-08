@@ -52,12 +52,18 @@ export default function FindPeople() {
     return (
         <div className="findFriendsDiv">
             <h1>Find People</h1>
+            <br />
             <input
                 onChange={e => setSearch(e.target.value)}
                 className="centerInput"
             />
             <br />
-            {!search && <h3>And see who just joined!</h3>}
+            {!search && (
+                <div>
+                    <h3>And see who just joined!</h3>
+                    <br />
+                </div>
+            )}
 
             {users &&
                 users.map(user => (
@@ -72,6 +78,7 @@ export default function FindPeople() {
                         <p>
                             {user.firstname} {user.lastname}
                         </p>
+                        <br />
                     </div>
                 ))}
         </div>

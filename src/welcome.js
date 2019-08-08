@@ -9,8 +9,10 @@ import Registration from "./registration";
 export default function Welcome(props) {
     return (
         <HashRouter>
-            <div>
+            <div className="Welcome">
+                <br />
                 <h1>Welcome to somethingsomething</h1>
+                <br />
                 <Logo />
 
                 <div>

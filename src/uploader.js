@@ -34,11 +34,16 @@ export default class Uploader extends React.Component {
     render() {
         return (
             <div className="modal">
+                <br />
                 <button className="close-btn" onClick={e => this.close(e)}>
                     Close
                 </button>
-                <h1>Want to change your profile image?</h1>
+                <br />
 
+                <h1 className="BioEditor">
+                    Want to change your profile image?
+                </h1>
+                <br />
                 <input
                     onChange={e => this.upload(e)}
                     name="file"

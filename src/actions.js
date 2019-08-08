@@ -66,9 +66,6 @@ export function showUsers(usersId) {
 
 export async function getFriendsOfFriendsList(user) {
     const { data } = await axios.get(`/friendsOfFriends/${user}.json`);
-    console.log("Log My Friends Data", data);
-    console.log("Id in friendstatus: ", data.friendsList.rows);
-    console.log("Id of LoggedInUser: ", data.loggedUserId);
 
     return {
         type: "FRIENDS_OF_FRIENDS_LIST",

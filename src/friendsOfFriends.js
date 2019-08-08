@@ -7,7 +7,7 @@ import Friendbutton from "./friendbutton";
 export default function FriendsOfFriends(props) {
     const dispatch = useDispatch();
 
-    // console.log("Log my Props in FOF: ", props);
+    console.log("Log my Props in FOF: ", props);
 
     useEffect(() => {
         dispatch(getFriendsOfFriendsList(props.otherProfileId));
@@ -20,24 +20,33 @@ export default function FriendsOfFriends(props) {
 
     return (
         <div>
-            <h4>This Guy is friends with: </h4>
+            <br />
+            <h4>{props.nameOfUser} is friends with... </h4>
+            <br />
+
             {friendsList &&
-                friendsList.map(user => (
-                    <div className="friendsList" key={user.id}>
-                        <Link to={`/user/${user.id}`}>
+                friendsList.map(friends => (
+                    <div className="friendsList" key={friends.id}>
+                        <br />
+                        <Link to={`/user/${friends.id}`}>
                             <img
-                                src={user.picurl}
+                                src={friends.picurl}
                                 height="100px"
                                 width="100px"
                             />
                         </Link>
                         <p>
-                            {user.firstname} {user.lastname}
+                            {friends.firstname} {friends.lastname}
                         </p>
 
-                        <Friendbutton otherProfileId={user.id} />
+                        <Friendbutton otherProfileId={friends.id} />
                     </div>
                 ))}
+            {!friendsList && (
+                <div>
+                    <p>Nobody</p>
+                </div>
+            )}
         </div>
     );
 }

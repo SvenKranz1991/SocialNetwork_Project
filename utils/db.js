@@ -162,10 +162,10 @@ exports.deleteAllChatMessagesOfUser = function deleteAllChatMessagesOfUser(id) {
 
 exports.getLastTenMessages = function getLastTenMessages() {
     return dbUrl.query(
-        `SELECT users.id, firstname, lastname, picurl, chats.id, chats.sender_id, chats.message, to_char(chats.created_at, 'Day DD-MM-YY - HH12:MI:SS') as date FROM users
+        `SELECT users.id, firstname, lastname, picurl, chats.id, chats.sender_id, chats.message, to_char(chats.created_at, 'Day DD-MM-YY - HH:MI:SS') as date, to_char((now() - chats.created_at), 'DD, HH:MI:SS') as timeElapsed FROM users
         JOIN chats
         ON users.id = sender_id
-        ORDER BY chats.created_at ASC LIMIT 10`
+        ORDER BY chats.created_at DESC LIMIT 10`
     );
 };
 
@@ -206,7 +206,7 @@ module.exports.getFriendsOfFriends = function getFriendsOfFriends(
         JOIN users
         ON (accepted = true AND receiver_id = $1 AND sender_id = users.id)
         OR (accepted = true AND sender_id = $1 AND receiver_id = users.id)
-        AND (accepted = true AND sender_id != $2 AND receiver_id != $2) `,
+        AND (accepted = true AND sender_id != $2 AND receiver_id != $2)`,
         [request_ID, loggedUserId]
     );
 };

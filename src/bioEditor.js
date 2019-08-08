@@ -46,7 +46,7 @@ export default class BioEditor extends React.Component {
         return (
             <div>
                 {!this.props.bio && (
-                    <div>
+                    <div className="BioEditor">
                         <p
                             onClick={() =>
                                 this.setState({
@@ -54,7 +54,7 @@ export default class BioEditor extends React.Component {
                                     addstatus: false
                                 })
                             }
-                            className="bioPlaceholder"
+                            className="bioPlaceholder BioEditor"
                         >
                             Add Your Bio
                         </p>
@@ -62,7 +62,7 @@ export default class BioEditor extends React.Component {
                 )}
 
                 {this.state.editing && (
-                    <div>
+                    <div className="BioEditor">
                         <textarea
                             name="draftBio"
                             defaultValue={this.props.bio}
@@ -74,11 +74,13 @@ export default class BioEditor extends React.Component {
                     </div>
                 )}
                 {this.props.bio && this.state.addstatus && (
-                    <div>
+                    <div className="BioEditor">
                         <br />
-                        <p>
-                            <strong>Bio:</strong> {this.props.bio}
+                        <p className="BioEditor">
+                            <strong className="BioEditor">Bio:</strong>{" "}
+                            {this.props.bio}
                         </p>
+                        <br />
                         <p
                             onClick={() =>
                                 this.setState({
@@ -86,7 +88,7 @@ export default class BioEditor extends React.Component {
                                     addstatus: false
                                 })
                             }
-                            className="editButton"
+                            className="editButton BioEditor"
                         >
                             Edit
                         </p>

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { socket } from "./socket";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Chat() {
     const chatMessages = useSelector(state => state && state.chatMessages);
@@ -36,8 +37,6 @@ export default function Chat() {
             e.preventDefault();
             console.log("Enter was presses!");
             socket.emit("MyNewChatMessage", e.target.value);
-            elemRef.current.scrollTop =
-                elemRef.current.scrollHeight + elemRef.current.scrollHeight;
 
             e.target.value = "";
         }
@@ -45,26 +44,41 @@ export default function Chat() {
     return (
         <div className="chatbox">
             <h1> HUGE Chatroom </h1>
+            <br />
             <div className="chat-container" ref={elemRef}>
                 {chatMessages &&
                     chatMessages.map(msg => (
                         <div key={msg.id}>
-                            <div className="ImageandnameInChat">
-                                <img
-                                    src={msg.picurl}
-                                    height="50px"
-                                    width="50px"
-                                />
-                                <p>
-                                    Name: {msg.firstname} {msg.lastname}
-                                </p>
+                            <div className="ImageandnameInChat chatwrappercolor">
+                                <hr />
+                                <br />
+                                <Link to={`/user/${msg.sender_id}`}>
+                                    <img
+                                        src={msg.picurl}
+                                        height="40px"
+                                        width="40px"
+                                    />
+                                </Link>
                             </div>
-                            <div className="users-container" ref={usersRef}>
+                            <div
+                                className="users-container BioEditor"
+                                ref={usersRef}
+                            >
+                                <p className="NameInChat chatwrappercolor">
+                                    from: {msg.firstname} {msg.lastname}
+                                </p>
+                                <br />
+                                <p className="MessageInChat">{msg.message}</p>
+                                <br />
                                 <div className="MessageAndDateInChat">
-                                    <p>{msg.message}</p>
-                                    <p className="dateformatinchat">
-                                        Date: {msg.date}
-                                    </p>
+                                    <div className="dateformatinchat">
+                                        <p className="chatwrappercolor">
+                                            Time since: {msg.timeelapsed}
+                                        </p>
+                                        <p className="chatwrappercolor">
+                                            Date: {msg.date}{" "}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -78,10 +92,12 @@ export default function Chat() {
             />
 
             <div className="UsersOnlineInChat">
+                <br />
                 <h4>Users who are Online</h4>
                 {usersOnline &&
                     usersOnline.map(online => (
                         <div key={online.id}>
+                            <br />
                             <img
                                 src={online.picurl}
                                 height="50px"

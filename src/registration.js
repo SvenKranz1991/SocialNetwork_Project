@@ -45,27 +45,43 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div className="Registration">
-                {this.state.error && <div className="error">Oops!</div>}
-                <h3 className="TitleWelcome">Registration</h3>
-                <h4>First</h4>
+                <br />
+
+                <h3 className="TitleWelcome BioEditor">Registration</h3>
+                <h4 className="BioEditor">First</h4>
                 <input type="text" name="first" onChange={this.handleChange} />
-                <h4>Last</h4>
+                <br />
+                <br />
+                <h4 className="BioEditor">Last</h4>
                 <input type="text" name="last" onChange={this.handleChange} />
-                <h4>E-Mail</h4>
+                <br />
+                <br />
+                <h4 className="BioEditor">E-Mail</h4>
                 <input type="text" name="email" onChange={this.handleChange} />
-                <h4>Password</h4>
+                <br />
+                <br />
+                <h4 className="BioEditor">Password</h4>
                 <input
                     type="password"
                     name="password"
                     onChange={this.handleChange}
                 />
                 <br />
+                <br />
+                {this.state.error && (
+                    <div className="error BioEditor">Oops!</div>
+                )}
+                <br />
                 <button onClick={this.handleSubmit} className="submitButton">
                     Register
                 </button>
-                <h5>
-                    Already a member? <Link to="/login">Login!</Link>
+                <h5 className="BioEditor">
+                    Already a member?{" "}
+                    <Link to="/login" className="BioEditor">
+                        Login!
+                    </Link>
                 </h5>
+                <br />
             </div>
         );
     }

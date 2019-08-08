@@ -46,9 +46,11 @@ export default class OtherProfile extends React.Component {
     render() {
         return (
             <div>
-                <h3>Other Profile</h3>
+                <h3>
+                    Profile of {this.state.firstname} {this.state.lastname}
+                </h3>
                 <br />
-                <div className="ProfileCard">
+                <div className="ProfileCard BioEditor">
                     <Profilepic
                         url={this.state.picurl}
                         first={this.state.firstname}
@@ -57,25 +59,31 @@ export default class OtherProfile extends React.Component {
                     <p className="NoWrap">{`${this.state.firstname} ${
                         this.state.lastname
                     }`}</p>
-                    <p>
-                        <strong>Bio:</strong> {this.state.bio}
+                    <p className="BioEditor">
+                        <strong className="BioEditor">Bio:</strong>{" "}
+                        {this.state.bio}
                     </p>
                     {!this.state.bio && (
-                        <div>
-                            <p>no Info</p>
+                        <div className="BioEditor">
+                            <p className="BioEditor">no Info</p>
                         </div>
                     )}
                 </div>
                 <Friendbutton otherProfileId={this.props.match.params.id} />
                 {this.state.showFriends && (
                     <div>
+                        <br />
                         <FriendsOfFriends
                             otherProfileId={this.props.match.params.id}
+                            nameOfUser={`${this.state.firstname} ${
+                                this.state.lastname
+                            }`}
                         />
                     </div>
                 )}
                 {!this.state.showFriends && (
                     <div>
+                        <br />
                         <p>You would never guess who he is friends with!</p>
                     </div>
                 )}
