@@ -196,13 +196,17 @@ module.exports.getNewOnlineUser = function getNewOnlineUser(id) {
 /////////////////////////////
 //////////// For Friends of Friends bonus
 
-module.exports.getFriendsOfFriends = function getFriendsOfFriends(request_ID) {
+module.exports.getFriendsOfFriends = function getFriendsOfFriends(
+    request_ID,
+    loggedUserId
+) {
     return dbUrl.query(
         `SELECT users.id, firstname, lastname, picurl, accepted
         FROM friendstatus
         JOIN users
         ON (accepted = true AND receiver_id = $1 AND sender_id = users.id)
-        OR (accepted = true AND sender_id = $1 AND receiver_id = users.id)`,
-        [request_ID]
+        OR (accepted = true AND sender_id = $1 AND receiver_id = users.id)
+        AND (accepted = true AND sender_id != $2 AND receiver_id != $2) `,
+        [request_ID, loggedUserId]
     );
 };

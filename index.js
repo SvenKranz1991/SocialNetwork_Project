@@ -139,11 +139,11 @@ app.get("/user", async (req, res) => {
     try {
         let user = await db.getUserById(req.session.userId);
         user = user.rows[0];
-        console.log("user data: ", user);
+        // console.log("user data: ", user);
         if (user.picurl == null) {
             user.picurl = "/images/smallimage.jpg";
         }
-        console.log("user", user);
+        // console.log("user", user);
 
         res.json({ user });
     } catch (err) {
@@ -265,12 +265,12 @@ app.post("/login", (req, res) => {
 // could use :id.json
 
 app.get("/user/:id.json", async (req, res) => {
-    console.log("Req.params.id: ", req.params.id);
+    // console.log("Req.params.id: ", req.params.id);
     let id = req.params.id;
-    console.log("Just id: ", id);
+    // console.log("Just id: ", id);
 
     if (req.session.userId == req.params.id) {
-        console.log("LoggedInUser");
+        // console.log("LoggedInUser");
         res.json({
             LoggedInUser: true
         });
@@ -278,11 +278,11 @@ app.get("/user/:id.json", async (req, res) => {
         try {
             let user = await db.getUserById(id);
             user = user.rows[0];
-            console.log("otherUser data: ", user);
+            // console.log("otherUser data: ", user);
             if (user.picurl == null) {
                 user.picurl = "/images/smallimage.jpg";
             }
-            console.log("otherUser different Picture", user);
+            // console.log("otherUser different Picture", user);
 
             res.json({ user });
         } catch (err) {
@@ -294,14 +294,14 @@ app.get("/user/:id.json", async (req, res) => {
 // Upload Route
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    console.log("My Request in Index: ", req);
+    // console.log("My Request in Index: ", req);
 
     let id = req.session.userId;
     let url = config.s3Url + req.file.filename;
     if (req.file) {
         db.updateUserImage(url, id)
             .then(updatePicture => {
-                console.log("Updated Picture of User: ", id);
+                // console.log("Updated Picture of User: ", id);
                 res.json({
                     data: updatePicture.rows[0].picurl,
                     success: true
@@ -320,14 +320,14 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
 app.post("/user/bioEditor", (req, res) => {
     let id = req.session.userId;
     let text = req.body.bio;
-    console.log("My Request in editing the Bio: ", req.body);
-    console.log("Text: ", text);
+    // console.log("My Request in editing the Bio: ", req.body);
+    // console.log("Text: ", text);
 
     if (text) {
         db.updateUserBio(text, id)
             .then(updateBio => {
-                console.log("Updated Bio of User: ", id);
-                console.log("Log: ", updateBio.rows[0].bio);
+                // console.log("Updated Bio of User: ", id);
+                // console.log("Log: ", updateBio.rows[0].bio);
 
                 res.json({
                     success: true,
@@ -346,15 +346,15 @@ app.post("/user/bioEditor", (req, res) => {
 });
 
 app.get("/users.json", (req, res) => {
-    console.log("My Request in recent Users: ", req.body);
+    // console.log("My Request in recent Users: ", req.body);
     // console.log("I get something from find People");
 
     db.getRecentRegistrations()
         .then(users => {
-            console.log("Data for recent Users: ", users);
+            // console.log("Data for recent Users: ", users);
             if (users.rows[0].picurl == null) {
                 users.picurl = "/images/smallimage.jpg";
-                console.log("New picture added in get RecentUsers!");
+                // console.log("New picture added in get RecentUsers!");
             }
             res.json(users.rows);
         })
@@ -366,11 +366,11 @@ app.get("/users.json", (req, res) => {
 app.get("/search-user/:search.json", (req, res) => {
     // console.log("Responds!");
     // console.log("My Request in User: ", req.body);
-    console.log("Req.params.search: ", req.params.search);
+    // console.log("Req.params.search: ", req.params.search);
     let val = req.params.search;
     db.findUsers(val)
         .then(users => {
-            console.log("Data for findUsers: ", users);
+            // console.log("Data for findUsers: ", users);
 
             // if theres data render
             res.json(users.rows);
@@ -386,18 +386,18 @@ app.get("/search-user/:search.json", (req, res) => {
 // getting Friendshipstatus
 
 app.get("/friendstatus/:user.json", async (req, res) => {
-    console.log(
-        "Logged User Id: ",
-        req.session.userId,
-        "...Foreign User Id: ",
-        req.params.user
-    );
+    // console.log(
+    //     "Logged User Id: ",
+    //     req.session.userId,
+    //     "...Foreign User Id: ",
+    //     req.params.user
+    // );
     let sender_id = req.session.userId;
     let receiver_id = req.params.user;
 
     try {
         const friendstatus = await db.getFriendstatus(sender_id, receiver_id);
-        console.log("The friendStatus from Query: ", friendstatus);
+        // console.log("The friendStatus from Query: ", friendstatus);
 
         // If Else Statement for friendshipstatus
         if (friendstatus.rowCount == 0) {
@@ -433,8 +433,8 @@ app.get("/friendstatus/:user.json", async (req, res) => {
 // sending FriendData
 
 app.post("/user/sendFriendRequest/:id.json", async (req, res) => {
-    console.log("Id of Object of Caring: ", req.params.id);
-    console.log("Id of Logged In User: ", req.session.userId);
+    // console.log("Id of Object of Caring: ", req.params.id);
+    // console.log("Id of Logged In User: ", req.session.userId);
 
     let sender_id = req.session.userId;
     let receiver_id = req.params.id;
@@ -459,7 +459,7 @@ app.post("/user/sendFriendRequest/:id.json", async (req, res) => {
 app.post("/user/acceptFriendRequest/:id.json", async (req, res) => {
     // just needs id
 
-    console.log("Id Row for Accepting Friend: ", req.params.id);
+    // console.log("Id Row for Accepting Friend: ", req.params.id);
     // let id = req.params.id;
     // console.log("Id of Logged In User: ", req.session.userId);
 
@@ -498,7 +498,7 @@ app.post("/user/withdrawFriendRequest/:id.json", async (req, res) => {
             sender_id,
             receiver_id
         );
-        console.log("Added to db!", newFriendstatus);
+        // console.log("Added to db!", newFriendstatus);
         res.json({
             newFriendstatus,
             noRowsOrNoRequest: true,
@@ -523,7 +523,7 @@ app.post("/user/declineFriendRequest/:id.json", async (req, res) => {
             sender_id,
             receiver_id
         );
-        console.log("Added to db!", newFriendstatus);
+        // console.log("Added to db!", newFriendstatus);
         res.json({
             newFriendstatus,
             noRowsOrNoRequest: true,
@@ -541,11 +541,11 @@ app.post("/user/declineFriendRequest/:id.json", async (req, res) => {
 
 app.get("/friends/getDataForFriends", async (req, res) => {
     let id = req.session.userId;
-    console.log("Req.session.userId: ", req.session.userId);
+    // console.log("Req.session.userId: ", req.session.userId);
 
     try {
         const friendsdata = await db.getDataForFriends(id);
-        console.log("My FriendsData: ", friendsdata);
+        // console.log("My FriendsData: ", friendsdata);
         res.json({
             friendsdata
         });
@@ -559,7 +559,7 @@ app.get("/friends/getDataForFriends", async (req, res) => {
 
 app.post("/user/deleteAccount", async (req, res) => {
     let id = req.session.userId;
-    console.log("ID for Delete User: ", id);
+    // console.log("ID for Delete User: ", id);
     try {
         const userDelete = await db.deleteUser(id);
         const friendstatusDelete = await db.deleteAllFriendstatus(id);
@@ -579,13 +579,18 @@ app.post("/user/deleteAccount", async (req, res) => {
 
 app.get("/friendsOfFriends/:user.json", async (req, res) => {
     let request_Id = req.params.user;
-    console.log("Log my Request Id for friendslist: ", request_Id);
+    let loggedUserId = req.session.userId;
+    // console.log("Log my Request Id for friendslist: ", request_Id);
 
     try {
-        const friendsList = await db.getFriendsOfFriends(request_Id);
-        console.log("The FriendsOfFriendsList: ", friendsList);
+        const friendsList = await db.getFriendsOfFriends(
+            request_Id,
+            loggedUserId
+        );
+        // console.log("The FriendsOfFriendsList: ", friendsList);
+        // console.log("Log My req.session.user FOF: ", loggedUserId);
         res.json({
-            friendsList
+            friendsList: friendsList
         });
     } catch (err) {
         console.log("Error in getting FriendsOfFriendsList: ", err);

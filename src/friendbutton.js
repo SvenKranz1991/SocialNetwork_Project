@@ -12,13 +12,13 @@ export default class Friendbutton extends React.Component {
         };
     }
     async componentDidMount() {
-        console.log("This props for FOF: ", this.props);
-        console.log("This state for FOF: ", this.state);
-        console.log("This otherProfileId: ", this.props.otherProfileId);
+        // console.log("This props for FOF: ", this.props);
+        // console.log("This state for FOF: ", this.state);
+        // console.log("This otherProfileId: ", this.props.otherProfileId);
         const userId = this.props.otherProfileId;
         // console.log("Reassuring this.props.otherProfileId", userId);
         const friendstatus = await axios.get(`/friendstatus/${userId}.json`);
-        console.log("myFriendstatus Object: ", friendstatus);
+        // console.log("myFriendstatus Object: ", friendstatus);
         // console.log("myFriendstatusRowcount: ", friendstatus.data.rowCount);
         // console.log(
         //     "myFriendStatus Value Boolean: ",
@@ -43,7 +43,7 @@ export default class Friendbutton extends React.Component {
     submitFriendRequest(e) {
         // console.log("Got a Friend Request!", e);
         const id = this.props.otherProfileId;
-        console.log("Reassuring it is the correct Id in front: ", id);
+        // console.log("Reassuring it is the correct Id in front: ", id);
         axios.post(`/user/sendFriendRequest/${id}.json`).then(result => {
             console.log("Results from sendFriendData at Front", result.data);
             this.setState(result.data);
@@ -51,13 +51,13 @@ export default class Friendbutton extends React.Component {
     }
     acceptFriendRequest(e) {
         // JustNeedsId of RowTable
-        console.log(
-            "MyState for Accept Friend Request: ",
-            this.state.friendstatus.rows[0].id
-        );
+        // console.log(
+        //     "MyState for Accept Friend Request: ",
+        //     this.state.friendstatus.rows[0].id
+        // );
         console.log("I accepted a Friend!", e);
         const id = this.state.friendstatus.rows[0].id;
-        console.log("My current Id for Friend Request: ", id);
+        // console.log("My current Id for Friend Request: ", id);
 
         axios.post(`/user/acceptFriendRequest/${id}.json`).then(result => {
             console.log("Results from sendFriendData at Front", result);
@@ -71,7 +71,7 @@ export default class Friendbutton extends React.Component {
         // console.log("Friendstatus.id: ", this.state.friendstatus.rows[0].id);
 
         axios.post(`/user/withdrawFriendRequest/${id}.json`).then(result => {
-            console.log("Results from sendFriendData at Front", result);
+            // console.log("Results from sendFriendData at Front", result);
             this.setState(result.data);
         });
     }
@@ -80,7 +80,7 @@ export default class Friendbutton extends React.Component {
         // console.log("Decline Friend Request!", e);
         const id = this.props.otherProfileId;
         axios.post(`/user/declineFriendRequest/${id}.json`).then(result => {
-            console.log("Results from sendFriendData at Front", result);
+            // console.log("Results from sendFriendData at Front", result);
             this.setState(result.data);
         });
     }

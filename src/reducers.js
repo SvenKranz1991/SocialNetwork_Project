@@ -64,6 +64,7 @@ export default function(state = {}, action) {
     }
 
     if (action.type == "FRIENDS_OF_FRIENDS_LIST") {
+        console.log("Action.friendslist: ", action.friendsList);
         state = {
             ...state,
             friendsList: action.friendsList
