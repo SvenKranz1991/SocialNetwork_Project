@@ -60,7 +60,7 @@ export default function FindPeople() {
             <br />
             {!search && (
                 <div>
-                    <h3>And see who just joined!</h3>
+                    <h3>...and see who just joined!</h3>
                     <br />
                 </div>
             )}

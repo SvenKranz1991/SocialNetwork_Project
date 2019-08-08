@@ -731,6 +731,18 @@ io.on("connection", function(socket) {
         console.log("New Message in index: ", userId, msg);
         db.insertMessageIntoTable(userId, msg)
             .then(result => {
+                // let chatInfo = result;
+                // db.getUserById(userId)
+                //     .then(profile => {
+                //         console.log("Profile for Chat: ", profile.rows[0]);
+                //         console.log("chatInfo: ", chatInfo.rows[0]);
+                //     })
+                //     .catch(err => {
+                //         console.log(
+                //             "Error in getting Profile and Chatinfo: ",
+                //             err
+                //         );
+                //     });
                 console.log("My Result for inserting in chat table: ", result);
                 io.sockets.emit("chatMessage", result.rows[0]);
             })

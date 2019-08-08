@@ -297,24 +297,39 @@ button {
 }
 
 .dateformatinchat {
-    font-size: 10px;
+    font-size: 8px;
     margin-bottom: 10px;
+    margin-top: 0px;
 }
 
 .dateformatinchat p {
     margin: 0px;
 }
 
-/* .ImageandnameInChat {
-    width: 150px;
+.imageInChat {
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+
+/* MAAAAKING CHAT CARD */
+
+/* .ChatWrapper {
+    display: inline-block;
+    width: 500px;
+    height: auto;
+}
+
+.ImageandnameInChat {
+    width: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+} */
 
-.MessageAndDateInChat {
-    width: 300px;
+/* .MessageAndDateInChat {
+    margin-top: 0;
+    width: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -332,13 +347,17 @@ button {
 .NameInChat {
     font-size: 12px;
     font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .MessageInChat {
     background-color: white;
     color: black;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 3px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 9px;
 }
 
 .BioEditor {
@@ -358,7 +377,7 @@ button {
     width: 70%;
     height: 30px;
     font-size: 10px;
-    font-weight: bold;
+    font-weight: lighter;
     background-color: white;
     color: black;
     border: 1px solid #cccccc;
@@ -368,21 +387,21 @@ button {
 }
 
 .AlreadyFriends {
-    background-color: green;
+    background-color: #01ff70;
 }
 
 .sendFriendRequest {
-    background-color: orange;
+    background-color: #ffdc00;
 }
 
 .PendingFriends {
-    background-color: violet;
+    background-color: #f012be;
 }
 
 .DeclineFriend {
-    background-color: red;
+    background-color: #ff4136;
 }
 
 .AcceptFriend {
-    background-color: pink;
+    background-color: #7fdbff;
 }

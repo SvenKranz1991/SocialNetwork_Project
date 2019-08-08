@@ -71,6 +71,9 @@ export default class OtherProfile extends React.Component {
                     )}
                 </div>
                 <Friendbutton otherProfileId={this.props.match.params.id} />
+
+                <br />
+                <hr className="horiLine" />
                 {this.state.showFriends && (
                     <div>
                         <br />

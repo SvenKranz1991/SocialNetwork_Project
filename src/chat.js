@@ -12,17 +12,19 @@ export default function Chat() {
     const elemRef = useRef("chat-container");
     const usersRef = useRef("users-container");
 
-    useEffect(() => {
-        console.log("chat hooks mounted!");
-        console.log("elemRef: ", elemRef);
-        console.log("scrolltop: ", elemRef.current.scrollTop);
-        console.log("scrollheight: ", elemRef.current.scrollHeight);
-        console.log("clientheight: ", elemRef.current.clientHeight);
-        socket.emit("getLatestChat");
-        elemRef.current.scrollTop =
-            elemRef.current.scrollHeight + elemRef.current.scrollHeight;
-    }, []);
-
+    useEffect(
+        () => {
+            console.log("chat hooks mounted!");
+            console.log("elemRef: ", elemRef);
+            console.log("scrolltop: ", elemRef.current.scrollTop);
+            console.log("scrollheight: ", elemRef.current.scrollHeight);
+            console.log("clientheight: ", elemRef.current.clientHeight);
+            elemRef.current.scrollTop =
+                elemRef.current.scrollHeight + elemRef.current.scrollHeight;
+            socket.emit("getLatestChat");
+        },
+        [chatMessages]
+    );
     // For getting Online Users
     useEffect(() => {
         console.log("Chat Users hooked!");
@@ -48,28 +50,31 @@ export default function Chat() {
             <div className="chat-container" ref={elemRef}>
                 {chatMessages &&
                     chatMessages.map(msg => (
-                        <div key={msg.id}>
+                        <div key={msg.id} className="ChatWrapper">
                             <div className="ImageandnameInChat chatwrappercolor">
                                 <hr />
-                                <br />
-                                <Link to={`/user/${msg.sender_id}`}>
+
+                                <Link
+                                    to={`/user/${msg.sender_id}`}
+                                    className="BioEditor"
+                                >
                                     <img
                                         src={msg.picurl}
-                                        height="40px"
-                                        width="40px"
+                                        height="35x"
+                                        width="35px"
+                                        className="imageInChat"
                                     />
                                 </Link>
                             </div>
+
                             <div
                                 className="users-container BioEditor"
                                 ref={usersRef}
                             >
-                                <p className="NameInChat chatwrappercolor">
-                                    from: {msg.firstname} {msg.lastname}
+                                <p className="NameInChat">
+                                    {msg.firstname} {msg.lastname}
                                 </p>
-                                <br />
                                 <p className="MessageInChat">{msg.message}</p>
-                                <br />
                                 <div className="MessageAndDateInChat">
                                     <div className="dateformatinchat">
                                         <p className="chatwrappercolor">
