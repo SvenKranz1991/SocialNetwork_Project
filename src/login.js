@@ -50,11 +50,16 @@ export default class Login extends React.Component {
                     onChange={this.handleChange}
                 />
                 <br />
-                {this.state.error && <div className="error">Oops!</div>}
+                {this.state.error && (
+                    <div className="error BioEditor">Oops!</div>
+                )}
                 <br />
-                <button onClick={this.handleSubmit} className="submitButton">
+                <p
+                    onClick={this.handleSubmit}
+                    className="submitButton BioEditor"
+                >
                     Login
-                </button>
+                </p>
             </div>
         );
     }

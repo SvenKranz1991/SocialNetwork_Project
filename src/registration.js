@@ -71,10 +71,12 @@ export default class Registration extends React.Component {
                 {this.state.error && (
                     <div className="error BioEditor">Oops!</div>
                 )}
-                <br />
-                <button onClick={this.handleSubmit} className="submitButton">
+                <p
+                    onClick={this.handleSubmit}
+                    className="submitButton BioEditor"
+                >
                     Register
-                </button>
+                </p>
                 <h5 className="BioEditor">
                     Already a member?{" "}
                     <Link to="/login" className="BioEditor">

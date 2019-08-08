@@ -38,6 +38,8 @@ export default function Friends() {
                 <div>
                     <h3>Your Friend Requests</h3>
                     <br />
+                    <hr className="horiLine" />
+                    <br />
                 </div>
             )}
 
@@ -55,22 +57,24 @@ export default function Friends() {
                             <p>
                                 {user.firstname} {user.lastname}
                             </p>
-                            <button
-                                className="Button AcceptFriend"
-                                onClick={() =>
-                                    dispatch(acceptFriendship(user.id))
-                                }
-                            >
-                                Add Friend
-                            </button>
-                            <button
-                                className="Button DeclineFriend"
-                                onClick={() =>
-                                    dispatch(declineFriendship(user.id))
-                                }
-                            >
-                                Decline Request
-                            </button>
+                            <div className="inline">
+                                <button
+                                    className="Button AcceptFriend"
+                                    onClick={() =>
+                                        dispatch(acceptFriendship(user.id))
+                                    }
+                                >
+                                    Add Friend
+                                </button>
+                                <button
+                                    className="Button DeclineFriend"
+                                    onClick={() =>
+                                        dispatch(declineFriendship(user.id))
+                                    }
+                                >
+                                    Decline Request
+                                </button>
+                            </div>
                         </div>
                         <br />
                     </div>
@@ -82,6 +86,8 @@ export default function Friends() {
             {friends && (
                 <div>
                     <h3>Your Friends</h3>
+                    <br />
+                    <hr className="horiLine" />
                     <br />
                 </div>
             )}

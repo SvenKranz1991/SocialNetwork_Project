@@ -51,16 +51,22 @@ export default function FindPeople() {
 
     return (
         <div className="findFriendsDiv">
-            <h1>Find People</h1>
+            <hr className="horiLine" />
+            <br />
+            <h1>Find Users</h1>
+            <br />
             <br />
             <input
                 onChange={e => setSearch(e.target.value)}
                 className="centerInput"
+                placeholder=""
             />
+            <br />
+            <hr className="horiLine" />
             <br />
             {!search && (
                 <div>
-                    <h3>...and see who just joined!</h3>
+                    <h3 className="lighter">...or see who just joined!</h3>
                     <br />
                 </div>
             )}
