@@ -84,7 +84,8 @@ export default class OtherProfile extends React.Component {
                 {!this.state.showFriends && (
                     <div>
                         <br />
-                        <p>You would never guess who he is friends with!</p>
+                        <br />
+                        <p>Become friends with {this.state.firstname}!</p>
                     </div>
                 )}
             </div>
