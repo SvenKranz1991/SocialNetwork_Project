@@ -47,6 +47,8 @@ export default function Chat() {
         <div className="chatbox">
             <h1> Chatroom </h1>
             <br />
+            <hr className="horiLine" />
+            <br />
             <div className="chat-container" ref={elemRef}>
                 {chatMessages &&
                     chatMessages.map(msg => (
@@ -91,6 +93,7 @@ export default function Chat() {
                     ))}
             </div>
             <br />
+
             <textarea
                 placeholder="Add your message here."
                 onKeyDown={keyCheck}
@@ -98,6 +101,8 @@ export default function Chat() {
             />
 
             <div className="UsersOnlineInChat">
+                <br />
+                <hr className="horiLine" />
                 <br />
                 <h4>Users who are Online</h4>
                 {usersOnline &&

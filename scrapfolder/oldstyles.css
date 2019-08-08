@@ -305,7 +305,6 @@ button {
     outline: none;
     border: 3px solid #cccccc;
     resize: none;
-    border-radius: 20px;
 }
 
 .dateformatinchat {
@@ -357,8 +356,8 @@ button {
 }
 
 .NameInChat {
-    font-size: 10px;
-    font-weight: bolder;
+    font-size: 12px;
+    font-weight: bold;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     background-color: #aaaaaa;
@@ -370,8 +369,7 @@ button {
     padding: 3px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    font-size: 10px;
-    font-weight: normal;
+    font-size: 9px;
 }
 
 .BioEditor {

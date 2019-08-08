@@ -45,7 +45,7 @@ export default class App extends React.Component {
                     <div>
                         <header className="navigation">
                             <Logonav />
-                            <h3>something something</h3>
+                            <h3 className="HeaderTitle">something something</h3>
                             <div className="navigation-links">
                                 <Link to="/">Home</Link>
                                 <Link to="/friends">Friends</Link>
