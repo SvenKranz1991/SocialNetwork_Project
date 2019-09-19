@@ -8,10 +8,7 @@ export default class Logonav extends React.Component {
     render() {
         return (
             <div>
-                <img
-                    className="logoinnav"
-                    src="/images/Social_Network_Ello_Logo.svg.png"
-                />
+                <img className="logoinnav" src="/images/download+(1).jpeg" />
             </div>
         );
     }

@@ -6,11 +6,6 @@ export default class Logo extends React.Component {
     }
 
     render() {
-        return (
-            <img
-                className="logo"
-                src="/images/Social_Network_Ello_Logo.svg.png"
-            />
-        );
+        return <img className="logo" src="/images/download+(1).jpeg" />;
     }
 }
