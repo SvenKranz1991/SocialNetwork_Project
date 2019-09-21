@@ -8,7 +8,9 @@ app.use(compression());
 const server = require("http").Server(app);
 // Socket IO Server Setup
 
-const io = require("socket.io")(server, { origins: "localhost:8080" });
+const io = require("socket.io")(server, {
+    origins: "https://thepolitenetwork.herokuapp.com/"
+});
 
 app.use(express.static("./public"));
 const db = require("./utils/db");
