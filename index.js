@@ -9,7 +9,7 @@ const server = require("http").Server(app);
 // Socket IO Server Setup
 
 const io = require("socket.io")(server, {
-    origins: "https://thepolitenetwork.herokuapp.com/"
+    origins: "localhost:8080 thepolitenetwork.herokuapp.com:*"
 });
 
 app.use(express.static("./public"));
