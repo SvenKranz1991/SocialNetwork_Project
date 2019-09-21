@@ -9,8 +9,8 @@ if (process.env.NODE_ENV == "production") {
 }
 
 const s3 = new aws.S3({
-    accessKeyId: process.env.AWS_KEY,
-    secretAccessKey: process.env.AWS_SECRET
+    accessKeyId: secrets.AWS_KEY,
+    secretAccessKey: secrets.AWS_SECRET
 });
 
 // Unfinished - uncomplete and will only delete single File
