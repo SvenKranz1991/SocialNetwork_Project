@@ -9,6 +9,7 @@ export default class Login extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
     handleSubmit(e) {
+        e.preventDefault();
         console.log("e: ", e);
         axios
             .post("/login", {
@@ -54,12 +55,13 @@ export default class Login extends React.Component {
                     <div className="error BioEditor">Oops!</div>
                 )}
                 <br />
-                <p
+                <a
                     onClick={this.handleSubmit}
-                    className="submitButton BioEditor"
+                    href="#"
+                    className="btn btn--white btn--animated"
                 >
                     Login
-                </p>
+                </a>
             </div>
         );
     }

@@ -6,7 +6,8 @@
     "scripts": {
         "build": "node build.js",
         "start": "node index.js",
-        "test": "jest"
+        "test": "jest",
+        "compile:sass": "node-sass sass/main.scss public/styles.css -w"
     },
     "engines": {
         "node": "10.15.1"
@@ -56,5 +57,8 @@
     },
     "keywords": [],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "devDependencies": {
+        "node-sass": "^4.12.0"
+    }
 }
