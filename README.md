@@ -1,5 +1,7 @@
 # Social Network - "Spotify-Related"
 
+# Refactor
+
 Spotify-Related was my final project built within 5 days at SPICED Academy - an onsite 12 weeks coding bootcamp in Berlin.
 
 The SPA was built with React.js using Hooks and Redux, Node.js and Express.js, PostgreSQL.
