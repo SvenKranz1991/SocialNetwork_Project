@@ -25,7 +25,7 @@ exports.delete = (req, res, next) => {
     const { filename } = req.file;
 
     s3.deleteObject({
-        Bucket: "spicedling",
+        Bucket: "svenlearningbucket",
         Key: filename
     })
         .promise()
@@ -48,7 +48,7 @@ exports.upload = (req, res, next) => {
     const { filename, mimetype, size, path } = req.file;
     // console.log("My Formdata", req.file);
     s3.putObject({
-        Bucket: "spicedling",
+        Bucket: "svenlearningbucket",
         ACL: "public-read",
         Key: filename,
         Body: fs.createReadStream(path),
