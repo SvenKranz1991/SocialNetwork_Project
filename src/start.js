@@ -10,6 +10,7 @@ import reducer from "./reducers";
 // import axios from "./axios";
 // for Socket
 import { init } from "./socket";
+import "./scss/main.scss";
 
 const store = createStore(
     reducer,

@@ -31,6 +31,7 @@
         "eslint": "^4.19.1",
         "eslint-plugin-react": "^7.12.4",
         "express": "^4.14.0",
+        "extract-text-webpack-plugin": "^3.0.2",
         "http-proxy-middleware": "^0.19.1",
         "jest": "^24.7.1",
         "multer": "^1.3.0",
@@ -43,12 +44,14 @@
         "redux": "^3.7.1",
         "redux-devtools-extension": "^2.13.2",
         "redux-promise": "^0.5.3",
+        "sass": "^1.23.0",
         "socket.io": "^2.2.0",
         "spiced-pg": "^1.0.0",
+        "to-string-loader": "^1.1.5",
         "uglifyjs-webpack-plugin": "^2.1.2",
         "uid-safe": "^2.1.4",
-        "webpack": "^4.29.6",
-        "webpack-dev-middleware": "^1.8.4"
+        "webpack-dev-middleware": "^1.8.4",
+        "webpack-md5-hash": "0.0.6"
     },
     "jest": {
         "setupFiles": [
@@ -59,6 +62,11 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "node-sass": "^4.12.0"
+        "css-loader": "^3.2.0",
+        "mini-css-extract-plugin": "^0.8.0",
+        "node-sass": "^4.12.0",
+        "sass-loader": "^8.0.0",
+        "style-loader": "^1.0.0",
+        "webpack": "^4.41.2"
     }
 }

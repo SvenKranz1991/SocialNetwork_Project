@@ -4,18 +4,18 @@ import Logo from "./logo";
 import Login from "./login";
 import { HashRouter, Route } from "react-router-dom";
 
+import "./scss/main.scss";
+
 import Registration from "./registration";
 
 export default function Welcome(props) {
     return (
         <HashRouter>
-            <div className="welcome">
-                <br />
-                <h1>Welcome to somethingsomething</h1>
-                <br />
-                <Logo />
-
-                <div>
+            <div className="logindashboard">
+                <div className="logindashboard__picture">
+                    <h1>Welcome to somethingsomething</h1>
+                </div>
+                <div className="logindashboard__registration">
                     <Route exact path="/" component={Registration} />
                     <Route path="/login" component={Login} />
                 </div>

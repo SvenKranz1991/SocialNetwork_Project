@@ -35,33 +35,44 @@ export default class Login extends React.Component {
     }
     render() {
         return (
-            <div className="Registration">
-                <br />
+            <div className="logindashboard__form">
                 <h3 className="BioEditor">Login</h3>
-                <br />
-                <h4 className="BioEditor">E-Mail</h4>
+                <div className="form__group">
+                    <input
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        className="form__input"
+                        onChange={this.handleChange}
+                        id="email"
+                    />
+                    <label htmlFor="email" className="form__label">
+                        E-Mail
+                    </label>
+                </div>
 
-                <input type="text" name="email" onChange={this.handleChange} />
-                <br />
-                <br />
-                <h4 className="BioEditor">Password</h4>
                 <input
                     type="password"
                     name="password"
+                    placeholder="Password"
+                    className="form__input"
                     onChange={this.handleChange}
+                    id="password"
                 />
-                <br />
+                <label htmlFor="password" className="form__label">
+                    Password
+                </label>
                 {this.state.error && (
                     <div className="error BioEditor">Oops!</div>
                 )}
                 <br />
-                <a
+                <button
                     onClick={this.handleSubmit}
                     href="#"
-                    className="btn btn--white btn--animated"
+                    className="btn btn--green"
                 >
                     Login
-                </a>
+                </button>
             </div>
         );
     }

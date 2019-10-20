@@ -4,6 +4,7 @@
 import React from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
+import "./scss/main.scss";
 
 export default class Registration extends React.Component {
     constructor(props) {
@@ -44,43 +45,81 @@ export default class Registration extends React.Component {
     }
     render() {
         return (
-            <div className="Registration">
+            <div className="logindashboard__form">
                 <br />
 
                 <h3 className="TitleWelcome BioEditor">Registration</h3>
-                <h4 className="BioEditor">First</h4>
-                <input type="text" name="first" onChange={this.handleChange} />
-                <br />
-                <br />
-                <h4 className="BioEditor">Last</h4>
-                <input type="text" name="last" onChange={this.handleChange} />
-                <br />
-                <br />
-                <h4 className="BioEditor">E-Mail</h4>
-                <input type="text" name="email" onChange={this.handleChange} />
-                <br />
-                <br />
-                <h4 className="BioEditor">Password</h4>
-                <input
-                    type="password"
-                    name="password"
-                    onChange={this.handleChange}
-                />
-                <br />
-                <br />
+                <div className="form__group">
+                    <input
+                        type="text"
+                        name="first"
+                        placeholder="First Name"
+                        onChange={this.handleChange}
+                        className="form__input"
+                        id="first"
+                    />
+                    <label htmlFor="first" className="form__label">
+                        First
+                    </label>
+                </div>
+                <div className="form__group">
+                    <input
+                        type="text"
+                        name="last"
+                        placeholder="Last Name"
+                        onChange={this.handleChange}
+                        className="form__input"
+                        id="last"
+                    />
+                    <label htmlFor="last" className="form__label">
+                        Last
+                    </label>
+                </div>
+                <div className="form__group">
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        className="form__input"
+                        onChange={this.handleChange}
+                        id="email"
+                    />
+                    <label htmlFor="email" className="form__label">
+                        E-Mail
+                    </label>
+                </div>
+
+                <div className="form__group">
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        className="form__input"
+                        onChange={this.handleChange}
+                        id="password"
+                    />
+                    <label htmlFor="password" className="form__label">
+                        Password
+                    </label>
+                </div>
+
                 {this.state.error && (
                     <div className="error BioEditor">Oops!</div>
                 )}
-                <p
-                    onClick={this.handleSubmit}
-                    className="submitButton BioEditor"
-                >
-                    Register
-                </p>
+
+                <div className="form__group">
+                    <button
+                        className="btn btn--green"
+                        onClick={this.handleSubmit}
+                    >
+                        Register
+                    </button>
+                </div>
+
                 <h5 className="BioEditor">
                     Already a member?{" "}
-                    <Link to="/login" className="BioEditor">
-                        Login!
+                    <Link to="/login" className="btn-text">
+                        Login &rarr;
                     </Link>
                 </h5>
                 <br />
