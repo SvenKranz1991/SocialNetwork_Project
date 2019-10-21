@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "./axios";
-import Logo from "./logo";
 import Login from "./login";
 import { HashRouter, Route } from "react-router-dom";
 

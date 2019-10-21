@@ -16,7 +16,10 @@ export default function ProfileCard(props) {
                             last={props.lastname}
                             onClick={props.onClick}
                         />
-                        <p className="profilecard__text paragraph text-black">{`${props.firstname} ${props.lastname}`}</p>
+                        <p className="profilecard__text">
+                            <strong>Name: </strong>
+                            {`${props.firstname} ${props.lastname}`}
+                        </p>
                         <BioEditor bio={props.bio} done={props.doneBio} />
                     </div>
                 </div>

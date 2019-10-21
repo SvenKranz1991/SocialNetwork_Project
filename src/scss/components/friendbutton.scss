@@ -1,0 +1,45 @@
+.friendbutton-wrapper {
+    margin-top: 4rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .frnd-btn {
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        border-radius: 10rem;
+        display: inline-block;
+        transition: all 0.2s;
+        position: relative;
+        font-size: $default-font-size;
+        color: $color-white;
+        margin-right: 1rem;
+
+        // Change for the <button> element
+
+        border: none;
+        cursor: pointer;
+
+        &--submit {
+            background-color: $color-secondary-dark;
+        }
+
+        &--friends {
+            background-color: $color-tertiary-light;
+        }
+
+        &--pending {
+            background-color: $color-secondary-light;
+        }
+
+        &--accept {
+            background-color: $color-primary-dark;
+        }
+
+        &--decline {
+            background-color: $color-tertiary-light;
+        }
+    }
+}

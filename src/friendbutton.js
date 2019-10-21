@@ -87,12 +87,12 @@ export default class Friendp extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="friendbutton-wrapper">
                 {this.state.noRowsOrNoRequest && (
                     <div>
                         <p
                             onClick={e => this.submitFriendRequest(e)}
-                            className="Button sendFriendRequest"
+                            className="frnd-btn frnd-btn--submit"
                         >
                             Send Friend Request
                         </p>
@@ -100,50 +100,50 @@ export default class Friendp extends React.Component {
                 )}
                 {this.state.accepted && (
                     <div>
-                        <p
+                        <button
                             onClick={e =>
                                 this.withdrawFriendRequest(
                                     this.props.otherProfileId
                                 )
                             }
-                            className="Button AlreadyFriends"
+                            className="frnd-btn frnd-btn--friends"
                         >
                             Already Friends - Terminate?
-                        </p>
+                        </button>
                     </div>
                 )}
                 {this.state.pending && (
                     <div>
-                        <p
+                        <button
                             onClick={e =>
                                 this.withdrawFriendRequest(
                                     this.props.otherProfileId
                                 )
                             }
-                            className="Button PendingFriends"
+                            className="frnd-btn frnd-btn--pending"
                         >
                             Status Pending - Cancel?
-                        </p>
+                        </button>
                     </div>
                 )}
                 {this.state.mightAccept && (
                     <div>
-                        <p
+                        <button
                             onClick={e => this.acceptFriendRequest(e)}
-                            className="Button AcceptFriend"
+                            className="frnd-btn frnd-btn--accept"
                         >
                             Accept Friend Request
-                        </p>
-                        <p
+                        </button>
+                        <button
                             onClick={e =>
                                 this.declineFriendRequest(
                                     this.props.otherProfileId
                                 )
                             }
-                            className="Button DeclineFriend"
+                            className="frnd-btn frnd-btn--decline"
                         >
                             Decline Friend Request
-                        </p>
+                        </button>
                     </div>
                 )}
             </div>

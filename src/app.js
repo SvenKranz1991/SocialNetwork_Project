@@ -4,7 +4,6 @@
 import React from "react";
 import axios from "./axios";
 // in order to use axios we need to import
-import Logonav from "./logonav";
 // things I need to add
 import Profile from "./profilepic";
 import Uploader from "./uploader";

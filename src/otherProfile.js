@@ -45,52 +45,51 @@ export default class OtherProfile extends React.Component {
     }
     render() {
         return (
-            <div>
-                <br />
-                <h3>
-                    Profile of {this.state.firstname} {this.state.lastname}
-                </h3>
-                <br />
-                <div className="ProfileCard BioEditor">
-                    <Profilepic
-                        url={this.state.picurl}
-                        first={this.state.firstname}
-                        last={this.state.lastname}
-                    />
-                    <p className="NoWrap">{`${this.state.firstname} ${
-                        this.state.lastname
-                    }`}</p>
-                    <p className="BioEditor">
-                        <strong className="BioEditor">Bio:</strong>{" "}
-                        {this.state.bio}
-                    </p>
-                    {!this.state.bio && (
-                        <div className="BioEditor">
-                            <p className="BioEditor">no Info</p>
+            <div className="profilepage">
+                <div className="profilecard">
+                    <div className="profilecard__content">
+                        <h1 className="heading-primary text-black">
+                            Profile of {this.state.firstname}{" "}
+                            {this.state.lastname}
+                        </h1>
+
+                        <div className="profilecard__container">
+                            <Profilepic
+                                url={this.state.picurl}
+                                first={this.state.firstname}
+                                last={this.state.lastname}
+                            />
+                            <p className="profilecard__text">
+                                <strong>Name:</strong>{" "}
+                                {`${this.state.firstname} ${this.state.lastname}`}
+                            </p>
+                            <p className="profilecard__text">
+                                <strong className="BioEditor">Bio:</strong>{" "}
+                                {this.state.bio}
+                            </p>
+                            {!this.state.bio && (
+                                <p className="profilecard__text">
+                                    No Info provided.
+                                </p>
+                            )}
                         </div>
-                    )}
+
+                        <Friendbutton
+                            otherProfileId={this.props.match.params.id}
+                        />
+                    </div>
                 </div>
-                <br />
-                <br />
-                <Friendbutton otherProfileId={this.props.match.params.id} />
-                <br />
-                <br />
-                <hr className="horiLine" />
+
                 {this.state.showFriends && (
-                    <div>
-                        <br />
+                    <div className="profilecard-side">
                         <FriendsOfFriends
                             otherProfileId={this.props.match.params.id}
-                            nameOfUser={`${this.state.firstname} ${
-                                this.state.lastname
-                            }`}
+                            nameOfUser={`${this.state.firstname} ${this.state.lastname}`}
                         />
                     </div>
                 )}
                 {!this.state.showFriends && (
-                    <div>
-                        <br />
-                        <br />
+                    <div className="profilecard-side">
                         <p>Become friends with {this.state.firstname}!</p>
                     </div>
                 )}

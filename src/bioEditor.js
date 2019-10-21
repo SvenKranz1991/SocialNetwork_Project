@@ -46,52 +46,57 @@ export default class BioEditor extends React.Component {
         return (
             <div>
                 {!this.props.bio && (
-                    <div className="BioEditor">
-                        <p
+                    <div className="profilecard__bioEditor">
+                        <button
                             onClick={() =>
                                 this.setState({
                                     editing: true,
                                     addstatus: false
                                 })
                             }
-                            className="profilecard__text paragraph text-black"
+                            className="btn-small"
                         >
                             Add Your Bio
-                        </p>
+                        </button>
                     </div>
                 )}
 
                 {this.state.editing && (
-                    <div className="BioEditor">
+                    <div className="profilecard__bioEditor">
                         <textarea
                             name="draftBio"
                             defaultValue={this.props.bio}
                             onChange={this.handleChangeBio}
-                            className="draftBio"
+                            className="profilecard__bioEditor__textarea"
                         />
                         <br />
-                        <button onClick={this.handleSubmitBio}>Save</button>
+                        <button
+                            onClick={this.handleSubmitBio}
+                            className="btn-small"
+                        >
+                            Save
+                        </button>
                     </div>
                 )}
                 {this.props.bio && this.state.addstatus && (
-                    <div className="BioEditor">
+                    <div className="profilecard__bioEditor">
                         <br />
-                        <p className="profilecard__text paragraph text-black">
+                        <p className="profilecard__bioEditor__text">
                             <strong className="BioEditor">Bio:</strong>{" "}
                             {this.props.bio}
                         </p>
                         <br />
-                        <p
+                        <button
                             onClick={() =>
                                 this.setState({
                                     editing: true,
                                     addstatus: false
                                 })
                             }
-                            className="btn-text"
+                            className="btn-small"
                         >
                             Edit
-                        </p>
+                        </button>
                         <br />
                     </div>
                 )}
