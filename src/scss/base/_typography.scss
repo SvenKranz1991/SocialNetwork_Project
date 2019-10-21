@@ -50,6 +50,11 @@ body {
         transform: skewY(2deg) skewX(15deg) scale(1.1);
         text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.1);
     }
+
+    &--animated {
+        animation: moveInUp 0.5s ease-out 0.75s;
+        animation-fill-mode: backwards;
+    }
 }
 
 .heading-tertiary {
@@ -63,4 +68,33 @@ body {
     &:not(last-child) {
         margin-bottom: 3rem;
     }
+    &--animated {
+        animation: moveInUp 0.5s ease-out 0.75s;
+        animation-fill-mode: backwards;
+    }
+}
+
+.infobox {
+    background-color: $color-white;
+    color: $color-black;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+    transition: all 0.3s ease-in;
+    cursor: zoom-in;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+}
+
+// Utility Colors
+
+.text-white {
+    color: $color-white;
+}
+
+.text-black {
+    color: $color-black;
 }

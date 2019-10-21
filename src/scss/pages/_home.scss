@@ -1,5 +1,12 @@
 .home-container {
     height: 100vh;
     width: 100vw;
-    background-color: $color-primary-light;
+
+    .pagelayout {
+        height: 92vh;
+    }
+
+    .navigation {
+        height: 8vh;
+    }
 }

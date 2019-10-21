@@ -38,7 +38,7 @@ export default class Login extends React.Component {
         return (
             <div className="logindashboard__form">
                 <div className="u-margin-bottom-medium u-margin-top-big">
-                    <h2 className="heading-tertiary">Login</h2>
+                    <h2 className="heading-tertiary text-white">Login</h2>
                 </div>
                 <div className="form__group">
                     <input
@@ -77,7 +77,7 @@ export default class Login extends React.Component {
                     Login
                 </button>
                 <div className="">
-                    <h5 className="paragraph u-margin-top-huge">
+                    <h5 className="paragraph u-margin-top-huge text-white">
                         Already a member?{" "}
                         <Link to="/" className="btn-text">
                             Create Account &rarr;

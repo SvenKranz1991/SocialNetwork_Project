@@ -54,7 +54,7 @@ export default class BioEditor extends React.Component {
                                     addstatus: false
                                 })
                             }
-                            className="bioPlaceholder BioEditor"
+                            className="profilecard__text paragraph text-black"
                         >
                             Add Your Bio
                         </p>
@@ -76,7 +76,7 @@ export default class BioEditor extends React.Component {
                 {this.props.bio && this.state.addstatus && (
                     <div className="BioEditor">
                         <br />
-                        <p className="BioEditor">
+                        <p className="profilecard__text paragraph text-black">
                             <strong className="BioEditor">Bio:</strong>{" "}
                             {this.props.bio}
                         </p>
@@ -88,7 +88,7 @@ export default class BioEditor extends React.Component {
                                     addstatus: false
                                 })
                             }
-                            className="editButton BioEditor"
+                            className="btn-text"
                         >
                             Edit
                         </p>

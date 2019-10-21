@@ -45,36 +45,45 @@ export default class App extends React.Component {
                     <div className="home-container">
                         <div className="navigation">
                             <div className="navigation__logo-box">
-                                <img
-                                    src="img/logo-white.png"
-                                    alt="logo-of-website"
-                                    className="navigation__logo"
-                                />
+                                <i className="navigation__logo icon-basic-compass"></i>
+                                <h3 className="navigation__title">
+                                    Hitchhikers Network
+                                </h3>
                             </div>
-                            <h3 className="navigation__title">
-                                Hitchhikers Network
-                            </h3>
+
                             <div className="navigation__links">
-                                <Link className="navigation__item" to="/">
-                                    Home
+                                <Link
+                                    className="navigation__item btn-text"
+                                    to="/"
+                                >
+                                    Profile
                                 </Link>
                                 <Link
-                                    className="navigation__item"
+                                    className="navigation__item btn-text"
                                     to="/friends"
                                 >
                                     Friends
                                 </Link>
-                                <Link className="navigation__item" to="/users">
+                                <Link
+                                    className="navigation__item btn-text"
+                                    to="/users"
+                                >
                                     Find Users
                                 </Link>
-                                <Link className="navigation__item" to="/chat">
+                                <Link
+                                    className="navigation__item btn-text"
+                                    to="/chat"
+                                >
                                     Chat
                                 </Link>
-                                <Link className="navigation__item" to="/logout">
+                                <Link
+                                    className="navigation__item btn-text"
+                                    to="/logout"
+                                >
                                     Logout
                                 </Link>
                                 <Link
-                                    className="navigation__item"
+                                    className="navigation__item btn-text"
                                     to="/deleteAccount"
                                 >
                                     Delete Account
@@ -92,7 +101,7 @@ export default class App extends React.Component {
                             />
                         </div>
 
-                        <div className="mainbody">
+                        <div className="pagelayout">
                             <div>
                                 <Route
                                     exact

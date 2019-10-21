@@ -8,7 +8,7 @@
         font-family: inherit;
         padding: 1.5rem 2rem;
         border-radius: 2px;
-        background-color: rgba($color-white, 0.5);
+        background-color: rgba($color-white, 0.3);
         border: none;
         border-bottom: 3px solid transparent;
         width: 90%;
@@ -16,9 +16,10 @@
         color: inherit;
         position: relative;
         transition: all 0.3s;
+        color: $color-white;
 
         &::-webkit-input-placeholder {
-            color: $color-grey-dark-2;
+            color: $color-white;
         }
 
         &:focus:invalid {
@@ -39,6 +40,7 @@
         margin-top: 0.7rem;
         display: block;
         transition: all 0.3s;
+        color: $color-white;
     }
 
     &__input:placeholder-shown + &__label {
