@@ -27,33 +27,46 @@ export default class Uploader extends React.Component {
                 console.log("err in upload(e):", err);
             });
     }
-    close() {
+    close(e) {
         console.log("closeClick");
         this.props.close();
     }
     render() {
         return (
-            <div className="modal">
-                <br />
-                <button className="close-btn" onClick={e => this.close(e)}>
-                    Close
-                </button>
-                <br />
+            <div className="popup">
+                <div className="popup__content">
+                    <div className="popup__left">
+                        <h1 className="popup__text ">
+                            Want to change your profile image?
+                        </h1>
+                        <img
+                            src={`${this.props.url}`}
+                            className="popup__image"
+                        ></img>
+                    </div>
 
-                <h1 className="BioEditor">
-                    Want to change your profile image?
-                </h1>
-                <br />
-                <input
-                    onChange={e => this.upload(e)}
-                    name="file"
-                    type="file"
-                    id="file"
-                    className="inputfile"
-                    accept="image/*"
-                />
-                <br />
-                <label htmlFor="file">Upload</label>
+                    <div className="popup__right">
+                        <a
+                            className="popup__close"
+                            onClick={e => this.close(e)}
+                        >
+                            &times;
+                        </a>
+                        <input
+                            onChange={e => this.upload(e)}
+                            name="file"
+                            type="file"
+                            id="file"
+                            className="popup__inputfile"
+                            accept="image/*"
+                            required
+                        />
+
+                        <label htmlFor="file" className="popup__upload">
+                            <i className="fas fa-upload"></i> Choose file
+                        </label>
+                    </div>
+                </div>
             </div>
         );
     }

@@ -2,6 +2,13 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    background-image: linear-gradient(
+            to right bottom,
+            rgba($color-primary-light, 0.9),
+            rgba($color-primary-dark, 0.9)
+        ),
+        url(/images/ales-krivec-DgtRKZOOE0w-unsplash.jpg);
+    background-size: auto;
 }
 
 .profilecard {
@@ -9,6 +16,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+
+    &__content {
+        height: 70%;
+        width: 70%;
+        background-color: white;
+        border-radius: 3px;
+        padding: 3rem;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+    }
 
     &__title {
     }
@@ -28,7 +45,6 @@
 .profilecard-side {
     width: 30%;
     height: 92vh;
-    background-image: url(/images/julius-drost-Yq52YU-GrbE-unsplash.jpg);
     border-radius: 3px;
     background-size: cover;
     background-position: center;
