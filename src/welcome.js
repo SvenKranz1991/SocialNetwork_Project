@@ -12,8 +12,8 @@ export default function Welcome(props) {
     return (
         <HashRouter>
             <div className="logindashboard">
-                <div className="logindashboard__picture">
-                    <h1>Welcome to somethingsomething</h1>
+                <div className="u-position-top-right">
+                    <h2 className="heading-secondary">Hitchhikers Network</h2>
                 </div>
                 <div className="logindashboard__registration">
                     <Route exact path="/" component={Registration} />

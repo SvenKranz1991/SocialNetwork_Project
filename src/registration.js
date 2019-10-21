@@ -46,9 +46,11 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div className="logindashboard__form">
-                <br />
-
-                <h3 className="TitleWelcome BioEditor">Registration</h3>
+                <div className="u-margin-bottom-medium u-margin-top-big">
+                    <h2 className="heading-tertiary">
+                        Join us by creating an Account
+                    </h2>
+                </div>
                 <div className="form__group">
                     <input
                         type="text"
@@ -116,7 +118,7 @@ export default class Registration extends React.Component {
                     </button>
                 </div>
 
-                <h5 className="BioEditor">
+                <h5 className="paragraph u-margin-top-medium">
                     Already a member?{" "}
                     <Link to="/login" className="btn-text">
                         Login &rarr;

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "./axios";
+import { Link } from "react-router-dom";
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -36,7 +37,9 @@ export default class Login extends React.Component {
     render() {
         return (
             <div className="logindashboard__form">
-                <h3 className="BioEditor">Login</h3>
+                <div className="u-margin-bottom-medium u-margin-top-big">
+                    <h2 className="heading-tertiary">Login</h2>
+                </div>
                 <div className="form__group">
                     <input
                         type="text"
@@ -73,6 +76,14 @@ export default class Login extends React.Component {
                 >
                     Login
                 </button>
+                <div className="">
+                    <h5 className="paragraph u-margin-top-huge">
+                        Already a member?{" "}
+                        <Link to="/" className="btn-text">
+                            Create Account &rarr;
+                        </Link>
+                    </h5>
+                </div>
             </div>
         );
     }

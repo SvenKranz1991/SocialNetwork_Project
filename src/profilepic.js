@@ -20,13 +20,13 @@ import React from "react";
 
 export default function({ url, firstname, lastname, onClick }) {
     return (
-        <div className="wrapperForProfilepic">
-            <p>
+        <div className="__profilepic-wrapper">
+            <p className="__profilepic--text">
                 {firstname} {lastname}
             </p>
 
             <img
-                className="Profilepic"
+                className="__profilepic--item"
                 src={url}
                 alt={`${firstname} ${lastname}`}
                 onClick={onClick}
