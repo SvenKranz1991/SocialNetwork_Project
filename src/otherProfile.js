@@ -90,7 +90,9 @@ export default class OtherProfile extends React.Component {
                 )}
                 {!this.state.showFriends && (
                     <div className="profilecard-side">
-                        <p>Become friends with {this.state.firstname}!</p>
+                        <h1 className="heading-primary u-margin-bottom-small">
+                            Become friends with {this.state.firstname}!
+                        </h1>
                     </div>
                 )}
             </div>

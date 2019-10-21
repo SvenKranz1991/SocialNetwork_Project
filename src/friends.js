@@ -33,91 +33,93 @@ export default function Friends() {
     console.log("WannabeFriends: ", wannabeFriends);
 
     return (
-        <div className="findFriendsDiv">
-            {wannabeFriends && (
-                <div>
-                    <h3>Your Friend Requests</h3>
-                    <br />
-                    <hr className="horiLine" />
-                    <br />
-                </div>
-            )}
+        <div className="friend-section">
+            <div className="friendrequest-section friendrequest-section--1">
+                {wannabeFriends && (
+                    <h1
+                        className="heading-primary text-white u-center-text
+                    u-margin-top-big"
+                    >
+                        Your Friend Requests
+                    </h1>
+                )}
 
-            {wannabeFriends &&
-                wannabeFriends.map(user => (
-                    <div>
-                        <div className="wannabelist" key={user.id}>
-                            <Link to={`/user/${user.id}`}>
-                                <img
-                                    src={user.picurl}
-                                    height="100px"
-                                    width="100px"
-                                />
-                            </Link>
-                            <p>
-                                {user.firstname} {user.lastname}
-                            </p>
-                            <div className="inline">
-                                <button
-                                    className="Button AcceptFriend"
-                                    onClick={() =>
-                                        dispatch(acceptFriendship(user.id))
-                                    }
-                                >
-                                    Add Friend
-                                </button>
-                                <button
-                                    className="Button DeclineFriend"
-                                    onClick={() =>
-                                        dispatch(declineFriendship(user.id))
-                                    }
-                                >
-                                    Decline Request
-                                </button>
+                <div className="flex-container">
+                    {wannabeFriends &&
+                        wannabeFriends.map(user => (
+                            <div className="friend-card" key={user.id}>
+                                <Link to={`/user/${user.id}`}>
+                                    <img
+                                        src={user.picurl}
+                                        height="100px"
+                                        width="100px"
+                                        className="friend-card__image"
+                                    />
+                                </Link>
+                                <p className="friend-card__name">
+                                    {user.firstname} {user.lastname}
+                                </p>
+                                <div className="friendbutton-wrapper">
+                                    <button
+                                        className="frnd-btn frnd-btn--accept"
+                                        onClick={() =>
+                                            dispatch(acceptFriendship(user.id))
+                                        }
+                                    >
+                                        Add Friend
+                                    </button>
+                                    <button
+                                        className="frnd-btn frnd-btn--decline"
+                                        onClick={() =>
+                                            dispatch(declineFriendship(user.id))
+                                        }
+                                    >
+                                        Decline Request
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <br />
-                    </div>
-                ))}
-
-            <hr className="horiLine" />
-            <br />
-
-            {friends && (
-                <div>
-                    <h3>Your Friends</h3>
-                    <br />
-                    <hr className="horiLine" />
-                    <br />
+                        ))}
                 </div>
-            )}
+            </div>
 
-            {friends &&
-                friends.map(user => (
-                    <div className="friendsList" key={user.id}>
-                        <Link to={`/user/${user.id}`}>
-                            <img
-                                src={user.picurl}
-                                height="100px"
-                                width="100px"
-                            />
-                        </Link>
-                        <p>
-                            {user.firstname} {user.lastname}
-                        </p>
-                        <div>
-                            <button
-                                className="Button AlreadyFriends"
-                                onClick={() =>
-                                    dispatch(declineFriendship(user.id))
-                                }
-                            >
-                                Friends - Terminate?
-                            </button>
-                        </div>
-                        <br />
-                    </div>
-                ))}
+            <div className="friendrequest-section friendrequest-section--2">
+                {friends && (
+                    <h1
+                        className="heading-primary text-white u-center-text
+                        u-margin-top-big"
+                    >
+                        Your Friends
+                    </h1>
+                )}
+                <div className="flex-container">
+                    {friends &&
+                        friends.map(user => (
+                            <div className="friend-card" key={user.id}>
+                                <Link to={`/user/${user.id}`}>
+                                    <img
+                                        src={user.picurl}
+                                        height="100px"
+                                        width="100px"
+                                        className="friend-card__image"
+                                    />
+                                </Link>
+                                <p className="friend-card__name">
+                                    {user.firstname} {user.lastname}
+                                </p>
+                                <div className="friendbutton-wrapper">
+                                    <button
+                                        className="frnd-btn frnd-btn--friends"
+                                        onClick={() =>
+                                            dispatch(declineFriendship(user.id))
+                                        }
+                                    >
+                                        Friends - Terminate?
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                </div>
+            </div>
         </div>
     );
 }
