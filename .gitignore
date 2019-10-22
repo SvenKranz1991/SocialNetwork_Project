@@ -4,3 +4,4 @@ secrets.json
 documentation-personal/
 package-lock.json
 package.json
+.imdone/

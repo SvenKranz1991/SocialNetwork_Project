@@ -52,37 +52,37 @@ export default class App extends React.Component {
 
                             <div className="navigation__links">
                                 <Link
-                                    className="navigation__item btn-text"
+                                    className="navigation__item btn-text btn-text--1"
                                     to="/"
                                 >
                                     Profile
                                 </Link>
                                 <Link
-                                    className="navigation__item btn-text"
+                                    className="navigation__item btn-text btn-text--1"
                                     to="/friends"
                                 >
                                     Friends
                                 </Link>
                                 <Link
-                                    className="navigation__item btn-text"
+                                    className="navigation__item btn-text btn-text--1"
                                     to="/users"
                                 >
                                     Find Users
                                 </Link>
                                 <Link
-                                    className="navigation__item btn-text"
+                                    className="navigation__item btn-text btn-text--1"
                                     to="/chat"
                                 >
                                     Chat
                                 </Link>
                                 <Link
-                                    className="navigation__item btn-text"
+                                    className="navigation__item btn-text btn-text--1"
                                     to="/logout"
                                 >
                                     Logout
                                 </Link>
                                 <Link
-                                    className="navigation__item btn-text"
+                                    className="navigation__item btn-text btn-text--1"
                                     to="/deleteAccount"
                                 >
                                     Delete Account
