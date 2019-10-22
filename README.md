@@ -1,31 +1,56 @@
-# Social Network - "Spotify-Related"
+# Social Network - currently named Hitchhikers Network
 
-# Refactor
+## Refactored
 
-Spotify-Related was my final project built within 5 days at SPICED Academy - an onsite 12 weeks coding bootcamp in Berlin.
+The Social Network was my final project at Spiced Academy during the Web Full Stack Development Course.
+The foundation of this project was finished within 10 days, with a finished prototype at the end.
 
-The SPA was built with React.js using Hooks and Redux, Node.js and Express.js, PostgreSQL.
+Since then, this project serves as a work-in-progress project, where I can add new things that I learned from other projects done. This gives me the oppurtunity to reflect on my progress and rewrite/restructure the existing code in a better way which helps in the learning process.
 
-Some General Information.
+The basic tech-stack the Social Network was built with:
 
-#### The Data I was interested in from the "Audio Features" - Endpoint that Spotify provided
+React.js - with Redux and Redis, Hooks and Promises
+CSS3 / HTML, Node.js, Express.js, PostgreSQL, Socket.IO, AWS(S3) and Webpack
 
--   Item
+This Project is deployed to Heroku:
 
-Especially the latter part was of high interested for me, since as a Sound Designer I was curious to see how and what Spotify stores about each track.
+[Social Network Project](https://thepolitenetwork.herokuapp.com)
 
-![The Login Process and Overview of Landing Page]()
+![Website Social Network Overview](readme-material/SocialNetwork-Overlook.gif)
 
-## Getting Started
+The older code can be viewed in the refactored-branch on this repository.
 
-https://thepolitenetwork.herokuapp.com
+## Features
+
+-   Registration and Login
+-   Creating and editing personal Profile
+-   Uploading profile pictures and (to my AWS Bucket)
+-   Find Users / Search Users (Components built with Hooks)
+-   Viewing Profiles of others
+-   Live Public Chat
+-   Handling and displaying Friend Requests and Statuses (handled with Redux)
+
+## Features Added Since
+
+-   Redesigned the page, by switching from simple CSS to SASS
+    -   used BEM Notation to restructure the CSS Classes into separate reusable Components, which is easier to maintain and also great for adapting the now existing Code into future Projects
+    -   also switched from using absolute values like pixels to relative values like rem and vh/vw
+
+## Features to be Added
+
+-   Using the react-spring library for smooth transitions
+-   Add media queries for responsiveness
+-   integrate GraphQL
+-   add Nodemailer for Password Reset
+-   private Chat
+-   more Columns for profiles
 
 ## Built With
 
 ### Frontend
 
 -   React.js - with Redux and Redis
--   CSS3
+-   CSS3 and SASS
 
 ### Backend
 
@@ -35,26 +60,6 @@ https://thepolitenetwork.herokuapp.com
 -   Socket.IO
 -   AWS(S3)
 
-## Features
-
-![Create Playlist - Process](readmegifs/Gif_1_640px_CreatePlaylist.gif)
-
-### Displaying Audio Features from every Track from the created Playlist
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-## Features to be added
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
 ## Authors
 
--   **Sven Kranz** - [SvenKranz1991](https://github.com/SvenKranz1991) | [LinkedIn](https://www.linkedin.com/in/sven-kranz-a2389318b/) | [Website](www.google.com)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
--   Thank god for PostgreSQL
+**Sven Kranz** - [SvenKranz1991](https://github.com/SvenKranz1991) | [LinkedIn](https://www.linkedin.com/in/sven-kranz-a2389318b/) | [Website](www.google.com)
