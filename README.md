@@ -18,7 +18,7 @@ This Project is deployed to Heroku:
 
 ![Website Social Network Overview](readme-material/SocialNetwork-Overlook.gif)
 
-The older code can be viewed in the refactored-branch on this repository.
+The older code can be viewed in the "wo-sass"-branch on this repository.
 
 ## Features
 
