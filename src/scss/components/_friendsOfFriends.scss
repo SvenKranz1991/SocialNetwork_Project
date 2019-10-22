@@ -1,0 +1,65 @@
+.friendsOfFriends-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    margin-right: 24%;
+
+    &--1 {
+        background-image: linear-gradient(
+                to right bottom,
+                rgba($color-secondary-light, 0.9),
+                rgba($color-secondary-dark, 0.9)
+            ),
+            url(/images/hero-small.jpg);
+        background-size: cover;
+    }
+
+    &--2 {
+        background-image: linear-gradient(
+                to right bottom,
+                rgba($color-primary-dark, 0.9),
+                rgba($color-primary-light, 0.9)
+            ),
+            url(/images/julius-drost-Yq52YU-GrbE-unsplash.jpg);
+        background-size: cover;
+    }
+
+    .flex-container {
+        height: 70%;
+        width: 100%;
+        border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+        overflow-x: hidden;
+        &::-webkit-scrollbar {
+            width: 0 !important;
+        }
+
+        -ms-overflow-style: none;
+        overflow: -moz-scrollbars-none;
+    }
+
+    .friend-card {
+        width: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        text-align: center;
+        white-space: nowrap;
+
+        &__image {
+        }
+
+        &__name {
+            color: $color-white;
+            font-size: 2rem;
+        }
+    }
+}

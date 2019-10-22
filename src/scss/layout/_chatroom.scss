@@ -1,0 +1,20 @@
+.chat-wrapper {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.users-online-wrapper {
+    width: 25%;
+    background-size: contain;
+    text-align: center;
+    margin-top: 3rem;
+    margin-right: 6rem;
+
+    h4 {
+        color: $color-white;
+        font-size: 2rem;
+    }
+}

@@ -19,29 +19,35 @@ export default function FriendsOfFriends(props) {
     // console.log("Log my GET friendsList: ", friendsList);
 
     return (
-        <div>
-            <br />
-            <h4>{props.nameOfUser} is friends with... </h4>
-            <br />
+        <div className="friendsOfFriends-section">
+            <h1
+                className="heading-primary text-white u-center-text
+        u-margin-top-medium"
+            >
+                {props.nameOfUser} is friends with...{" "}
+            </h1>
 
-            {friendsList &&
-                friendsList.map(friends => (
-                    <div className="friendsList" key={friends.id}>
-                        <br />
-                        <Link to={`/user/${friends.id}`}>
-                            <img
-                                src={friends.picurl}
-                                height="100px"
-                                width="100px"
-                            />
-                        </Link>
-                        <p>
-                            {friends.firstname} {friends.lastname}
-                        </p>
+            <div className="flex-container">
+                {friendsList &&
+                    friendsList.map(friends => (
+                        <div className="friend-card" key={friends.id}>
+                            <br />
+                            <Link to={`/user/${friends.id}`}>
+                                <img
+                                    src={friends.picurl}
+                                    height="100px"
+                                    width="100px"
+                                    className="friend-card__image"
+                                />
+                            </Link>
+                            <p className="friend-card__name">
+                                {friends.firstname} {friends.lastname}
+                            </p>
 
-                        <Friendbutton otherProfileId={friends.id} />
-                    </div>
-                ))}
+                            <Friendbutton otherProfileId={friends.id} />
+                        </div>
+                    ))}
+            </div>
             {!friendsList && (
                 <div>
                     <p>Nobody</p>

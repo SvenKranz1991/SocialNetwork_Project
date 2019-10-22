@@ -8,85 +8,82 @@ export default function FindPeople() {
     const [search, setSearch] = useState();
 
     console.log("My search: ", search);
-    useEffect(
-        () => {
-            // if no Value in the Input Field
-            if (!search) {
-                (async () => {
-                    try {
-                        // console.log("Has Some Effect");
-                        let usersList = await axios.get(`/users.json`);
-                        console.log("My usersList: ", usersList);
-                        console.log("Typeof Data: ", typeof usersList);
-                        setUser(usersList.data);
-                    } catch (err) {
-                        console.log(
-                            "Error in getting first Data for findPeople: ",
-                            err
-                        );
-                    }
-                })();
-                // if something is in search field
-            } else {
-                (async () => {
-                    try {
-                        // console.log("Has Some Effect");
-                        let usersList = await axios.get(
-                            `/search-user/${search}.json`
-                        );
-                        console.log("My searchList: ", usersList);
-                        console.log("Typeof Data: ", typeof usersList);
-                        setUser(usersList.data);
-                    } catch (err) {
-                        console.log(
-                            "Error in getting Value for SearchTerm: ",
-                            err
-                        );
-                    }
-                })();
-            }
-        },
-        [search]
-    );
+    useEffect(() => {
+        // if no Value in the Input Field
+        if (!search) {
+            (async () => {
+                try {
+                    // console.log("Has Some Effect");
+                    let usersList = await axios.get(`/users.json`);
+                    console.log("My usersList: ", usersList);
+                    console.log("Typeof Data: ", typeof usersList);
+                    setUser(usersList.data);
+                } catch (err) {
+                    console.log(
+                        "Error in getting first Data for findPeople: ",
+                        err
+                    );
+                }
+            })();
+            // if something is in search field
+        } else {
+            (async () => {
+                try {
+                    // console.log("Has Some Effect");
+                    let usersList = await axios.get(
+                        `/search-user/${search}.json`
+                    );
+                    console.log("My searchList: ", usersList);
+                    console.log("Typeof Data: ", typeof usersList);
+                    setUser(usersList.data);
+                } catch (err) {
+                    console.log("Error in getting Value for SearchTerm: ", err);
+                }
+            })();
+        }
+    }, [search]);
 
     return (
-        <div className="findFriendsDiv">
-            <hr className="horiLine" />
-            <br />
-            <h1>Find Users</h1>
-            <br />
-            <br />
-            <input
-                onChange={e => setSearch(e.target.value)}
-                className="centerInput"
-                placeholder=""
-            />
-            <br />
-            <hr className="horiLine" />
-            <br />
-            {!search && (
-                <div>
-                    <h3 className="lighter">...or see who just joined!</h3>
-                    <br />
+        <div className="findPeople-section">
+            <div className="input-search">
+                <h1 className="heading-tertiary text-black">Find Users</h1>
+                <div className="form__group">
+                    <input
+                        onChange={e => setSearch(e.target.value)}
+                        className="form__input form__input--1"
+                        placeholder=""
+                        id="search"
+                    />
                 </div>
-            )}
+            </div>
 
-            {users &&
-                users.map(user => (
-                    <div key={user.id}>
-                        <Link to={`/user/${user.id}`}>
-                            <img
-                                src={user.picurl}
-                                height="100px"
-                                width="100px"
-                            />
-                        </Link>
-                        <p>
-                            {user.firstname} {user.lastname}
-                        </p>
-                        <br />
+            <div className="people-search">
+                {!search && (
+                    <div>
+                        <h1 className="heading-tertiary text-black u-margin-bottom-small">
+                            ...or see who just joined!
+                        </h1>
                     </div>
-                ))}
+                )}
+                <div className="people-card-wrapper">
+                    {users &&
+                        users.map(user => (
+                            <div key={user.id} className="people-card">
+                                <Link to={`/user/${user.id}`}>
+                                    <img
+                                        src={user.picurl}
+                                        height="100px"
+                                        width="100px"
+                                        className="people-card__image"
+                                    />
+                                </Link>
+                                <p className="people-card__name">
+                                    {user.firstname} {user.lastname}
+                                </p>
+                            </div>
+                        ))}
+                </div>
+            </div>
         </div>
     );
 }

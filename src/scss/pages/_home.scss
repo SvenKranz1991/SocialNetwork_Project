@@ -16,3 +16,33 @@
     display: inline-flex;
     flex-direction: row;
 }
+
+.findPeople-section {
+    height: 92vh;
+    width: 100vw;
+    background-image: linear-gradient(
+            to right bottom,
+            rgba($color-primary-light, 0.8),
+            rgba($color-primary-dark, 0.8)
+        ),
+        url(/images/daniel-leone-g30P1zcOzXo-unsplash.jpg);
+    background-size: cover;
+    background-position: top;
+}
+
+.chat-section {
+    height: 92vh;
+    width: 100vw;
+
+    display: inline-flex;
+    flex-direction: row;
+
+    background-image: linear-gradient(
+            to right bottom,
+            rgba(darken($color-secondary-light, 20%), 0.9),
+            rgba($color-secondary-dark, 0.9)
+        ),
+        url(/images/hero-small.jpg);
+
+    background-size: cover;
+}

@@ -9,6 +9,8 @@
 
 @import "layout/header";
 @import "layout/navigation";
+@import "layout/findPeople";
+@import "layout/chatroom";
 
 @import "pages/logindashboard";
 @import "pages/home";
@@ -20,3 +22,8 @@
 @import "components/popup";
 @import "components/friendbutton";
 @import "components/friends";
+@import "components/input-search";
+@import "components/people-search";
+@import "components/usersOnline";
+@import "components/chat";
+@import "components/friendsOfFriends.scss";

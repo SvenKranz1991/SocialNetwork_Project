@@ -1,0 +1,49 @@
+.people-search {
+    text-align: center;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    .people-card-wrapper {
+        padding-top: 4rem;
+        height: 60vh;
+        // max-width: 90%;
+        border-radius: 3px;
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            width: 0 !important;
+        }
+
+        -ms-overflow-style: none;
+        overflow: -moz-scrollbars-none;
+    }
+
+    .people-card {
+        width: 300px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem;
+
+        &__image {
+            max-height: 150px;
+            max-width: 150px;
+        }
+
+        &__name {
+            font-size: 1.5rem;
+            color: $color-black;
+            margin-left: 2rem;
+            width: 30px;
+            white-space: nowrap;
+        }
+    }
+}

@@ -31,6 +31,14 @@
             box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
             border-bottom: 3px solid $color-primary;
         }
+
+        &--1 {
+            border: 1px solid $color-grey-light-2;
+            // width: 40%;
+            width: 30vw;
+            text-align: center;
+            color: $color-black;
+        }
     }
 
     &__label {

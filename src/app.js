@@ -44,8 +44,8 @@ export default class App extends React.Component {
                     <div className="home-container">
                         <div className="navigation">
                             <div className="navigation__logo-box">
-                                <i className="navigation__logo icon-basic-compass"></i>
-                                <h3 className="navigation__title">
+                                <i className="navigation__logo icon-basic-compass u-cursor-handler"></i>
+                                <h3 className="navigation__title u-cursor-handler">
                                     Hitchhikers Network
                                 </h3>
                             </div>

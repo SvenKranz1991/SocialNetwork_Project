@@ -12,19 +12,16 @@ export default function Chat() {
     const elemRef = useRef("chat-container");
     const usersRef = useRef("users-container");
 
-    useEffect(
-        () => {
-            console.log("chat hooks mounted!");
-            console.log("elemRef: ", elemRef);
-            console.log("scrolltop: ", elemRef.current.scrollTop);
-            console.log("scrollheight: ", elemRef.current.scrollHeight);
-            console.log("clientheight: ", elemRef.current.clientHeight);
-            elemRef.current.scrollTop =
-                elemRef.current.scrollHeight + elemRef.current.scrollHeight;
-            socket.emit("getLatestChat");
-        },
-        [chatMessages]
-    );
+    useEffect(() => {
+        console.log("chat hooks mounted!");
+        console.log("elemRef: ", elemRef);
+        console.log("scrolltop: ", elemRef.current.scrollTop);
+        console.log("scrollheight: ", elemRef.current.scrollHeight);
+        console.log("clientheight: ", elemRef.current.clientHeight);
+        elemRef.current.scrollTop =
+            elemRef.current.scrollHeight + elemRef.current.scrollHeight;
+        socket.emit("getLatestChat");
+    }, [chatMessages]);
     // For getting Online Users
     useEffect(() => {
         console.log("Chat Users hooked!");
@@ -44,41 +41,41 @@ export default function Chat() {
         }
     };
     return (
-        <div className="chatbox">
-            <h1> Chatroom </h1>
-            <br />
-            <hr className="horiLine" />
-            <br />
-            <div className="chat-container" ref={elemRef}>
-                {chatMessages &&
-                    chatMessages.map(msg => (
-                        <div key={msg.id} className="ChatWrapper">
-                            <div className="ImageandnameInChat chatwrappercolor">
-                                <hr />
+        <div className="chat-section">
+            <div className="chat-wrapper">
+                <h1 className="u-margin-bottom-small text-white"> Chatroom </h1>
+                <div className="chat-container" ref={elemRef}>
+                    {chatMessages &&
+                        chatMessages.map(msg => (
+                            <div key={msg.id} className="chat-container__box">
+                                <div className="chat-container__box__image">
+                                    <Link
+                                        to={`/user/${msg.sender_id}`}
+                                        className="BioEditor"
+                                    >
+                                        <img
+                                            src={msg.picurl}
+                                            height="35x"
+                                            width="35px"
+                                            className="imageInChat"
+                                        />
+                                    </Link>
+                                    <p className="chat-container__box__image__name">
+                                        {msg.firstname} {msg.lastname}
+                                    </p>
+                                </div>
 
-                                <Link
-                                    to={`/user/${msg.sender_id}`}
-                                    className="BioEditor"
+                                <div
+                                    className="chat-container__box__text"
+                                    ref={usersRef}
                                 >
-                                    <img
-                                        src={msg.picurl}
-                                        height="35x"
-                                        width="35px"
-                                        className="imageInChat"
-                                    />
-                                </Link>
-                            </div>
+                                    <p className="chat-container__box__text__message">
+                                        {msg.message}
+                                    </p>
+                                </div>
 
-                            <div
-                                className="users-container BioEditor"
-                                ref={usersRef}
-                            >
-                                <p className="NameInChat">
-                                    {msg.firstname} {msg.lastname}
-                                </p>
-                                <p className="MessageInChat">{msg.message}</p>
-                                <div className="MessageAndDateInChat">
-                                    <div className="dateformatinchat">
+                                <div className="chat-container__box__date">
+                                    <div className="chat-container__box__date__format">
                                         <p className="chatwrappercolor">
                                             Message send {msg.timeelapsed}{" "}
                                             seconds ago
@@ -89,36 +86,34 @@ export default function Chat() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                </div>
+
+                <textarea
+                    placeholder="Add your message here."
+                    onKeyDown={keyCheck}
+                    className="chat-container__bioEditor__textarea"
+                />
             </div>
-            <br />
 
-            <textarea
-                placeholder="Add your message here."
-                onKeyDown={keyCheck}
-                className="ChatTextarea"
-            />
-
-            <div className="UsersOnlineInChat">
-                <br />
-                <hr className="horiLine" />
-                <br />
-                <h4>Users who are Online</h4>
-                {usersOnline &&
-                    usersOnline.map(online => (
-                        <div key={online.id}>
-                            <br />
-                            <img
-                                src={online.picurl}
-                                height="50px"
-                                width="50px"
-                            />
-                            <p>
-                                {online.firstname} {online.lastname}
-                            </p>
-                        </div>
-                    ))}
+            <div className="users-online-wrapper">
+                <div className="usersOnline-container">
+                    <h4>Users who are Online</h4>
+                    {usersOnline &&
+                        usersOnline.map(online => (
+                            <div className="usersOnline-card" key={online.id}>
+                                <img
+                                    src={online.picurl}
+                                    height="50px"
+                                    width="50px"
+                                    className="usersOnline-card__image"
+                                />
+                                <p className="usersOnline-card__name">
+                                    {online.firstname} {online.lastname}
+                                </p>
+                            </div>
+                        ))}
+                </div>
             </div>
         </div>
     );
